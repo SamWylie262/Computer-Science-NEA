@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../components/home_page/topic_tile.dart';
 import '../data/words.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,6 +18,7 @@ class _HomePageState extends State<HomePage> {
       if (!_topics.contains(t.topic)) {
         _topics.add(t.topic);
       }
+      _topics.sort();
     }
     super.initState();
   }
@@ -52,10 +54,7 @@ class _HomePageState extends State<HomePage> {
             SliverGrid(
                 delegate: SliverChildBuilderDelegate(
                   childCount: _topics.length,
-                  (context, index) => Container(
-                    color: Colors.red,
-                    child: Text(_topics[index]),
-                  ),
+                  (context, index) => TopicTile(topic: _topics[index]),
                 ),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
