@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:secondly/configs/themes.dart';
 import 'package:secondly/pages/home_page.dart';
 
 void main() {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "GCSEPotential",
-      theme: ThemeData(),
+      theme: appTheme,
       home: const HomePage(),
     );
   }
