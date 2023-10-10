@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
               flexibleSpace: FlexibleSpaceBar(
                 background: Padding(
                   padding: EdgeInsets.all(size.width * 0.10),
-                  child: Text('home page image'),
+                  child: Image.asset('assets/images/logo.png'),
                 ),
               ),
             ),
