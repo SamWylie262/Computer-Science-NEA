@@ -13,6 +13,6 @@ final appTheme = ThemeData(
         fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
-      color: kBlue,
+      color: kNavy,
     ),
-    scaffoldBackgroundColor: kBlue);
+    scaffoldBackgroundColor: kNavy);

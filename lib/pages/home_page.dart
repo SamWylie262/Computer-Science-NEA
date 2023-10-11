@@ -34,15 +34,32 @@ class _HomePageState extends State<HomePage> {
                 bottomLeft: Radius.circular(30),
                 bottomRight: Radius.circular(30))),
         toolbarHeight: size.height * 0.15,
-        title: Text("GCSEPotential Flashcards"),
+        title: Row(
+          children: [
+            actions: [
+        IconButton(
+          icon: Icon(Icons.settings),
+          onPressed: () {
+            // Add your settings button logic here
+          },
+        ),
+      ],
+            Text(
+              'GCSEPotential Flashcards',
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
         centerTitle: true,
         elevation: 0,
       ),
+      
       body: Padding(
         padding: EdgeInsets.only(left: widthPadding, right: widthPadding),
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               expandedHeight: size.height * 0.40,
               flexibleSpace: FlexibleSpaceBar(
                 background: Padding(
