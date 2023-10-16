@@ -35,25 +35,23 @@ class _HomePageState extends State<HomePage> {
                 bottomRight: Radius.circular(30))),
         toolbarHeight: size.height * 0.15,
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            actions: [
-        IconButton(
-          icon: Icon(Icons.settings),
-          onPressed: () {
-            // Add your settings button logic here
-          },
-        ),
-      ],
             Text(
               'GCSEPotential Flashcards',
               textAlign: TextAlign.center,
+            ),
+            IconButton(
+              icon: Icon(Icons.settings),
+              onPressed: () {
+                // Add your settings button logic here
+              },
             ),
           ],
         ),
         centerTitle: true,
         elevation: 0,
       ),
-      
       body: Padding(
         padding: EdgeInsets.only(left: widthPadding, right: widthPadding),
         child: CustomScrollView(

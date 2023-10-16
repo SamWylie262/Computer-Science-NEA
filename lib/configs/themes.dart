@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:secondly/configs/constants.dart';
 
 final appTheme = ThemeData(
-    primaryColor: kBlue,
+    primaryColor: kbutton,
     textTheme: const TextTheme(
         bodyMedium: TextStyle(
       color: Colors.white,
@@ -13,6 +13,6 @@ final appTheme = ThemeData(
         fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
-      color: kNavy,
+      color: kbutton,
     ),
-    scaffoldBackgroundColor: kNavy);
+    scaffoldBackgroundColor: klogo);

@@ -1,4 +1,4 @@
 import 'package:flutter/material.dart';
 
-const Color kBlue = Color.fromARGB(255, 8, 228, 252);
-const Color kNavy = Color.fromARGB(255, 58, 130, 254);
+const Color kbutton = Color.fromARGB(255, 19, 129, 140);
+const Color klogo = Color.fromARGB(255, 25, 167, 181);
