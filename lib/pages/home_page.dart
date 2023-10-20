@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:secondly/animations/fade_in_animation.dart';
 import '../components/home_page/topic_tile.dart';
 import '../data/words.dart';
 
@@ -37,6 +38,12 @@ class _HomePageState extends State<HomePage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            IconButton(
+              icon: Icon(Icons.reviews),
+              onPressed: () {
+                //Add Review logic here
+              },
+            ),
             Text(
               'GCSEPotential Flashcards',
               textAlign: TextAlign.center,
@@ -61,9 +68,9 @@ class _HomePageState extends State<HomePage> {
               expandedHeight: size.height * 0.40,
               flexibleSpace: FlexibleSpaceBar(
                 background: Padding(
-                  padding: EdgeInsets.all(size.width * 0.10),
-                  child: Image.asset('assets/images/logo.png'),
-                ),
+                    padding: EdgeInsets.all(size.width * 0.10),
+                    child: FadeInAnimation(
+                        child: Image.asset('assets/images/logo.png'))),
               ),
             ),
             SliverGrid(
