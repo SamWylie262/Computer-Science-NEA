@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:secondly/configs/themes.dart';
+import 'package:secondly/notifiers/flashcards_notifier.dart';
 import 'package:secondly/pages/home_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

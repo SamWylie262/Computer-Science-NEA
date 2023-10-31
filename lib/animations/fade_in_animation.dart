@@ -44,7 +44,10 @@ class _FadeInAnimationState extends State<FadeInAnimation>
       builder: (context, child) => Opacity(
         opacity: _opacityAnimation.value,
         child: Transform(
-            transform: Matrix4.identity()..scale(_scaleAnimation.value)),
+          alignment: Alignment.center,
+          transform: Matrix4.identity()..scale(_scaleAnimation.value),
+          child: widget.child,
+        ),
       ),
     );
   }

@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     final widthPadding = size.width * 0.04;
     return Scaffold(
       appBar: AppBar(
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(30),
                 bottomRight: Radius.circular(30))),
@@ -39,17 +39,19 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              icon: Icon(Icons.reviews),
+              icon: const Icon(Icons.reviews),
               onPressed: () {
                 //Add Review logic here
               },
             ),
-            Text(
-              'GCSEPotential Flashcards',
-              textAlign: TextAlign.center,
+            const FadeInAnimation(
+              child: Text(
+                'GCSEPotential Flashcards',
+                textAlign: TextAlign.center,
+              ),
             ),
             IconButton(
-              icon: Icon(Icons.settings),
+              icon: const Icon(Icons.settings),
               onPressed: () {
                 // Add your settings button logic here
               },
@@ -78,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                   childCount: _topics.length,
                   (context, index) => TopicTile(topic: _topics[index]),
                 ),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 6,
                   mainAxisSpacing: 6,
