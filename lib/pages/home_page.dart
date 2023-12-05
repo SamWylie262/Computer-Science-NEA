@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<String> _topics = [];
+  final List<String> _topics = [];
 
   @override
   initState() {
@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage> {
     final widthPadding = size.width * 0.04;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(30),
