@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:secondly/animations/fade_in_animation.dart';
+import 'package:secondly/pages/browse_page.dart';
+import 'package:secondly/pages/settings_page.dart';
 import '../components/home_page/topic_tile.dart';
 import '../data/words.dart';
 
@@ -40,9 +42,12 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              icon: const Icon(Icons.reviews),
+              icon: const Icon(Icons.search),
               onPressed: () {
-                //Add Review logic here
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const BrowsePage()),
+                );
               },
             ),
             const FadeInAnimation(
@@ -54,7 +59,10 @@ class _HomePageState extends State<HomePage> {
             IconButton(
               icon: const Icon(Icons.settings),
               onPressed: () {
-                // Add your settings button logic here
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SettingsPage()),
+                );
               },
             ),
           ],
