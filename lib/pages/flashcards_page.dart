@@ -13,6 +13,8 @@ class _FlashcardsPageState extends State<FlashcardsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        title: const Text('Review Page'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -21,6 +23,38 @@ class _FlashcardsPageState extends State<FlashcardsPage> {
               MaterialPageRoute(builder: (context) => const HomePage()),
             );
           },
+        ),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              onPressed: () {
+                // Add your button logic here
+              },
+              child: DefaultTextStyle(
+                style: TextStyle(fontSize: 24),
+                child: Text('Daily Review'),
+              ),
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(200, 100), // specify the button's size
+              ),
+            ),
+            SizedBox(height: 75), // add some space between the buttons
+            ElevatedButton(
+              onPressed: () {
+                // Add your button logic here
+              },
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(200, 100), // specify the button's size
+              ),
+              child: DefaultTextStyle(
+                style: TextStyle(fontSize: 24),
+                child: Text('Custom Review'),
+              ),
+            ),
+          ],
         ),
       ),
     );

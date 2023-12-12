@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:secondly/animations/fade_in_animation.dart';
+import 'package:secondly/pages/add_page.dart';
 import 'package:secondly/pages/browse_page.dart';
 import 'package:secondly/pages/settings_page.dart';
 import '../components/home_page/topic_tile.dart';
 import '../data/words.dart';
+import 'package:flutter_neon/flutter_neon.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -78,10 +80,34 @@ class _HomePageState extends State<HomePage> {
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               expandedHeight: size.height * 0.40,
               flexibleSpace: FlexibleSpaceBar(
-                background: Padding(
-                    padding: EdgeInsets.all(size.width * 0.10),
-                    child: FadeInAnimation(
-                        child: Image.asset('assets/images/logo.png'))),
+                background: Stack(
+                  children: [
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(size.width * 0.10),
+                        child: FadeInAnimation(
+                          child: Image.asset('assets/images/logo.png'),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 20, // adjust as needed
+                      right: 10, // adjust as needed
+                      child: FloatingActionButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AddPage()),
+                          );
+                        },
+                        backgroundColor: Theme.of(context)
+                            .primaryColor, // Set the background color to the primary color
+                        child: Icon(Icons.add, size: 30),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             SliverGrid(
