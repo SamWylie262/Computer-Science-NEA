@@ -25,6 +25,42 @@ class _BrowsePageState extends State<BrowsePage> {
           },
         ),
       ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Search',
+                      prefixIcon: Icon(Icons.search),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Expanded(
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(),
+                  ),
+                  VerticalDivider(color: Colors.black),
+                  Expanded(
+                    child: Container(),
+                  ),
+                  VerticalDivider(color: Colors.black),
+                  Expanded(
+                    child: Container(),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
