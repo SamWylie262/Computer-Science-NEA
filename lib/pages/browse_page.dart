@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:secondly/pages/home_page.dart';
+import 'package:resizable_widget/resizable_widget.dart';
 
 class BrowsePage extends StatefulWidget {
   const BrowsePage({super.key});
@@ -45,15 +46,37 @@ class _BrowsePageState extends State<BrowsePage> {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: Container(),
+                    flex: 2,
+                    child: Column(
+                      children: <Widget>[
+                        Text('Question'), // Add title to the first column
+                        Expanded(
+                          child: Container(),
+                        ),
+                      ],
+                    ),
                   ),
                   VerticalDivider(color: Colors.black),
                   Expanded(
-                    child: Container(),
+                    child: Column(
+                      children: <Widget>[
+                        Text('Deck'), // Add title to the second column
+                        Expanded(
+                          child: Container(),
+                        ),
+                      ],
+                    ),
                   ),
                   VerticalDivider(color: Colors.black),
                   Expanded(
-                    child: Container(),
+                    child: Column(
+                      children: <Widget>[
+                        Text('Answer'), // Add title to the third column
+                        Expanded(
+                          child: Container(),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
