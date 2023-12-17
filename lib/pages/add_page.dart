@@ -10,7 +10,7 @@ class AddPage extends StatefulWidget {
 }
 
 class _AddPageState extends State<AddPage> {
-  String dropdownValue = 'English';
+  String dropdownValue = 'Computing';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,8 +44,14 @@ class _AddPageState extends State<AddPage> {
                         dropdownValue = newValue!;
                       });
                     },
-                    items: <String>['English', 'Maths', 'Geography', 'History']
-                        .map<DropdownMenuItem<String>>((String value) {
+                    items: <String>[
+                      'Computing',
+                      'English',
+                      'Geography',
+                      'History',
+                      'Maths',
+                      'Science'
+                    ].map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Container(
