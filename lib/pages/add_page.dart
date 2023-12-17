@@ -11,6 +11,8 @@ class AddPage extends StatefulWidget {
 
 class _AddPageState extends State<AddPage> {
   String dropdownValue = 'Computing';
+  final textController1 = TextEditingController();
+  final textController2 = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,6 +76,7 @@ class _AddPageState extends State<AddPage> {
               children: <Widget>[
                 Expanded(
                   child: TextFormField(
+                    controller: textController1,
                     decoration: InputDecoration(
                       labelText: 'Enter some text',
                     ),
@@ -91,6 +94,7 @@ class _AddPageState extends State<AddPage> {
               children: <Widget>[
                 Expanded(
                   child: TextFormField(
+                    controller: textController2,
                     decoration: InputDecoration(
                       labelText: 'Enter some text',
                     ),
@@ -104,6 +108,10 @@ class _AddPageState extends State<AddPage> {
               children: <Widget>[
                 ElevatedButton(
                   onPressed: () {
+                    final dropdown = dropdownValue;
+                    final QuestionText = textController1.text;
+                    final AnswerText = textController2.text;
+                    AddCard(dropdown, QuestionText, AnswerText);
                     // Add your button logic here
                   },
                   child: Text('Submit'),
@@ -121,6 +129,15 @@ void main() async {
   final neonClient = FlutterNeon(
       connectionUrl:
           "postgresql://SamWylie262:************@ep-cold-bird-78274763.eu-central-1.aws.neon.tech/potentialdb?sslmode=require",
+      pooling: true);
+  await neonClient.open();
+}
+
+void AddCard(String dropdown, String QuestionText, String AnswerText) async {
+  final neonClient = FlutterNeon(
+      connectionUrl:
+          "postgresql://SamWylie262:************@ep-cold-bird-78274763"
+          ".eu-central-1.aws.neon.tech/potentialdb?sslmode=require",
       pooling: true);
   await neonClient.open();
 }
