@@ -38,6 +38,7 @@ dependencies:
   provider: ^6.0.3
   flutter_neon: ^0.1.0+5
   resizable_widget: ^1.0.0
+  orm: ^3.4.4
 
 dev_dependencies:
   flutter_test:
