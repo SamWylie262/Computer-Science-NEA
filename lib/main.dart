@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:secondly/configs/themes.dart';
 import 'package:secondly/pages/home_page.dart';
+import 'package:orm/logger.dart';
 
 void main() {
   runApp(const MyApp());
