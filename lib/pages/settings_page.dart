@@ -16,7 +16,10 @@ class _SettingsPageState extends State<SettingsPage> {
         title: const Text('Settings'),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
           onPressed: () {
             Navigator.push(
               context,

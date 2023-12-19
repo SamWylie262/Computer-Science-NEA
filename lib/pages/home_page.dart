@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              icon: const Icon(Icons.search),
+              icon: const Icon(Icons.search, color: Colors.white),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             IconButton(
-              icon: const Icon(Icons.settings),
+              icon: const Icon(Icons.settings, color: Colors.white),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                         },
                         backgroundColor: Theme.of(context)
                             .primaryColor, // Set the background color to the primary color
-                        child: Icon(Icons.add, size: 30),
+                        child: Icon(Icons.add, color: Colors.white, size: 30),
                       ),
                     ),
                   ],

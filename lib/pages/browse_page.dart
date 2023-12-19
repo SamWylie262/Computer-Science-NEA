@@ -17,7 +17,7 @@ class _BrowsePageState extends State<BrowsePage> {
         title: const Text('Browse Cards'),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.push(
               context,

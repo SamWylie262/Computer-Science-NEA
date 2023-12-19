@@ -20,7 +20,7 @@ class _AddPageState extends State<AddPage> {
         title: const Text('Add Cards'),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.push(
               context,
@@ -115,6 +115,11 @@ class _AddPageState extends State<AddPage> {
                     // Add your button logic here
                   },
                   child: Text('Submit'),
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Theme.of(context)
+                        .primaryColor, // Set the button color to primary color
+                  ),
                 ),
               ],
             ),

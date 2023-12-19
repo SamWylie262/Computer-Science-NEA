@@ -16,7 +16,7 @@ class _FlashcardsPageState extends State<FlashcardsPage> {
         centerTitle: true,
         title: const Text('Review Page'),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.push(
               context,
@@ -38,6 +38,7 @@ class _FlashcardsPageState extends State<FlashcardsPage> {
                 child: Text('Daily Review'),
               ),
               style: ElevatedButton.styleFrom(
+                backgroundColor: Theme.of(context).primaryColor,
                 minimumSize: Size(200, 100), // specify the button's size
               ),
             ),
@@ -47,6 +48,7 @@ class _FlashcardsPageState extends State<FlashcardsPage> {
                 // Add your button logic here
               },
               style: ElevatedButton.styleFrom(
+                backgroundColor: Theme.of(context).primaryColor,
                 minimumSize: Size(200, 100), // specify the button's size
               ),
               child: DefaultTextStyle(
