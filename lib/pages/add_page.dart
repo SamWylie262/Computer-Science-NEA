@@ -14,15 +14,6 @@ final prisma = PrismaClient(
   ),
 );
 
-main() async {
-  try {
-    final user = await prisma.$queryRaw('SELECT * FROM "users"');
-    print(user);
-  } finally {
-    await prisma.$disconnect();
-  }
-}
-
 class AddPage extends StatefulWidget {
   const AddPage({super.key});
 
@@ -151,4 +142,30 @@ class _AddPageState extends State<AddPage> {
   }
 }
 
-void AddCard(String dropdown, String QuestionText, String AnswerText) async {}
+void AddCard(String dropdown, String QuestionText, String AnswerText) async {
+  if (dropdown == 'Computing') {
+    final result = await prisma.$executeRaw(
+        'INSERT INTO cards (deck_id, question, answer, due) VALUES (1, \'$QuestionText\', \'$AnswerText\', 0)');
+    print(result);
+  } else if (dropdown == 'English') {
+    final result = await prisma.$executeRaw(
+        'INSERT INTO cards (deck_id, question, answer, due) VALUES (2, \'$QuestionText\', \'$AnswerText\', 0)');
+    print(result);
+  } else if (dropdown == 'Geography') {
+    final result = await prisma.$executeRaw(
+        'INSERT INTO cards (deck_id, question, answer, due) VALUES (3, \'$QuestionText\', \'$AnswerText\', 0)');
+    print(result);
+  } else if (dropdown == 'History') {
+    final result = await prisma.$executeRaw(
+        'INSERT INTO cards (deck_id, question, answer, due) VALUES (4, \'$QuestionText\', \'$AnswerText\', 0)');
+    print(result);
+  } else if (dropdown == 'Maths') {
+    final result = await prisma.$executeRaw(
+        'INSERT INTO cards (deck_id, question, answer, due) VALUES (5, \'$QuestionText\', \'$AnswerText\', 0)');
+    print(result);
+  } else if (dropdown == 'Science') {
+    final result = await prisma.$executeRaw(
+        'INSERT INTO cards (deck_id, question, answer, due) VALUES (6, \'$QuestionText\', \'$AnswerText\', 0)');
+    print(result);
+  }
+}

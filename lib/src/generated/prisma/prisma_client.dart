@@ -42,10 +42,10 @@ enum CustomStudyScalarFieldEnum implements _i1.PrismaEnum {
 enum DecksScalarFieldEnum implements _i1.PrismaEnum {
   @JsonValue('deck_id')
   deckId(r'deck_id'),
-  @JsonValue('user_id')
-  userId(r'user_id'),
   title,
-  datecreated;
+  datecreated,
+  @JsonValue('user_id')
+  userId(r'user_id');
 
   const DecksScalarFieldEnum([this.originalName]);
 
@@ -495,9 +495,9 @@ class DecksWhereInput implements _i1.JsonSerializable {
     this.OR,
     this.NOT,
     this.deckId,
-    this.userId,
     this.title,
     this.datecreated,
+    this.userId,
     this.cards,
     this.users,
   });
@@ -514,12 +514,12 @@ class DecksWhereInput implements _i1.JsonSerializable {
   @JsonKey(name: r'deck_id')
   final IntFilter? deckId;
 
-  @JsonKey(name: r'user_id')
-  final IntNullableFilter? userId;
-
   final StringNullableFilter? title;
 
   final StringNullableFilter? datecreated;
+
+  @JsonKey(name: r'user_id')
+  final IntNullableFilter? userId;
 
   final CardsListRelationFilter? cards;
 
@@ -533,9 +533,9 @@ class DecksWhereInput implements _i1.JsonSerializable {
 class DecksOrderByWithRelationInput implements _i1.JsonSerializable {
   const DecksOrderByWithRelationInput({
     this.deckId,
-    this.userId,
     this.title,
     this.datecreated,
+    this.userId,
     this.cards,
     this.users,
   });
@@ -546,12 +546,12 @@ class DecksOrderByWithRelationInput implements _i1.JsonSerializable {
   @JsonKey(name: r'deck_id')
   final SortOrder? deckId;
 
-  @JsonKey(name: r'user_id')
-  final SortOrder? userId;
-
   final SortOrder? title;
 
   final SortOrder? datecreated;
+
+  @JsonKey(name: r'user_id')
+  final SortOrder? userId;
 
   final CardsOrderByRelationAggregateInput? cards;
 
@@ -568,9 +568,9 @@ class DecksWhereUniqueInput implements _i1.JsonSerializable {
     this.AND,
     this.OR,
     this.NOT,
-    this.userId,
     this.title,
     this.datecreated,
+    this.userId,
     this.cards,
     this.users,
   });
@@ -587,12 +587,12 @@ class DecksWhereUniqueInput implements _i1.JsonSerializable {
 
   final Iterable<DecksWhereInput>? NOT;
 
-  @JsonKey(name: r'user_id')
-  final IntNullableFilter? userId;
-
   final StringNullableFilter? title;
 
   final StringNullableFilter? datecreated;
+
+  @JsonKey(name: r'user_id')
+  final IntNullableFilter? userId;
 
   final CardsListRelationFilter? cards;
 
@@ -606,9 +606,9 @@ class DecksWhereUniqueInput implements _i1.JsonSerializable {
 class DecksOrderByWithAggregationInput implements _i1.JsonSerializable {
   const DecksOrderByWithAggregationInput({
     this.deckId,
-    this.userId,
     this.title,
     this.datecreated,
+    this.userId,
     this.$count,
     this.$avg,
     this.$max,
@@ -623,12 +623,12 @@ class DecksOrderByWithAggregationInput implements _i1.JsonSerializable {
   @JsonKey(name: r'deck_id')
   final SortOrder? deckId;
 
-  @JsonKey(name: r'user_id')
-  final SortOrder? userId;
-
   final SortOrder? title;
 
   final SortOrder? datecreated;
+
+  @JsonKey(name: r'user_id')
+  final SortOrder? userId;
 
   @JsonKey(name: r'_count')
   final DecksCountOrderByAggregateInput? $count;
@@ -657,9 +657,9 @@ class DecksScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
     this.OR,
     this.NOT,
     this.deckId,
-    this.userId,
     this.title,
     this.datecreated,
+    this.userId,
   });
 
   factory DecksScalarWhereWithAggregatesInput.fromJson(
@@ -675,12 +675,12 @@ class DecksScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
   @JsonKey(name: r'deck_id')
   final IntWithAggregatesFilter? deckId;
 
-  @JsonKey(name: r'user_id')
-  final IntNullableWithAggregatesFilter? userId;
-
   final StringNullableWithAggregatesFilter? title;
 
   final StringNullableWithAggregatesFilter? datecreated;
+
+  @JsonKey(name: r'user_id')
+  final IntNullableWithAggregatesFilter? userId;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -1380,9 +1380,9 @@ class DecksCreateInput implements _i1.JsonSerializable {
 class DecksUncheckedCreateInput implements _i1.JsonSerializable {
   const DecksUncheckedCreateInput({
     this.deckId,
-    this.userId,
     this.title,
     this.datecreated,
+    this.userId,
     this.cards,
   });
 
@@ -1392,12 +1392,12 @@ class DecksUncheckedCreateInput implements _i1.JsonSerializable {
   @JsonKey(name: r'deck_id')
   final int? deckId;
 
-  @JsonKey(name: r'user_id')
-  final int? userId;
-
   final String? title;
 
   final String? datecreated;
+
+  @JsonKey(name: r'user_id')
+  final int? userId;
 
   final CardsUncheckedCreateNestedManyWithoutDecksInput? cards;
 
@@ -1433,9 +1433,9 @@ class DecksUpdateInput implements _i1.JsonSerializable {
 class DecksUncheckedUpdateInput implements _i1.JsonSerializable {
   const DecksUncheckedUpdateInput({
     this.deckId,
-    this.userId,
     this.title,
     this.datecreated,
+    this.userId,
     this.cards,
   });
 
@@ -1445,12 +1445,12 @@ class DecksUncheckedUpdateInput implements _i1.JsonSerializable {
   @JsonKey(name: r'deck_id')
   final IntFieldUpdateOperationsInput? deckId;
 
-  @JsonKey(name: r'user_id')
-  final NullableIntFieldUpdateOperationsInput? userId;
-
   final NullableStringFieldUpdateOperationsInput? title;
 
   final NullableStringFieldUpdateOperationsInput? datecreated;
+
+  @JsonKey(name: r'user_id')
+  final NullableIntFieldUpdateOperationsInput? userId;
 
   final CardsUncheckedUpdateManyWithoutDecksNestedInput? cards;
 
@@ -1462,9 +1462,9 @@ class DecksUncheckedUpdateInput implements _i1.JsonSerializable {
 class DecksCreateManyInput implements _i1.JsonSerializable {
   const DecksCreateManyInput({
     this.deckId,
-    this.userId,
     this.title,
     this.datecreated,
+    this.userId,
   });
 
   factory DecksCreateManyInput.fromJson(Map<String, dynamic> json) =>
@@ -1473,12 +1473,12 @@ class DecksCreateManyInput implements _i1.JsonSerializable {
   @JsonKey(name: r'deck_id')
   final int? deckId;
 
-  @JsonKey(name: r'user_id')
-  final int? userId;
-
   final String? title;
 
   final String? datecreated;
+
+  @JsonKey(name: r'user_id')
+  final int? userId;
 
   @override
   Map<String, dynamic> toJson() => _$DecksCreateManyInputToJson(this);
@@ -1506,9 +1506,9 @@ class DecksUpdateManyMutationInput implements _i1.JsonSerializable {
 class DecksUncheckedUpdateManyInput implements _i1.JsonSerializable {
   const DecksUncheckedUpdateManyInput({
     this.deckId,
-    this.userId,
     this.title,
     this.datecreated,
+    this.userId,
   });
 
   factory DecksUncheckedUpdateManyInput.fromJson(Map<String, dynamic> json) =>
@@ -1517,12 +1517,12 @@ class DecksUncheckedUpdateManyInput implements _i1.JsonSerializable {
   @JsonKey(name: r'deck_id')
   final IntFieldUpdateOperationsInput? deckId;
 
-  @JsonKey(name: r'user_id')
-  final NullableIntFieldUpdateOperationsInput? userId;
-
   final NullableStringFieldUpdateOperationsInput? title;
 
   final NullableStringFieldUpdateOperationsInput? datecreated;
+
+  @JsonKey(name: r'user_id')
+  final NullableIntFieldUpdateOperationsInput? userId;
 
   @override
   Map<String, dynamic> toJson() => _$DecksUncheckedUpdateManyInputToJson(this);
@@ -2503,9 +2503,9 @@ class CardsOrderByRelationAggregateInput implements _i1.JsonSerializable {
 class DecksCountOrderByAggregateInput implements _i1.JsonSerializable {
   const DecksCountOrderByAggregateInput({
     this.deckId,
-    this.userId,
     this.title,
     this.datecreated,
+    this.userId,
   });
 
   factory DecksCountOrderByAggregateInput.fromJson(Map<String, dynamic> json) =>
@@ -2514,12 +2514,12 @@ class DecksCountOrderByAggregateInput implements _i1.JsonSerializable {
   @JsonKey(name: r'deck_id')
   final SortOrder? deckId;
 
-  @JsonKey(name: r'user_id')
-  final SortOrder? userId;
-
   final SortOrder? title;
 
   final SortOrder? datecreated;
+
+  @JsonKey(name: r'user_id')
+  final SortOrder? userId;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -2550,9 +2550,9 @@ class DecksAvgOrderByAggregateInput implements _i1.JsonSerializable {
 class DecksMaxOrderByAggregateInput implements _i1.JsonSerializable {
   const DecksMaxOrderByAggregateInput({
     this.deckId,
-    this.userId,
     this.title,
     this.datecreated,
+    this.userId,
   });
 
   factory DecksMaxOrderByAggregateInput.fromJson(Map<String, dynamic> json) =>
@@ -2561,12 +2561,12 @@ class DecksMaxOrderByAggregateInput implements _i1.JsonSerializable {
   @JsonKey(name: r'deck_id')
   final SortOrder? deckId;
 
-  @JsonKey(name: r'user_id')
-  final SortOrder? userId;
-
   final SortOrder? title;
 
   final SortOrder? datecreated;
+
+  @JsonKey(name: r'user_id')
+  final SortOrder? userId;
 
   @override
   Map<String, dynamic> toJson() => _$DecksMaxOrderByAggregateInputToJson(this);
@@ -2576,9 +2576,9 @@ class DecksMaxOrderByAggregateInput implements _i1.JsonSerializable {
 class DecksMinOrderByAggregateInput implements _i1.JsonSerializable {
   const DecksMinOrderByAggregateInput({
     this.deckId,
-    this.userId,
     this.title,
     this.datecreated,
+    this.userId,
   });
 
   factory DecksMinOrderByAggregateInput.fromJson(Map<String, dynamic> json) =>
@@ -2587,12 +2587,12 @@ class DecksMinOrderByAggregateInput implements _i1.JsonSerializable {
   @JsonKey(name: r'deck_id')
   final SortOrder? deckId;
 
-  @JsonKey(name: r'user_id')
-  final SortOrder? userId;
-
   final SortOrder? title;
 
   final SortOrder? datecreated;
+
+  @JsonKey(name: r'user_id')
+  final SortOrder? userId;
 
   @override
   Map<String, dynamic> toJson() => _$DecksMinOrderByAggregateInputToJson(this);
@@ -3925,9 +3925,9 @@ class DecksCreateWithoutCardsInput implements _i1.JsonSerializable {
 class DecksUncheckedCreateWithoutCardsInput implements _i1.JsonSerializable {
   const DecksUncheckedCreateWithoutCardsInput({
     this.deckId,
-    this.userId,
     this.title,
     this.datecreated,
+    this.userId,
   });
 
   factory DecksUncheckedCreateWithoutCardsInput.fromJson(
@@ -3937,12 +3937,12 @@ class DecksUncheckedCreateWithoutCardsInput implements _i1.JsonSerializable {
   @JsonKey(name: r'deck_id')
   final int? deckId;
 
-  @JsonKey(name: r'user_id')
-  final int? userId;
-
   final String? title;
 
   final String? datecreated;
+
+  @JsonKey(name: r'user_id')
+  final int? userId;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -4092,9 +4092,9 @@ class DecksUpdateWithoutCardsInput implements _i1.JsonSerializable {
 class DecksUncheckedUpdateWithoutCardsInput implements _i1.JsonSerializable {
   const DecksUncheckedUpdateWithoutCardsInput({
     this.deckId,
-    this.userId,
     this.title,
     this.datecreated,
+    this.userId,
   });
 
   factory DecksUncheckedUpdateWithoutCardsInput.fromJson(
@@ -4104,12 +4104,12 @@ class DecksUncheckedUpdateWithoutCardsInput implements _i1.JsonSerializable {
   @JsonKey(name: r'deck_id')
   final IntFieldUpdateOperationsInput? deckId;
 
-  @JsonKey(name: r'user_id')
-  final NullableIntFieldUpdateOperationsInput? userId;
-
   final NullableStringFieldUpdateOperationsInput? title;
 
   final NullableStringFieldUpdateOperationsInput? datecreated;
+
+  @JsonKey(name: r'user_id')
+  final NullableIntFieldUpdateOperationsInput? userId;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -4868,9 +4868,9 @@ class DecksScalarWhereInput implements _i1.JsonSerializable {
     this.OR,
     this.NOT,
     this.deckId,
-    this.userId,
     this.title,
     this.datecreated,
+    this.userId,
   });
 
   factory DecksScalarWhereInput.fromJson(Map<String, dynamic> json) =>
@@ -4885,12 +4885,12 @@ class DecksScalarWhereInput implements _i1.JsonSerializable {
   @JsonKey(name: r'deck_id')
   final IntFilter? deckId;
 
-  @JsonKey(name: r'user_id')
-  final IntNullableFilter? userId;
-
   final StringNullableFilter? title;
 
   final StringNullableFilter? datecreated;
+
+  @JsonKey(name: r'user_id')
+  final IntNullableFilter? userId;
 
   @override
   Map<String, dynamic> toJson() => _$DecksScalarWhereInputToJson(this);
@@ -5277,9 +5277,9 @@ class CustomStudy implements _i1.JsonSerializable {
 class Decks implements _i1.JsonSerializable {
   const Decks({
     required this.deckId,
-    this.userId,
     this.title,
     this.datecreated,
+    this.userId,
   });
 
   factory Decks.fromJson(Map<String, dynamic> json) => _$DecksFromJson(json);
@@ -5287,12 +5287,12 @@ class Decks implements _i1.JsonSerializable {
   @JsonKey(name: r'deck_id')
   final int deckId;
 
-  @JsonKey(name: r'user_id')
-  final int? userId;
-
   final String? title;
 
   final String? datecreated;
+
+  @JsonKey(name: r'user_id')
+  final int? userId;
 
   @override
   Map<String, dynamic> toJson() => _$DecksToJson(this);
@@ -8342,9 +8342,9 @@ class CustomStudyGroupByOutputType implements _i1.JsonSerializable {
 class DecksGroupByOutputType implements _i1.JsonSerializable {
   const DecksGroupByOutputType({
     this.deckId,
-    this.userId,
     this.title,
     this.datecreated,
+    this.userId,
   });
 
   factory DecksGroupByOutputType.fromJson(Map<String, dynamic> json) =>
@@ -8353,12 +8353,12 @@ class DecksGroupByOutputType implements _i1.JsonSerializable {
   @JsonKey(name: r'deck_id')
   final int? deckId;
 
-  @JsonKey(name: r'user_id')
-  final int? userId;
-
   final String? title;
 
   final String? datecreated;
+
+  @JsonKey(name: r'user_id')
+  final int? userId;
 
   @override
   Map<String, dynamic> toJson() => _$DecksGroupByOutputTypeToJson(this);
@@ -9373,19 +9373,6 @@ class DecksCountAggregateOutputType {
     return query(const []).then((value) => (value as int));
   }
 
-  Future<int> userId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'user_id',
-          fields: fields,
-        )
-      ]),
-      key: r'user_id',
-    );
-    return query(const []).then((value) => (value as int));
-  }
-
   Future<int> title() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
@@ -9408,6 +9395,19 @@ class DecksCountAggregateOutputType {
         )
       ]),
       key: r'datecreated',
+    );
+    return query(const []).then((value) => (value as int));
+  }
+
+  Future<int> userId() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'user_id',
+          fields: fields,
+        )
+      ]),
+      key: r'user_id',
     );
     return query(const []).then((value) => (value as int));
   }
@@ -9508,19 +9508,6 @@ class DecksMinAggregateOutputType {
     return query(const []).then((value) => (value as int?));
   }
 
-  Future<int?> userId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'user_id',
-          fields: fields,
-        )
-      ]),
-      key: r'user_id',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-
   Future<String?> title() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
@@ -9545,6 +9532,19 @@ class DecksMinAggregateOutputType {
       key: r'datecreated',
     );
     return query(const []).then((value) => (value as String?));
+  }
+
+  Future<int?> userId() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'user_id',
+          fields: fields,
+        )
+      ]),
+      key: r'user_id',
+    );
+    return query(const []).then((value) => (value as int?));
   }
 }
 
@@ -9566,19 +9566,6 @@ class DecksMaxAggregateOutputType {
     return query(const []).then((value) => (value as int?));
   }
 
-  Future<int?> userId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'user_id',
-          fields: fields,
-        )
-      ]),
-      key: r'user_id',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-
   Future<String?> title() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
@@ -9603,6 +9590,19 @@ class DecksMaxAggregateOutputType {
       key: r'datecreated',
     );
     return query(const []).then((value) => (value as String?));
+  }
+
+  Future<int?> userId() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'user_id',
+          fields: fields,
+        )
+      ]),
+      key: r'user_id',
+    );
+    return query(const []).then((value) => (value as int?));
   }
 }
 
@@ -10031,7 +10031,7 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
     final engine = _i5.BinaryEngine(
       logger: logger,
       schema:
-          r'Z2VuZXJhdG9yIGNsaWVudCB7DQogIHByb3ZpZGVyID0gImRhcnQgcnVuIG9ybSINCn0NCg0KZGF0YXNvdXJjZSBkYiB7DQogIHByb3ZpZGVyID0gInBvc3RncmVzcWwiDQogIHVybCAgICAgID0gZW52KCJEQVRBQkFTRV9VUkwiKQ0KfQ0KDQptb2RlbCBjYXJkcyB7DQogIGNhcmRfaWQgIEludCAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgZGVja19pZCAgSW50Pw0KICBxdWVzdGlvbiBTdHJpbmc/IEBkYi5WYXJDaGFyKDI1NSkNCiAgYW5zd2VyICAgU3RyaW5nPyBAZGIuVmFyQ2hhcigyNTUpDQogIGR1ZSAgICAgIEludD8NCiAgdGFnX2lkICAgSW50Pw0KICBkZWNrcyAgICBkZWNrcz8gIEByZWxhdGlvbihmaWVsZHM6IFtkZWNrX2lkXSwgcmVmZXJlbmNlczogW2RlY2tfaWRdLCBvbkRlbGV0ZTogTm9BY3Rpb24sIG9uVXBkYXRlOiBOb0FjdGlvbikNCiAgdGFncyAgICAgdGFncz8gICBAcmVsYXRpb24oZmllbGRzOiBbdGFnX2lkXSwgcmVmZXJlbmNlczogW3RhZ19pZF0sIG9uRGVsZXRlOiBOb0FjdGlvbiwgb25VcGRhdGU6IE5vQWN0aW9uKQ0KfQ0KDQptb2RlbCBjdXN0b21fc3R1ZHkgew0KICBjdXN0b21pZCAgIEludCAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgY3VzdG9tX2R1ZSBJbnQ/DQp9DQoNCm1vZGVsIGRlY2tzIHsNCiAgZGVja19pZCAgICAgSW50ICAgICBAaWQgQGRlZmF1bHQoYXV0b2luY3JlbWVudCgpKQ0KICB1c2VyX2lkICAgICBJbnQ/DQogIHRpdGxlICAgICAgIFN0cmluZz8gQGRiLlZhckNoYXIoMjU1KQ0KICBkYXRlY3JlYXRlZCBTdHJpbmc/IEBkYi5WYXJDaGFyKDI1NSkNCiAgY2FyZHMgICAgICAgY2FyZHNbXQ0KICB1c2VycyAgICAgICB1c2Vycz8gIEByZWxhdGlvbihmaWVsZHM6IFt1c2VyX2lkXSwgcmVmZXJlbmNlczogW3VzZXJfaWRdLCBvbkRlbGV0ZTogTm9BY3Rpb24sIG9uVXBkYXRlOiBOb0FjdGlvbikNCn0NCg0KbW9kZWwgdGFncyB7DQogIHRhZ19pZCAgIEludCAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgdGFnX25hbWUgU3RyaW5nPyBAZGIuVmFyQ2hhcigyNTUpDQogIGNhcmRzICAgIGNhcmRzW10NCn0NCg0KbW9kZWwgdXNlcnMgew0KICB1c2VyX2lkICAgICAgIEludCAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgdXNlcm5hbWUgICAgICBTdHJpbmc/IEBkYi5WYXJDaGFyKDI1NSkNCiAgcGFzc3dvcmRfaGFzaCBTdHJpbmc/IEBkYi5WYXJDaGFyKDI1NSkNCiAgZGVja3MgICAgICAgICBkZWNrc1tdDQp9DQo=',
+          r'Z2VuZXJhdG9yIGNsaWVudCB7CiAgcHJvdmlkZXIgPSAiZGFydCBydW4gb3JtIgp9CgpkYXRhc291cmNlIGRiIHsKICBwcm92aWRlciA9ICJwb3N0Z3Jlc3FsIgogIHVybCAgICAgID0gZW52KCJEQVRBQkFTRV9VUkwiKQp9Cgptb2RlbCBjYXJkcyB7CiAgY2FyZF9pZCAgSW50ICAgICBAaWQgQGRlZmF1bHQoYXV0b2luY3JlbWVudCgpKQogIGRlY2tfaWQgIEludD8KICBxdWVzdGlvbiBTdHJpbmc/IEBkYi5WYXJDaGFyKDI1NSkKICBhbnN3ZXIgICBTdHJpbmc/IEBkYi5WYXJDaGFyKDI1NSkKICBkdWUgICAgICBJbnQ/CiAgdGFnX2lkICAgSW50PwogIGRlY2tzICAgIGRlY2tzPyAgQHJlbGF0aW9uKGZpZWxkczogW2RlY2tfaWRdLCByZWZlcmVuY2VzOiBbZGVja19pZF0sIG9uRGVsZXRlOiBOb0FjdGlvbiwgb25VcGRhdGU6IE5vQWN0aW9uKQogIHRhZ3MgICAgIHRhZ3M/ICAgQHJlbGF0aW9uKGZpZWxkczogW3RhZ19pZF0sIHJlZmVyZW5jZXM6IFt0YWdfaWRdLCBvbkRlbGV0ZTogTm9BY3Rpb24sIG9uVXBkYXRlOiBOb0FjdGlvbikKfQoKbW9kZWwgY3VzdG9tX3N0dWR5IHsKICBjdXN0b21pZCAgIEludCAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkKICBjdXN0b21fZHVlIEludD8KfQoKbW9kZWwgZGVja3MgewogIGRlY2tfaWQgICAgIEludCAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkKICB0aXRsZSAgICAgICBTdHJpbmc/IEBkYi5WYXJDaGFyKDI1NSkKICBkYXRlY3JlYXRlZCBTdHJpbmc/IEBkYi5WYXJDaGFyKDI1NSkKICB1c2VyX2lkICAgICBJbnQ/CiAgY2FyZHMgICAgICAgY2FyZHNbXQogIHVzZXJzICAgICAgIHVzZXJzPyAgQHJlbGF0aW9uKGZpZWxkczogW3VzZXJfaWRdLCByZWZlcmVuY2VzOiBbdXNlcl9pZF0sIG9uRGVsZXRlOiBOb0FjdGlvbiwgb25VcGRhdGU6IE5vQWN0aW9uKQp9Cgptb2RlbCB0YWdzIHsKICB0YWdfaWQgICBJbnQgICAgIEBpZCBAZGVmYXVsdChhdXRvaW5jcmVtZW50KCkpCiAgdGFnX25hbWUgU3RyaW5nPyBAZGIuVmFyQ2hhcigyNTUpCiAgY2FyZHMgICAgY2FyZHNbXQp9Cgptb2RlbCB1c2VycyB7CiAgdXNlcl9pZCAgICAgICBJbnQgICAgIEBpZCBAZGVmYXVsdChhdXRvaW5jcmVtZW50KCkpCiAgdXNlcm5hbWUgICAgICBTdHJpbmc/IEBkYi5WYXJDaGFyKDI1NSkKICBwYXNzd29yZF9oYXNoIFN0cmluZz8gQGRiLlZhckNoYXIoMjU1KQogIGRlY2tzICAgICAgICAgZGVja3NbXQp9Cg==',
       datasources: datasources?.toJson().cast() ?? const {},
       executable:
           r'C:\flutterapps\Computer-Science-NEA\node_modules\prisma\query-engine-windows.exe',
