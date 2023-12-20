@@ -9,7 +9,7 @@ import 'package:orm/logger.dart';
 import '../src/generated/prisma/prisma_client.dart';
 
 final prisma = PrismaClient(
-  datasources: Datasources(
+  datasources: const Datasources(
     db: 'postgresql://SamWylie262:IfQ9EWP7Yqlu@ep-cold-bird-78274763.eu-central-1.aws.neon.tech/potentialdb?sslmode=require',
   ),
 );
