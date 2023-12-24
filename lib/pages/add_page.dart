@@ -142,24 +142,17 @@ class _AddPageState extends State<AddPage> {
   }
 }
 
+final neonClient = FlutterNeon(
+    connectionUrl:
+        "postgresql://SamWylie262:IfQ9EWP7Yqlu@ep-cold-bird-78274763-pooler.eu-central-1.aws.neon.tech/potentialdb?sslmode=disable",
+    pooling: true);
+
 void AddCard(String dropdown, String QuestionText, String AnswerText) async {
-  if (dropdown == 'Computing') {
-    await prisma.$executeRaw(
-        'INSERT INTO cards (deck_id, question, answer, due) VALUES (1, \'$QuestionText\', \'$AnswerText\', 0, 1)');
-  } else if (dropdown == 'English') {
-    await prisma.$executeRaw(
-        'INSERT INTO cards (deck_id, question, answer, due, tag_id) VALUES (2, \'$QuestionText\', \'$AnswerText\', 0, 1)');
-  } else if (dropdown == 'Geography') {
-    await prisma.$executeRaw(
-        'INSERT INTO cards (deck_id, question, answer, due, tag_id) VALUES (3, \'$QuestionText\', \'$AnswerText\', 0, 1)');
-  } else if (dropdown == 'History') {
-    await prisma.$executeRaw(
-        'INSERT INTO cards (deck_id, question, answer, due, tag_id) VALUES (4, \'$QuestionText\', \'$AnswerText\', 0, 1)');
-  } else if (dropdown == 'Maths') {
-    await prisma.$executeRaw(
-        'INSERT INTO cards (deck_id, question, answer, due, tag_id) VALUES (5, \'$QuestionText\', \'$AnswerText\', 0, 1)');
-  } else if (dropdown == 'Science') {
-    await prisma.$executeRaw(
-        'INSERT INTO cards (deck_id, question, answer, due, tag_id) VALUES (6, \'$QuestionText\', \'$AnswerText\', 0, 1)');
-  }
+  print(dropdown);
+  print(QuestionText);
+  print(AnswerText);
+  await neonClient.open();
+  final results = await neonClient.selectAll(table: "users");
+  print(results.first);
+  await neonClient.close();
 }
