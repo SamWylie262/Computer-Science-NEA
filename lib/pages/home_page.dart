@@ -5,7 +5,6 @@ import 'package:secondly/pages/browse_page.dart';
 import 'package:secondly/pages/settings_page.dart';
 import '../components/home_page/topic_tile.dart';
 import '../data/words.dart';
-import 'package:flutter_neon/flutter_neon.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

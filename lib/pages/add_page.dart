@@ -1,18 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:secondly/pages/home_page.dart';
-import 'package:flutter_neon/flutter_neon.dart';
-import 'package:orm/logger.dart';
-import 'package:orm/orm.dart';
-
-import 'package:orm/logger.dart';
-
-import '../src/generated/prisma/prisma_client.dart';
-
-final prisma = PrismaClient(
-  datasources: const Datasources(
-    db: 'postgresql://SamWylie262:IfQ9EWP7Yqlu@ep-cold-bird-78274763.eu-central-1.aws.neon.tech/potentialdb?sslmode=require',
-  ),
-);
 
 class AddPage extends StatefulWidget {
   const AddPage({super.key});
@@ -142,17 +129,8 @@ class _AddPageState extends State<AddPage> {
   }
 }
 
-final neonClient = FlutterNeon(
-    connectionUrl:
-        "postgresql://SamWylie262:IfQ9EWP7Yqlu@ep-cold-bird-78274763-pooler.eu-central-1.aws.neon.tech/potentialdb?sslmode=disable",
-    pooling: true);
-
 void AddCard(String dropdown, String QuestionText, String AnswerText) async {
   print(dropdown);
   print(QuestionText);
   print(AnswerText);
-  await neonClient.open();
-  final results = await neonClient.selectAll(table: "users");
-  print(results.first);
-  await neonClient.close();
 }
