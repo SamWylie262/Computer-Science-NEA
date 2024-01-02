@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:secondly/pages/home_page.dart';
+import 'dart:async';
 import 'package:mysql1/mysql1.dart';
+import 'package:secondly/models/mysql.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({super.key});
@@ -10,6 +12,7 @@ class AddPage extends StatefulWidget {
 }
 
 class _AddPageState extends State<AddPage> {
+  var db = new Mysql();
   String dropdownValue = 'Computing';
   final textController1 = TextEditingController();
   final textController2 = TextEditingController();
@@ -131,14 +134,14 @@ class _AddPageState extends State<AddPage> {
 }
 
 void AddCard(String dropdown, String QuestionText, String AnswerText) async {
-  // Open a connection (testdb should already exist)
-  final conn = await MySqlConnection.connect(ConnectionSettings(
-      host: 'localhost', port: 3306, user: 'root', db: 'potentialdb'));
+  final db = new Mysql();
+  db.getConnection().then((conn) async {
+    var result = await conn.query(
+        'INSERT INTO cards (deck_id, question, answer) VALUES (?, ?, ?)',
+        [1, QuestionText, AnswerText]);
+    print(result);
+  });
   print(dropdown);
   print(QuestionText);
   print(AnswerText);
-  var result = await conn.query(
-      'insert into cards (deck_id, question, answer) values (?, ?, ?)',
-      [1, QuestionText, AnswerText]);
-  await conn.close();
 }
