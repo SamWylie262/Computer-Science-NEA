@@ -40,6 +40,7 @@ dependencies:
   resizable_widget: ^1.0.0
   orm: ^3.4.5
   json_annotation: ^4.8.1
+  mysql1: ^0.20.0
 
 dev_dependencies:
   flutter_test:
