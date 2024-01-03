@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:secondly/pages/home_page.dart';
-import 'package:mysql1/mysql1.dart';
-import 'dart:async';
+
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});

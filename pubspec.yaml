@@ -36,11 +36,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   provider: ^6.0.3
-  flutter_neon: ^0.1.0+5
   resizable_widget: ^1.0.0
-  orm: ^3.4.5
-  json_annotation: ^4.8.1
-  mysql1: ^0.20.0
+  postgres: ^2.6.3
+  flutter_neon: ^0.1.0+5
 
 dev_dependencies:
   flutter_test:

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:secondly/configs/themes.dart';
 import 'package:secondly/pages/home_page.dart';
-import 'package:orm/logger.dart';
-import 'package:mysql1/mysql1.dart';
+
+import 'package:postgres/postgres.dart';
 
 void main() {
   runApp(const MyApp());

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neon/flutter_neon.dart';
 import 'package:secondly/pages/home_page.dart';
-import 'dart:async';
-import 'package:mysql1/mysql1.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({super.key});
@@ -132,7 +131,12 @@ class _AddPageState extends State<AddPage> {
 }
 
 void AddCard(String dropdown, String QuestionText, String AnswerText) async {
-  print(dropdown);
-  print(QuestionText);
-  print(AnswerText);
+  final neonClient = FlutterNeon(
+      connectionUrl:
+          "postgresql://SamWylie262:IfQ9EWP7Yqlu@ep-cold-bird-78274763.eu-central-1.aws.neon.tech/potentialdb",
+      pooling: true);
+  await neonClient.open();
+  final results = await neonClient.selectAll(table: "users");
+  print(results.first);
+  await neonClient.close();
 }
