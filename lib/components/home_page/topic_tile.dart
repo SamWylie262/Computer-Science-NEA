@@ -4,9 +4,9 @@ import 'package:secondly/utils/methods.dart';
 
 class TopicTile extends StatelessWidget {
   const TopicTile({
-    Key? key,
+    super.key,
     required this.topic,
-  }) : super(key: key);
+  });
 
   final String topic;
 

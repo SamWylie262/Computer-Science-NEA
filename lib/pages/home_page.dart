@@ -6,7 +6,6 @@ import 'package:secondly/pages/settings_page.dart';
 import '../components/home_page/topic_tile.dart';
 import '../data/words.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -103,7 +102,8 @@ class _HomePageState extends State<HomePage> {
                         },
                         backgroundColor: Theme.of(context)
                             .primaryColor, // Set the background color to the primary color
-                        child: Icon(Icons.add, color: Colors.white, size: 30),
+                        child: const Icon(Icons.add,
+                            color: Colors.white, size: 30),
                       ),
                     ),
                   ],

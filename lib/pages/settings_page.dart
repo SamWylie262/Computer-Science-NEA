@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:secondly/pages/home_page.dart';
 
-
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 
@@ -33,64 +32,64 @@ class _SettingsPageState extends State<SettingsPage> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
-            SizedBox(height: 20),
-            Row(
+            const SizedBox(height: 20),
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Maximum Interval:'),
-                Container(
+                SizedBox(
                   width: 150,
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0),
                     child: TextField(),
                   ),
                 ),
               ],
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Daily Review Limit:'),
-                Container(
+                SizedBox(
                   width: 150,
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0),
                     child: TextField(),
                   ),
                 ),
               ],
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Daily new card review limit:'),
-                Container(
+                SizedBox(
                   width: 150,
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0),
                     child: TextField(),
                   ),
                 ),
               ],
             ),
-            Spacer(),
+            const Spacer(),
             Align(
               alignment: Alignment.bottomRight,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(
+                child: SizedBox(
                   width: 150, // Set the width of the button
                   height: 60, // Set the height of the button
                   child: ElevatedButton(
                     onPressed: () {
                       // Add your action here
-                    },
-                    child: Text('Apply'), // Add your button text here
+                    }, // Add your button text here
                     style: ElevatedButton.styleFrom(
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
                       ),
                     ),
+                    child: const Text('Apply'),
                   ),
                 ),
               ),

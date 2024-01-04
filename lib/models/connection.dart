@@ -1,5 +1,4 @@
 import 'package:flutter_neon/flutter_neon.dart';
-import 'package:postgres/postgres.dart';
 
 final neonClient = FlutterNeon(
     connectionUrl:

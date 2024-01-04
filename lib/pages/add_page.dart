@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_neon/flutter_neon.dart';
 import 'package:secondly/models/connection.dart';
 import 'package:secondly/pages/home_page.dart';
 
@@ -36,8 +35,8 @@ class _AddPageState extends State<AddPage> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Text('Deck:'),
-                Spacer(),
+                const Text('Deck:'),
+                const Spacer(),
                 ButtonTheme(
                   alignedDropdown: true,
                   child: DropdownButton<String>(
@@ -57,7 +56,7 @@ class _AddPageState extends State<AddPage> {
                     ].map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
-                        child: Container(
+                        child: SizedBox(
                           width: 200,
                           child: Text(value),
                         ),
@@ -67,8 +66,8 @@ class _AddPageState extends State<AddPage> {
                 ),
               ],
             ),
-            SizedBox(height: 40),
-            Row(
+            const SizedBox(height: 40),
+            const Row(
               children: <Widget>[
                 Text("Question:"),
               ],
@@ -78,15 +77,15 @@ class _AddPageState extends State<AddPage> {
                 Expanded(
                   child: TextFormField(
                     controller: textController1,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Enter some text',
                     ),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 60),
-            Row(
+            const SizedBox(height: 60),
+            const Row(
               children: <Widget>[
                 Text("Answer:"),
               ],
@@ -96,24 +95,33 @@ class _AddPageState extends State<AddPage> {
                 Expanded(
                   child: TextFormField(
                     controller: textController2,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Enter some text',
                     ),
                   ),
                 ),
               ],
             ),
-            Spacer(),
+            const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 ElevatedButton(
                   onPressed: () {
                     var dropdown = dropdownValue;
-                    final QuestionText = textController1.text;
-                    final AnswerText = textController2.text;
-                    AddCard(dropdown, QuestionText, AnswerText);
-                    // Add your button logic here
+                    final questionText = textController1.text;
+                    final answerText = textController2.text;
+                    if (questionText.isEmpty || answerText.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content:
+                                Text('Please enter both question and answer')),
+                      );
+                    } else {
+                      addCard(dropdown, questionText, answerText);
+                      textController1.clear();
+                      textController2.clear();
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
@@ -131,7 +139,7 @@ class _AddPageState extends State<AddPage> {
   }
 }
 
-void AddCard(dropdown, QuestionText, AnswerText) async {
+void addCard(dropdown, questionText, answerText) async {
   if (dropdown == 'Computing') {
     dropdown = 1;
   }
@@ -155,9 +163,8 @@ void AddCard(dropdown, QuestionText, AnswerText) async {
   if (dropdown == 'Science') {
     dropdown = 6;
   }
-  print(dropdown);
   neonClient.query(
     query:
-        "INSERT INTO cards (deck_id, question, answer, due, tag_id) VALUES ($dropdown, '$QuestionText', '$AnswerText', 0, 1)",
+        "INSERT INTO cards (deck_id, question, answer, due, tag_id) VALUES ($dropdown, '$questionText', '$answerText', 0, 1)",
   );
 }

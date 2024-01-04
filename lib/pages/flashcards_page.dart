@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:secondly/pages/home_page.dart';
 
-
 class FlashcardsPage extends StatefulWidget {
   const FlashcardsPage({super.key});
 
@@ -34,25 +33,25 @@ class _FlashcardsPageState extends State<FlashcardsPage> {
               onPressed: () {
                 // Add your button logic here
               },
-              child: DefaultTextStyle(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Theme.of(context).primaryColor,
+                minimumSize: const Size(200, 100), // specify the button's size
+              ),
+              child: const DefaultTextStyle(
                 style: TextStyle(fontSize: 24),
                 child: Text('Daily Review'),
               ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).primaryColor,
-                minimumSize: Size(200, 100), // specify the button's size
-              ),
             ),
-            SizedBox(height: 75), // add some space between the buttons
+            const SizedBox(height: 75), // add some space between the buttons
             ElevatedButton(
               onPressed: () {
                 // Add your button logic here
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).primaryColor,
-                minimumSize: Size(200, 100), // specify the button's size
+                minimumSize: const Size(200, 100), // specify the button's size
               ),
-              child: DefaultTextStyle(
+              child: const DefaultTextStyle(
                 style: TextStyle(fontSize: 24),
                 child: Text('Custom Review'),
               ),

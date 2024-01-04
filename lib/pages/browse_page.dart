@@ -29,7 +29,7 @@ class _BrowsePageState extends State<BrowsePage> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
-            Row(
+            const Row(
               children: <Widget>[
                 Expanded(
                   child: TextField(
@@ -48,29 +48,29 @@ class _BrowsePageState extends State<BrowsePage> {
                     flex: 2,
                     child: Column(
                       children: <Widget>[
-                        Text('Question'), // Add title to the first column
+                        const Text('Question'), // Add title to the first column
                         Expanded(
                           child: Container(),
                         ),
                       ],
                     ),
                   ),
-                  VerticalDivider(color: Colors.black),
+                  const VerticalDivider(color: Colors.black),
                   Expanded(
                     child: Column(
                       children: <Widget>[
-                        Text('Deck'), // Add title to the second column
+                        const Text('Deck'), // Add title to the second column
                         Expanded(
                           child: Container(),
                         ),
                       ],
                     ),
                   ),
-                  VerticalDivider(color: Colors.black),
+                  const VerticalDivider(color: Colors.black),
                   Expanded(
                     child: Column(
                       children: <Widget>[
-                        Text('Answer'), // Add title to the third column
+                        const Text('Answer'), // Add title to the third column
                         Expanded(
                           child: Container(),
                         ),
