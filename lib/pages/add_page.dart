@@ -132,29 +132,32 @@ class _AddPageState extends State<AddPage> {
 }
 
 void AddCard(String dropdown, String QuestionText, String AnswerText) async {
-  final results = await neonClient.selectAll(table: "users");
-  print(results);
   if (dropdown == 'Computing') {
     int dropdown = 1;
   }
 
-  if (dropdown == 'two') {
+  if (dropdown == 'English') {
     int dropdown = 2;
   }
 
-  if (dropdown == 'three') {
+  if (dropdown == 'Geography') {
     int dropdown = 3;
   }
 
-  if (dropdown == 'four') {
+  if (dropdown == 'History') {
     int dropdown = 4;
   }
 
-  if (dropdown == 'five') {
+  if (dropdown == 'Maths') {
     int dropdown = 5;
   }
 
-  if (dropdown == 'six') {
+  if (dropdown == 'Science') {
     int dropdown = 6;
   }
+
+  neonClient.query(
+    query:
+        "INSERT INTO cards (deck_id, question, answer, due, tag_id ) VALUES (2, 'hello', 'Eric Dier', 0, 1)",
+  );
 }
