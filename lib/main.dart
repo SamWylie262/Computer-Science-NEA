@@ -4,8 +4,6 @@ import 'package:secondly/models/connection.dart';
 
 import 'package:secondly/pages/home_page.dart';
 
-import 'package:postgres/postgres.dart';
-
 void main() async {
   await neonClient.open();
   runApp(const MyApp());

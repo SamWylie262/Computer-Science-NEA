@@ -109,18 +109,18 @@ class _AddPageState extends State<AddPage> {
               children: <Widget>[
                 ElevatedButton(
                   onPressed: () {
-                    final dropdown = dropdownValue;
+                    var dropdown = dropdownValue;
                     final QuestionText = textController1.text;
                     final AnswerText = textController2.text;
                     AddCard(dropdown, QuestionText, AnswerText);
                     // Add your button logic here
                   },
-                  child: Text('Submit'),
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor: Theme.of(context)
                         .primaryColor, // Set the button color to primary color
                   ),
+                  child: const Text('Submit'),
                 ),
               ],
             ),
@@ -131,33 +131,33 @@ class _AddPageState extends State<AddPage> {
   }
 }
 
-void AddCard(String dropdown, String QuestionText, String AnswerText) async {
+void AddCard(dropdown, QuestionText, AnswerText) async {
   if (dropdown == 'Computing') {
-    int dropdown = 1;
+    dropdown = 1;
   }
 
   if (dropdown == 'English') {
-    int dropdown = 2;
+    dropdown = 2;
   }
 
   if (dropdown == 'Geography') {
-    int dropdown = 3;
+    dropdown = 3;
   }
 
   if (dropdown == 'History') {
-    int dropdown = 4;
+    dropdown = 4;
   }
 
   if (dropdown == 'Maths') {
-    int dropdown = 5;
+    dropdown = 5;
   }
 
   if (dropdown == 'Science') {
-    int dropdown = 6;
+    dropdown = 6;
   }
-
+  print(dropdown);
   neonClient.query(
     query:
-        "INSERT INTO cards (deck_id, question, answer, due, tag_id ) VALUES (2, 'hello', 'Eric Dier', 0, 1)",
+        "INSERT INTO cards (deck_id, question, answer, due, tag_id) VALUES ($dropdown, '$QuestionText', '$AnswerText', 0, 1)",
   );
 }

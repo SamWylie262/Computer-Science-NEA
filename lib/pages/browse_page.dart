@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:secondly/pages/home_page.dart';
-import 'package:resizable_widget/resizable_widget.dart';
-
 
 class BrowsePage extends StatefulWidget {
   const BrowsePage({super.key});
