@@ -134,4 +134,27 @@ class _AddPageState extends State<AddPage> {
 void AddCard(String dropdown, String QuestionText, String AnswerText) async {
   final results = await neonClient.selectAll(table: "users");
   print(results);
+  if (dropdown == 'Computing') {
+    int dropdown = 1;
+  }
+
+  if (dropdown == 'two') {
+    int dropdown = 2;
+  }
+
+  if (dropdown == 'three') {
+    int dropdown = 3;
+  }
+
+  if (dropdown == 'four') {
+    int dropdown = 4;
+  }
+
+  if (dropdown == 'five') {
+    int dropdown = 5;
+  }
+
+  if (dropdown == 'six') {
+    int dropdown = 6;
+  }
 }
