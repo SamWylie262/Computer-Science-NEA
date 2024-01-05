@@ -40,64 +40,80 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(0),
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: klogo,
-                  ),
-                  child: const Column(
-                    children: [
-                      Text('Easy', style: TextStyle(color: Colors.black)),
-                      Text('14 days', style: TextStyle(color: Colors.black)),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(width: 0),
-              Padding(
-                padding: const EdgeInsets.all(0),
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: klogo,
-                  ),
-                  child: const Column(
-                    children: [
-                      Text('Good', style: TextStyle(color: Colors.black)),
-                      Text('7 days', style: TextStyle(color: Colors.black)),
-                    ],
+                child: Container(
+                  width: 90.0,
+                  height: 70.0,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: klogo,
+                    ),
+                    child: const Column(
+                      children: [
+                        Text('Easy', style: TextStyle(color: Colors.black)),
+                        Text('month', style: TextStyle(color: Colors.black)),
+                      ],
+                    ),
                   ),
                 ),
               ),
               const SizedBox(width: 0),
               Padding(
                 padding: const EdgeInsets.all(0),
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: klogo,
-                  ),
-                  child: const Column(
-                    children: [
-                      Text('Tricky', style: TextStyle(color: Colors.black)),
-                      Text('2 days', style: TextStyle(color: Colors.black)),
-                    ],
+                child: Container(
+                  width: 90.0,
+                  height: 70.0,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: klogo,
+                    ),
+                    child: const Column(
+                      children: [
+                        Text('Good', style: TextStyle(color: Colors.black)),
+                        Text('7 days', style: TextStyle(color: Colors.black)),
+                      ],
+                    ),
                   ),
                 ),
               ),
               const SizedBox(width: 0),
               Padding(
                 padding: const EdgeInsets.all(0),
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: klogo,
+                child: Container(
+                  width: 90.0,
+                  height: 70.0,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: klogo,
+                    ),
+                    child: const Column(
+                      children: [
+                        Text('Tricky', style: TextStyle(color: Colors.black)),
+                        Text('2 days', style: TextStyle(color: Colors.black)),
+                      ],
+                    ),
                   ),
-                  child: const Column(
-                    children: [
-                      Text('Hard', style: TextStyle(color: Colors.black)),
-                      Text('Today', style: TextStyle(color: Colors.black)),
-                    ],
+                ),
+              ),
+              const SizedBox(width: 0),
+              Padding(
+                padding: const EdgeInsets.all(0),
+                child: Container(
+                  width: 87.0,
+                  height: 70.0,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: klogo,
+                    ),
+                    child: const Column(
+                      children: [
+                        Text('Hard', style: TextStyle(color: Colors.black)),
+                        Text('Today', style: TextStyle(color: Colors.black)),
+                      ],
+                    ),
                   ),
                 ),
               ),
