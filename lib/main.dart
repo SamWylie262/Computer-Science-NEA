@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:secondly/configs/themes.dart';
 import 'package:secondly/models/connection.dart';
-
 import 'package:secondly/pages/home_page.dart';
 
 void main() async {
