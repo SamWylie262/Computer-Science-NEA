@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:secondly/animations/fade_in_animation.dart';
 import 'package:secondly/utils/methods.dart';
 
+String tappedTopic = '';
+
 class TopicTile extends StatelessWidget {
   const TopicTile({
     super.key,
@@ -15,7 +17,7 @@ class TopicTile extends StatelessWidget {
     return FadeInAnimation(
       child: GestureDetector(
         onTap: () {
-          String tappedTopic = topic;
+          tappedTopic = topic;
           loadSession(context: context);
         },
         child: Container(
