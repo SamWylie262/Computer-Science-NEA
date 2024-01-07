@@ -13,6 +13,8 @@ class DailyReviewPage extends StatefulWidget {
 
 class _DailyReviewPageState extends State<DailyReviewPage> {
   bool showAnswerAndBottomBar = false;
+  List<String> dailyQuestions = [];
+  List<String> dailyAnswers = [];
   @override
   void initState() {
     super.initState();
@@ -55,6 +57,20 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
         dailyAnswersResult.map((result) => result.toString()).toList();
   }
 
+  void answeredCard(int newDue) async {
+    final cardId = await neonClient.query(
+        query: 'SELECT card_id FROM Cards WHERE question = $dailyQuestions[0]');
+    final answeredCardResult = await neonClient.query(
+        query: 'UPDATE cards SET due = $newDue WHERE card_id = $cardId');
+    if (newDue != 0) {
+      dailyQuestions.removeAt(0);
+    } else {
+      String question = dailyQuestions.removeAt(0);
+      dailyQuestions.add(question);
+    }
+    showAnswerAndBottomBar = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -81,15 +97,21 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text(
-                'Question',
-                style: TextStyle(fontSize: 30),
-              ),
-              const SizedBox(height: 20),
-              if (showAnswerAndBottomBar)
+              if (dailyQuestions.isEmpty)
                 const Text(
-                  'Answer',
+                  'No more questions for today!',
                   style: TextStyle(fontSize: 30),
+                )
+              else
+                Text(
+                  dailyQuestions[0],
+                  style: const TextStyle(fontSize: 30),
+                ),
+              const SizedBox(height: 20),
+              if (showAnswerAndBottomBar && dailyQuestions.isNotEmpty)
+                Text(
+                  dailyAnswers[0],
+                  style: const TextStyle(fontSize: 30),
                 ),
             ],
           ),
@@ -108,7 +130,9 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
                           width: 90.0,
                           height: 70.0,
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              answeredCard(30);
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: klogo,
                             ),
@@ -130,7 +154,9 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
                           width: 90.0,
                           height: 70.0,
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              answeredCard(7);
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: klogo,
                             ),
@@ -152,7 +178,9 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
                           width: 90.0,
                           height: 70.0,
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              answeredCard(2);
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: klogo,
                             ),
@@ -174,7 +202,9 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
                           width: 87.0,
                           height: 70.0,
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              answeredCard(0);
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: klogo,
                             ),
