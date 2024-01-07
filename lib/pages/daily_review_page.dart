@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_const
+
 import 'package:flutter/material.dart';
 import 'package:secondly/configs/constants.dart';
 import 'package:secondly/pages/flashcards_page.dart';
@@ -48,18 +50,19 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
     final dailyQuestionsResult = await neonClient.query(
         query:
             'SELECT question FROM Cards WHERE due <= 0 AND deck_id = $tappedTopic');
-    List<String> dailyQuestions =
+    dailyQuestions =
         dailyQuestionsResult.map((result) => result.toString()).toList();
     final dailyAnswersResult = await neonClient.query(
         query:
             'SELECT answer FROM Cards WHERE due <= 0 AND deck_id = $tappedTopic');
-    List<String> dailyAnswers =
+    dailyAnswers =
         dailyAnswersResult.map((result) => result.toString()).toList();
   }
 
   void answeredCard(int newDue) async {
+    final question = dailyQuestions[0];
     final cardId = await neonClient.query(
-        query: 'SELECT card_id FROM Cards WHERE question = $dailyQuestions[0]');
+        query: 'SELECT card_id FROM Cards WHERE question = $question');
     final answeredCardResult = await neonClient.query(
         query: 'UPDATE cards SET due = $newDue WHERE card_id = $cardId');
     if (newDue != 0) {
@@ -98,9 +101,12 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               if (dailyQuestions.isEmpty)
-                const Text(
-                  'No more questions for today!',
-                  style: TextStyle(fontSize: 30),
+                const Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: const Text(
+                    'No more questions for today!',
+                    style: TextStyle(fontSize: 30),
+                  ),
                 )
               else
                 Text(
