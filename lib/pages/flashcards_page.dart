@@ -118,6 +118,4 @@ Future<void> getCards() async {
           'SELECT answer FROM Cards WHERE due <= 0 AND deck_id = $tappedTopic');
   dailyAnswers = dailyAnswersResult.map((result) => result.toString()).toList();
   await Future.delayed(const Duration(seconds: 1));
-  print(dailyQuestions);
-  print(dailyAnswers);
 }
