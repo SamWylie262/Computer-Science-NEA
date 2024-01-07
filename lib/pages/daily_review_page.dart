@@ -18,22 +18,22 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
   @override
   void initState() {
     super.initState();
-    print(dailyQuestions);
   }
 
   void answeredCard(int newDue) async {
-    final question = dailyQuestions[0];
-    final cardId = await neonClient.query(
-        query: 'SELECT card_id FROM Cards WHERE question = $question');
-    final answeredCardResult = await neonClient.query(
-        query: 'UPDATE cards SET due = $newDue WHERE card_id = $cardId');
+    var question = dailyQuestions[0];
+    question = question.substring(1, question.length - 1);
+    neonClient.query(
+        query: "UPDATE cards SET due = $newDue WHERE question = '$question'");
     if (newDue != 0) {
       dailyQuestions.removeAt(0);
+      dailyAnswers.removeAt(0);
     } else {
       String question = dailyQuestions.removeAt(0);
       dailyQuestions.add(question);
+      String answer = dailyAnswers.removeAt(0);
+      dailyAnswers.add(answer);
     }
-    showAnswerAndBottomBar = false;
   }
 
   @override
@@ -100,6 +100,9 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
                           child: ElevatedButton(
                             onPressed: () {
                               answeredCard(30);
+                              setState(() {
+                                showAnswerAndBottomBar = false;
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: klogo,
@@ -124,6 +127,9 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
                           child: ElevatedButton(
                             onPressed: () {
                               answeredCard(7);
+                              setState(() {
+                                showAnswerAndBottomBar = false;
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: klogo,
@@ -148,6 +154,9 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
                           child: ElevatedButton(
                             onPressed: () {
                               answeredCard(2);
+                              setState(() {
+                                showAnswerAndBottomBar = false;
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: klogo,
@@ -172,6 +181,9 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
                           child: ElevatedButton(
                             onPressed: () {
                               answeredCard(0);
+                              setState(() {
+                                showAnswerAndBottomBar = false;
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: klogo,
