@@ -14,6 +14,12 @@ class FlashcardsPage extends StatefulWidget {
 
 class _FlashcardsPageState extends State<FlashcardsPage> {
   @override
+  void initState() {
+    super.initState();
+    getCards();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -35,7 +41,6 @@ class _FlashcardsPageState extends State<FlashcardsPage> {
           children: <Widget>[
             ElevatedButton(
               onPressed: () {
-                getCards();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -79,7 +84,7 @@ class _FlashcardsPageState extends State<FlashcardsPage> {
 List<String> dailyQuestions = [];
 List<String> dailyAnswers = [];
 
-void getCards() async {
+Future<void> getCards() async {
   if (tappedTopic == 'Computing') {
     tappedTopic = '1';
   }
@@ -112,7 +117,7 @@ void getCards() async {
       query:
           'SELECT answer FROM Cards WHERE due <= 0 AND deck_id = $tappedTopic');
   dailyAnswers = dailyAnswersResult.map((result) => result.toString()).toList();
+  await Future.delayed(const Duration(seconds: 1));
   print(dailyQuestions);
   print(dailyAnswers);
-  await Future.delayed(const Duration(seconds: 1));
 }

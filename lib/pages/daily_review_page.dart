@@ -15,6 +15,12 @@ class DailyReviewPage extends StatefulWidget {
 class _DailyReviewPageState extends State<DailyReviewPage> {
   bool showAnswerAndBottomBar = false;
 
+  @override
+  void initState() {
+    super.initState();
+    print(dailyQuestions);
+  }
+
   void answeredCard(int newDue) async {
     final question = dailyQuestions[0];
     final cardId = await neonClient.query(
