@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:secondly/configs/constants.dart';
 import 'package:secondly/pages/flashcards_page.dart';
-import 'package:secondly/components/home_page/topic_tile.dart';
 import 'package:secondly/models/connection.dart';
 
 class DailyReviewPage extends StatefulWidget {
@@ -15,49 +14,6 @@ class DailyReviewPage extends StatefulWidget {
 
 class _DailyReviewPageState extends State<DailyReviewPage> {
   bool showAnswerAndBottomBar = false;
-  List<String> dailyQuestions = [];
-  List<String> dailyAnswers = [];
-  @override
-  void initState() {
-    super.initState();
-    getCards();
-  }
-
-  void getCards() async {
-    if (tappedTopic == 'Computing') {
-      tappedTopic = '1';
-    }
-
-    if (tappedTopic == 'English') {
-      tappedTopic = '2';
-    }
-
-    if (tappedTopic == 'Geography') {
-      tappedTopic = '3';
-    }
-
-    if (tappedTopic == 'History') {
-      tappedTopic = '4';
-    }
-
-    if (tappedTopic == 'Maths') {
-      tappedTopic = '5';
-    }
-
-    if (tappedTopic == 'Science') {
-      tappedTopic = '6';
-    }
-    final dailyQuestionsResult = await neonClient.query(
-        query:
-            'SELECT question FROM Cards WHERE due <= 0 AND deck_id = $tappedTopic');
-    dailyQuestions =
-        dailyQuestionsResult.map((result) => result.toString()).toList();
-    final dailyAnswersResult = await neonClient.query(
-        query:
-            'SELECT answer FROM Cards WHERE due <= 0 AND deck_id = $tappedTopic');
-    dailyAnswers =
-        dailyAnswersResult.map((result) => result.toString()).toList();
-  }
 
   void answeredCard(int newDue) async {
     final question = dailyQuestions[0];

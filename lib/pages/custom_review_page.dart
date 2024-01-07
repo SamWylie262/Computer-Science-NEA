@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:secondly/pages/flashcards_page.dart';
 import 'package:secondly/configs/constants.dart';
-import 'package:secondly/components/home_page/topic_tile.dart';
 
 class CustomReviewPage extends StatefulWidget {
   const CustomReviewPage({super.key});
