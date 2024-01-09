@@ -23,9 +23,11 @@ class _CustomReviewPageState extends State<CustomReviewPage> {
   void answeredCard(int newDue) async {
     var question = customQuestions[0];
     question = question.substring(1, question.length - 1);
+    var cardIdOfDelete = await neonClient.query(
+        query: 'SELECT card_id FROM cards WHERE question = "$customQuestions"');
     if (newDue != 0) {
       await neonClient.query(
-          query: 'DELETE FROM custom_study WHERE question = "$question"');
+          query: 'DELETE FROM custom_study WHERE card_id = $cardIdOfDelete');
       customQuestions.removeAt(0);
       customAnswers.removeAt(0);
     } else {

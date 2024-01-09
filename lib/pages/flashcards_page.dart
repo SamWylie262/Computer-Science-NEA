@@ -148,14 +148,16 @@ Future<void> getReviewCards() async {
   }
   await neonClient.query(
       query:
-          'INSERT INTO custom_study SELECT * FROM cards WHERE deck_id = $tappedTopic');
-  final customQuestionsResult =
-      await neonClient.query(query: 'SELECT question FROM custom_study');
+          'INSERT INTO custom_study (card_id) SELECT (card_id) FROM cards WHERE deck_id = $tappedTopic');
+  final customQuestionsResult = await neonClient.query(
+      query:
+          'SELECT question FROM cards WHERE card_id IN (SELECT card_id FROM custom_study)');
   customQuestions =
       customQuestionsResult.map((result) => result.toString()).toList();
 
-  final customAnswersResult =
-      await neonClient.query(query: 'SELECT answer FROM custom_study');
+  final customAnswersResult = await neonClient.query(
+      query:
+          'SELECT answer FROM cards WHERE card_id IN (SELECT card_id FROM custom_study)');
   customAnswers =
       customAnswersResult.map((result) => result.toString()).toList();
   await Future.delayed(const Duration(seconds: 1));
