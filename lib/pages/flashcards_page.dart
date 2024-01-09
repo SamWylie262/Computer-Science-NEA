@@ -17,6 +17,7 @@ class _FlashcardsPageState extends State<FlashcardsPage> {
   void initState() {
     super.initState();
     getCards();
+    getReviewCards();
   }
 
   @override
@@ -83,7 +84,8 @@ class _FlashcardsPageState extends State<FlashcardsPage> {
 
 List<String> dailyQuestions = [];
 List<String> dailyAnswers = [];
-
+List<String> customQuestions = [];
+List<String> customAnswers = [];
 Future<void> getCards() async {
   if (tappedTopic == 'Computing') {
     tappedTopic = '1';
@@ -117,5 +119,44 @@ Future<void> getCards() async {
       query:
           'SELECT answer FROM Cards WHERE due <= 0 AND deck_id = $tappedTopic');
   dailyAnswers = dailyAnswersResult.map((result) => result.toString()).toList();
+  await Future.delayed(const Duration(seconds: 1));
+}
+
+Future<void> getReviewCards() async {
+  if (tappedTopic == 'Computing') {
+    tappedTopic = '1';
+  }
+
+  if (tappedTopic == 'English') {
+    tappedTopic = '2';
+  }
+
+  if (tappedTopic == 'Geography') {
+    tappedTopic = '3';
+  }
+
+  if (tappedTopic == 'History') {
+    tappedTopic = '4';
+  }
+
+  if (tappedTopic == 'Maths') {
+    tappedTopic = '5';
+  }
+
+  if (tappedTopic == 'Science') {
+    tappedTopic = '6';
+  }
+  await neonClient.query(
+      query:
+          'INSERT INTO custom_study SELECT * FROM cards WHERE deck_id = $tappedTopic');
+  final customQuestionsResult =
+      await neonClient.query(query: 'SELECT question FROM custom_study');
+  customQuestions =
+      customQuestionsResult.map((result) => result.toString()).toList();
+
+  final customAnswersResult =
+      await neonClient.query(query: 'SELECT answer FROM custom_study');
+  customAnswers =
+      customAnswersResult.map((result) => result.toString()).toList();
   await Future.delayed(const Duration(seconds: 1));
 }
