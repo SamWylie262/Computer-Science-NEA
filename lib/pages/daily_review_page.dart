@@ -84,7 +84,7 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
             ],
           ),
         ),
-        bottomNavigationBar: showAnswerAndBottomBar
+        bottomNavigationBar: showAnswerAndBottomBar && dailyQuestions.isNotEmpty
             ? BottomAppBar(
                 color: Theme.of(context).primaryColor,
                 child: Padding(
@@ -111,7 +111,7 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
                               children: [
                                 Text('Easy',
                                     style: TextStyle(color: Colors.black)),
-                                Text('month',
+                                Text('later',
                                     style: TextStyle(color: Colors.black)),
                               ],
                             ),

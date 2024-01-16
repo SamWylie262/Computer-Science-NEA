@@ -16,6 +16,7 @@ class _FlashcardsPageState extends State<FlashcardsPage> {
   @override
   void initState() {
     super.initState();
+    neonClient.query(query: "DELETE FROM custom_study");
     getCards();
     getReviewCards();
   }
@@ -112,14 +113,13 @@ Future<void> getCards() async {
   }
   final dailyQuestionsResult = await neonClient.query(
       query:
-          'SELECT question FROM Cards WHERE due <= 0 AND deck_id = $tappedTopic');
+          "SELECT question FROM Cards WHERE due <= 0 AND deck_id = $tappedTopic");
   dailyQuestions =
       dailyQuestionsResult.map((result) => result.toString()).toList();
   final dailyAnswersResult = await neonClient.query(
       query:
-          'SELECT answer FROM Cards WHERE due <= 0 AND deck_id = $tappedTopic');
+          "SELECT answer FROM Cards WHERE due <= 0 AND deck_id = $tappedTopic");
   dailyAnswers = dailyAnswersResult.map((result) => result.toString()).toList();
-  await Future.delayed(const Duration(seconds: 1));
 }
 
 Future<void> getReviewCards() async {
@@ -146,19 +146,18 @@ Future<void> getReviewCards() async {
   if (tappedTopic == 'Science') {
     tappedTopic = '6';
   }
-  await neonClient.query(
+
+  neonClient.query(
       query:
-          'INSERT INTO custom_study (card_id) SELECT (card_id) FROM cards WHERE deck_id = $tappedTopic');
+          "INSERT INTO custom_study (card_id) SELECT (card_id) FROM cards WHERE deck_id = $tappedTopic");
   final customQuestionsResult = await neonClient.query(
       query:
-          'SELECT question FROM cards WHERE card_id IN (SELECT card_id FROM custom_study)');
+          "SELECT question FROM cards WHERE card_id IN (SELECT card_id FROM custom_study)");
   customQuestions =
       customQuestionsResult.map((result) => result.toString()).toList();
-
   final customAnswersResult = await neonClient.query(
       query:
-          'SELECT answer FROM cards WHERE card_id IN (SELECT card_id FROM custom_study)');
+          "SELECT answer FROM cards WHERE card_id IN (SELECT card_id FROM custom_study)");
   customAnswers =
       customAnswersResult.map((result) => result.toString()).toList();
-  await Future.delayed(const Duration(seconds: 1));
 }

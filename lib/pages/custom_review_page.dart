@@ -23,15 +23,18 @@ class _CustomReviewPageState extends State<CustomReviewPage> {
   void answeredCard(int newDue) async {
     var customQuestion = customQuestions[0];
     customQuestion = customQuestion.substring(1, customQuestion.length - 1);
-    var cardIdOfDeleteResult = await neonClient.query(
-        query: 'SELECT card_id FROM cards WHERE question = "$customQuestion"');
-    int cardIdOfDelete = int.parse(cardIdOfDeleteResult[0].toString());
-    print(cardIdOfDelete);
     if (newDue != 0) {
-      await neonClient.query(
-          query: 'DELETE FROM custom_study WHERE card_id = $cardIdOfDelete');
       customQuestions.removeAt(0);
       customAnswers.removeAt(0);
+      var cardIdOfDeleteResult = await neonClient.query(
+          query:
+              "SELECT card_id FROM cards WHERE question = '$customQuestion'");
+      var cardIdOfDelete = cardIdOfDeleteResult[0]
+          .toString()
+          .replaceAll('[', '')
+          .replaceAll(']', '');
+      await neonClient.query(
+          query: "DELETE FROM custom_study WHERE card_id = $cardIdOfDelete");
     } else {
       String question = customQuestions.removeAt(0);
       customQuestions.add(question);
@@ -88,73 +91,74 @@ class _CustomReviewPageState extends State<CustomReviewPage> {
             ],
           ),
         ),
-        bottomNavigationBar: showAnswerAndBottomBar
-            ? BottomAppBar(
-                color: Theme.of(context).primaryColor,
-                child: Padding(
-                  padding: const EdgeInsets.all(1.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      const SizedBox(width: 0),
-                      Padding(
-                        padding: const EdgeInsets.all(0),
-                        child: SizedBox(
-                          width: 90.0,
-                          height: 70.0,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              answeredCard(1);
-                              setState(() {
-                                showAnswerAndBottomBar = false;
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: klogo,
-                            ),
-                            child: const Column(
-                              children: [
-                                Text('Good',
-                                    style: TextStyle(color: Colors.black)),
-                                Text('Finish',
-                                    style: TextStyle(color: Colors.black)),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 0),
-                      Padding(
-                        padding: const EdgeInsets.all(0),
-                        child: SizedBox(
-                          width: 90.0,
-                          height: 70.0,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              answeredCard(0);
-                              setState(() {
-                                showAnswerAndBottomBar = false;
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: klogo,
-                            ),
-                            child: const Column(
-                              children: [
-                                Text('Tricky',
-                                    style: TextStyle(color: Colors.black)),
-                                Text('Again',
-                                    style: TextStyle(color: Colors.black)),
-                              ],
+        bottomNavigationBar:
+            showAnswerAndBottomBar && customQuestions.isNotEmpty
+                ? BottomAppBar(
+                    color: Theme.of(context).primaryColor,
+                    child: Padding(
+                      padding: const EdgeInsets.all(1.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          const SizedBox(width: 0),
+                          Padding(
+                            padding: const EdgeInsets.all(0),
+                            child: SizedBox(
+                              width: 90.0,
+                              height: 70.0,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  answeredCard(1);
+                                  setState(() {
+                                    showAnswerAndBottomBar = false;
+                                  });
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: klogo,
+                                ),
+                                child: const Column(
+                                  children: [
+                                    Text('Good',
+                                        style: TextStyle(color: Colors.black)),
+                                    Text('Finish',
+                                        style: TextStyle(color: Colors.black)),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                          const SizedBox(width: 0),
+                          Padding(
+                            padding: const EdgeInsets.all(0),
+                            child: SizedBox(
+                              width: 90.0,
+                              height: 70.0,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  answeredCard(0);
+                                  setState(() {
+                                    showAnswerAndBottomBar = false;
+                                  });
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: klogo,
+                                ),
+                                child: const Column(
+                                  children: [
+                                    Text('Tricky',
+                                        style: TextStyle(color: Colors.black)),
+                                    Text('Again',
+                                        style: TextStyle(color: Colors.black)),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-              )
-            : null,
+                    ),
+                  )
+                : null,
       ),
     );
   }
