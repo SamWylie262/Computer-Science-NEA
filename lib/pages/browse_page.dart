@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:secondly/pages/home_page.dart';
+import 'package:secondly/models/connection.dart';
 
 class BrowsePage extends StatefulWidget {
   const BrowsePage({super.key});
@@ -9,6 +10,12 @@ class BrowsePage extends StatefulWidget {
 }
 
 class _BrowsePageState extends State<BrowsePage> {
+  @override
+  void initState() {
+    super.initState();
+    getBroseCards();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,4 +92,17 @@ class _BrowsePageState extends State<BrowsePage> {
       ),
     );
   }
+}
+
+void getBroseCards() async {
+  final results = await neonClient
+      .select(table: "cards", columns: ["question", "deck_id", "answer"]);
+  print(results);
+  List<String> questions = results.map((row) => row[0].toString()).toList();
+  List<String> decks = results.map((row) => row[1].toString()).toList();
+  List<String> answers = results.map((row) => row[2].toString()).toList();
+
+  print(questions);
+  print(decks);
+  print(answers);
 }
