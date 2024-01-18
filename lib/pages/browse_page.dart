@@ -3,7 +3,7 @@ import 'package:secondly/pages/home_page.dart';
 import 'package:secondly/models/connection.dart';
 
 class BrowsePage extends StatefulWidget {
-  const BrowsePage({super.key});
+  const BrowsePage({required Key key}) : super(key: key);
 
   @override
   State<BrowsePage> createState() => _BrowsePageState();
@@ -32,77 +32,47 @@ class _BrowsePageState extends State<BrowsePage> {
           },
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[
-            const Row(
-              children: <Widget>[
-                Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Search',
-                      prefixIcon: Icon(Icons.search),
+      body: FutureBuilder<List<List<String>>>(
+        future: getBroseCards(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else {
+            return ListView.builder(
+              itemCount: snapshot.data?.elementAt(0).length ?? 0,
+              itemBuilder: (context, index) {
+                return Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                          snapshot.data?.elementAt(0).elementAt(index) ?? ''),
                     ),
-                  ),
-                ),
-              ],
-            ),
-            Expanded(
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 2,
-                    child: Column(
-                      children: <Widget>[
-                        const Text('Question'), // Add title to the first column
-                        Expanded(
-                          child: Container(),
-                        ),
-                      ],
+                    Expanded(
+                      child: Text(
+                          snapshot.data?.elementAt(1).elementAt(index) ?? ''),
                     ),
-                  ),
-                  const VerticalDivider(color: Colors.black),
-                  Expanded(
-                    child: Column(
-                      children: <Widget>[
-                        const Text('Deck'), // Add title to the second column
-                        Expanded(
-                          child: Container(),
-                        ),
-                      ],
+                    Expanded(
+                      child: Text(
+                          snapshot.data?.elementAt(2).elementAt(index) ?? ''),
                     ),
-                  ),
-                  const VerticalDivider(color: Colors.black),
-                  Expanded(
-                    child: Column(
-                      children: <Widget>[
-                        const Text('Answer'), // Add title to the third column
-                        Expanded(
-                          child: Container(),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+                  ],
+                );
+              },
+            );
+          }
+        },
       ),
     );
   }
 }
 
-void getBroseCards() async {
+Future<List<List<String>>> getBroseCards() async {
   final results = await neonClient
       .select(table: "cards", columns: ["question", "deck_id", "answer"]);
-  print(results);
   List<String> questions = results.map((row) => row[0].toString()).toList();
   List<String> decks = results.map((row) => row[1].toString()).toList();
   List<String> answers = results.map((row) => row[2].toString()).toList();
-
-  print(questions);
-  print(decks);
-  print(answers);
+  return [questions, decks, answers];
 }
