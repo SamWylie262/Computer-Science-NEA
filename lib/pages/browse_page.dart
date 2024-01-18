@@ -32,37 +32,62 @@ class _BrowsePageState extends State<BrowsePage> {
           },
         ),
       ),
-      body: FutureBuilder<List<List<String>>>(
-        future: getBroseCards(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
-          } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          } else {
-            return ListView.builder(
-              itemCount: snapshot.data?.elementAt(0).length ?? 0,
-              itemBuilder: (context, index) {
-                return Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Text(
-                          snapshot.data?.elementAt(0).elementAt(index) ?? ''),
-                    ),
-                    Expanded(
-                      child: Text(
-                          snapshot.data?.elementAt(1).elementAt(index) ?? ''),
-                    ),
-                    Expanded(
-                      child: Text(
-                          snapshot.data?.elementAt(2).elementAt(index) ?? ''),
-                    ),
-                  ],
-                );
+      body: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              onChanged: (value) {
+                // Perform the search operation
               },
-            );
-          }
-        },
+              decoration: const InputDecoration(
+                labelText: "Search",
+                hintText: "Search",
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: FutureBuilder<List<List<String>>>(
+              future: getBroseCards(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else {
+                  return ListView.builder(
+                    itemCount: snapshot.data?.elementAt(0).length ?? 0,
+                    itemBuilder: (context, index) {
+                      return Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(
+                                snapshot.data?.elementAt(0).elementAt(index) ??
+                                    ''),
+                          ),
+                          Expanded(
+                            child: Text(
+                                snapshot.data?.elementAt(1).elementAt(index) ??
+                                    ''),
+                          ),
+                          Expanded(
+                            child: Text(
+                                snapshot.data?.elementAt(2).elementAt(index) ??
+                                    ''),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
