@@ -10,6 +10,7 @@ class BrowsePage extends StatefulWidget {
 }
 
 class _BrowsePageState extends State<BrowsePage> {
+  String searchQuery = '';
   @override
   void initState() {
     super.initState();
@@ -38,6 +39,9 @@ class _BrowsePageState extends State<BrowsePage> {
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               onChanged: (value) {
+                setState(() {
+                  searchQuery = value;
+                });
                 // Perform the search operation
               },
               decoration: const InputDecoration(
@@ -50,21 +54,8 @@ class _BrowsePageState extends State<BrowsePage> {
               ),
             ),
           ),
-          const Row(
-            children: <Widget>[
-              Expanded(
-                child: Text('Question', textAlign: TextAlign.center),
-              ),
-              Expanded(
-                child: Text('Deck', textAlign: TextAlign.center),
-              ),
-              Expanded(
-                child: Text('Answer', textAlign: TextAlign.center),
-              ),
-            ],
-          ),
           Expanded(
-            child: FutureBuilder<List<List<String>>>(
+            child: FutureBuilder(
               future: getBroseCards(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -72,40 +63,43 @@ class _BrowsePageState extends State<BrowsePage> {
                 } else if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 } else {
-                  return ListView.builder(
-                    itemCount: snapshot.data?.elementAt(0).length ?? 0,
-                    itemBuilder: (context, index) {
-                      return Row(
+                  print(searchQuery);
+                  var filteredData = <List<String>>[];
+                  for (var i = 0; i < snapshot.data![0].length; i++) {
+                    if (snapshot.data![0][i].contains(searchQuery) ||
+                        snapshot.data![1][i].contains(searchQuery) ||
+                        snapshot.data![2][i].contains(searchQuery)) {
+                      filteredData.add([
+                        snapshot.data![0][i],
+                        snapshot.data![1][i],
+                        snapshot.data![2][i]
+                      ]);
+                    }
+                  }
+                  print(filteredData);
+                  print(filteredData.length);
+                  var widgets = <Widget>[];
+                  for (var index = 0; index < (filteredData.length); index++) {
+                    var filteredQuestion =
+                        filteredData.isNotEmpty ? filteredData[index][0] : '';
+                    var filteredDeck = filteredData[index][1];
+                    var filteredAnswer = filteredData[index][2];
+                    widgets.add(
+                      Column(
                         children: <Widget>[
-                          Expanded(
-                            child: Text(
-                                snapshot.data?.elementAt(0).elementAt(index) ??
-                                    ''),
-                          ),
-                          const VerticalDivider(
-                            color: Colors.black,
-                            thickness: 10,
-                            width: 100,
-                          ),
-                          Expanded(
-                            child: Text(
-                                snapshot.data?.elementAt(1).elementAt(index) ??
-                                    ''),
-                          ),
-                          const VerticalDivider(color: Colors.black),
-                          Expanded(
-                            child: Text(
-                                snapshot.data?.elementAt(2).elementAt(index) ??
-                                    ''),
-                          ),
+                          Text('Question: $filteredQuestion'),
+                          Text('Answer: $filteredAnswer'),
+                          Text('Deck: $filteredDeck'),
+                          const Divider(color: Colors.black),
                         ],
-                      );
-                    },
-                  );
+                      ),
+                    );
+                  }
+                  return ListView(children: widgets);
                 }
               },
             ),
-          ),
+          )
         ],
       ),
     );
