@@ -63,7 +63,6 @@ class _BrowsePageState extends State<BrowsePage> {
                 } else if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 } else {
-                  print(searchQuery);
                   var filteredData = <List<String>>[];
                   for (var i = 0; i < snapshot.data![0].length; i++) {
                     if (snapshot.data![0][i].contains(searchQuery) ||
@@ -76,8 +75,6 @@ class _BrowsePageState extends State<BrowsePage> {
                       ]);
                     }
                   }
-                  print(filteredData);
-                  print(filteredData.length);
                   var widgets = <Widget>[];
                   for (var index = 0; index < (filteredData.length); index++) {
                     var filteredQuestion =
