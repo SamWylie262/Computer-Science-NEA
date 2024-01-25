@@ -13,6 +13,8 @@ class BrowsePage extends StatefulWidget {
 class _BrowsePageState extends State<BrowsePage> {
   String searchQuery = '';
   String dropdownValue = 'keep same';
+  final controller1 = TextEditingController();
+  final controller2 = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -90,8 +92,6 @@ class _BrowsePageState extends State<BrowsePage> {
                               TextEditingController(text: filteredQuestion);
                           TextEditingController controller2 =
                               TextEditingController(text: filteredAnswer);
-                          TextEditingController controller3 =
-                              TextEditingController(text: filteredDeck);
                           showModalBottomSheet(
                             context: context,
                             builder: (BuildContext context) {
@@ -144,6 +144,34 @@ class _BrowsePageState extends State<BrowsePage> {
                                       ElevatedButton(
                                         child: const Text('Apply'),
                                         onPressed: () {
+                                          var tempQuestion = filteredQuestion;
+                                          var tempAnswer = filteredAnswer;
+                                          var tempDeck = filteredDeck;
+                                          int tempDeck2 = 0;
+                                          int filteredDeck2 = 0;
+                                          if (tempDeck == 'Computing') {
+                                            int tempDeck2 = 1;
+                                          }
+
+                                          if (tempDeck == 'English') {
+                                            int tempDeck2 = 2;
+                                          }
+
+                                          if (tempDeck == 'Geography') {
+                                            int tempDeck2 = 3;
+                                          }
+
+                                          if (tempDeck == 'History') {
+                                            int tempDeck2 = 4;
+                                          }
+
+                                          if (tempDeck == 'Maths') {
+                                            int tempDeck2 = 5;
+                                          }
+
+                                          if (tempDeck == 'Science') {
+                                            int tempDeck2 = 6;
+                                          }
                                           // Handle the apply button press
                                           if (controller1.text.isNotEmpty) {
                                             filteredQuestion = controller1.text;
@@ -151,9 +179,42 @@ class _BrowsePageState extends State<BrowsePage> {
                                           if (controller2.text.isNotEmpty) {
                                             filteredAnswer = controller2.text;
                                           }
+                                          print(dropdownValue);
                                           if (dropdownValue != 'keep same') {
-                                            filteredDeck = dropdownValue;
+                                            if (filteredDeck == 'Computing') {
+                                              int filteredDeck2 = 1;
+                                            }
+
+                                            if (filteredDeck == 'English') {
+                                              int filteredDeck2 = 2;
+                                            }
+
+                                            if (filteredDeck == 'Geography') {
+                                              int filteredDeck2 = 3;
+                                            }
+
+                                            if (filteredDeck == 'History') {
+                                              int filteredDeck2 = 4;
+                                            }
+
+                                            if (filteredDeck == 'Maths') {
+                                              int filteredDeck2 = 5;
+                                            }
+
+                                            if (filteredDeck == 'Science') {
+                                              int filteredDeck2 = 6;
+                                            }
+                                          } else {
+                                            int filteredDeck2 = tempDeck2;
                                           }
+                                          print(filteredAnswer);
+                                          print(filteredQuestion);
+                                          print(filteredDeck2);
+                                          neonClient.query(
+                                              query:
+                                                  "UPDATE cards SET question = '$filteredQuestion', answer = '$filteredAnswer', deck_id = $filteredDeck2 WHERE question = '$tempQuestion' AND answer = '$tempAnswer' AND deck_id = $tempDeck2");
+                                          controller1.clear();
+                                          controller2.clear();
                                           Navigator.pop(context);
                                         },
                                       ),
