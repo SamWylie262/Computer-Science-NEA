@@ -81,10 +81,10 @@ class _BrowsePageState extends State<BrowsePage> {
                   }
                   var widgets = <Widget>[];
                   for (var index = 0; index < (filteredData.length); index++) {
-                    var filteredQuestion =
+                    dynamic filteredQuestion =
                         filteredData.isNotEmpty ? filteredData[index][0] : '';
-                    var filteredDeck = filteredData[index][1];
-                    var filteredAnswer = filteredData[index][2];
+                    dynamic filteredDeck = filteredData[index][1];
+                    dynamic filteredAnswer = filteredData[index][2];
                     widgets.add(
                       GestureDetector(
                         onTap: () {
@@ -144,33 +144,32 @@ class _BrowsePageState extends State<BrowsePage> {
                                       ElevatedButton(
                                         child: const Text('Apply'),
                                         onPressed: () {
-                                          var tempQuestion = filteredQuestion;
-                                          var tempAnswer = filteredAnswer;
-                                          var tempDeck = filteredDeck;
-                                          int tempDeck2 = 0;
-                                          int filteredDeck2 = 0;
+                                          dynamic tempQuestion =
+                                              filteredQuestion;
+                                          dynamic tempAnswer = filteredAnswer;
+                                          dynamic tempDeck = filteredDeck;
                                           if (tempDeck == 'Computing') {
-                                            int tempDeck2 = 1;
+                                            tempDeck = 1;
                                           }
 
                                           if (tempDeck == 'English') {
-                                            int tempDeck2 = 2;
+                                            tempDeck = 2;
                                           }
 
                                           if (tempDeck == 'Geography') {
-                                            int tempDeck2 = 3;
+                                            tempDeck = 3;
                                           }
 
                                           if (tempDeck == 'History') {
-                                            int tempDeck2 = 4;
+                                            tempDeck = 4;
                                           }
 
                                           if (tempDeck == 'Maths') {
-                                            int tempDeck2 = 5;
+                                            tempDeck = 5;
                                           }
 
                                           if (tempDeck == 'Science') {
-                                            int tempDeck2 = 6;
+                                            tempDeck = 6;
                                           }
                                           // Handle the apply button press
                                           if (controller1.text.isNotEmpty) {
@@ -179,40 +178,42 @@ class _BrowsePageState extends State<BrowsePage> {
                                           if (controller2.text.isNotEmpty) {
                                             filteredAnswer = controller2.text;
                                           }
-                                          print(dropdownValue);
                                           if (dropdownValue != 'keep same') {
                                             if (filteredDeck == 'Computing') {
-                                              int filteredDeck2 = 1;
+                                              filteredDeck = 1;
                                             }
 
                                             if (filteredDeck == 'English') {
-                                              int filteredDeck2 = 2;
+                                              filteredDeck = 2;
                                             }
 
                                             if (filteredDeck == 'Geography') {
-                                              int filteredDeck2 = 3;
+                                              filteredDeck = 3;
                                             }
 
                                             if (filteredDeck == 'History') {
-                                              int filteredDeck2 = 4;
+                                              filteredDeck = 4;
                                             }
 
                                             if (filteredDeck == 'Maths') {
-                                              int filteredDeck2 = 5;
+                                              filteredDeck = 5;
                                             }
 
                                             if (filteredDeck == 'Science') {
-                                              int filteredDeck2 = 6;
+                                              filteredDeck = 6;
                                             }
                                           } else {
-                                            int filteredDeck2 = tempDeck2;
+                                            filteredDeck = tempDeck;
                                           }
                                           print(filteredAnswer);
                                           print(filteredQuestion);
-                                          print(filteredDeck2);
+                                          print(filteredDeck);
+                                          print(tempQuestion);
+                                          print(tempAnswer);
+                                          print(tempDeck);
                                           neonClient.query(
                                               query:
-                                                  "UPDATE cards SET question = '$filteredQuestion', answer = '$filteredAnswer', deck_id = $filteredDeck2 WHERE question = '$tempQuestion' AND answer = '$tempAnswer' AND deck_id = $tempDeck2");
+                                                  "UPDATE cards SET question = '$filteredQuestion', answer = '$filteredAnswer', deck_id = $filteredDeck WHERE question = '$tempQuestion' AND answer = '$tempAnswer' AND deck_id = $tempDeck");
                                           controller1.clear();
                                           controller2.clear();
                                           Navigator.pop(context);
