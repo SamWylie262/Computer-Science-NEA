@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:secondly/pages/home_page.dart';
 import 'package:secondly/models/connection.dart';
+import 'package:secondly/configs/constants.dart';
 
 class BrowsePage extends StatefulWidget {
   const BrowsePage({required Key key}) : super(key: key);
@@ -11,6 +12,7 @@ class BrowsePage extends StatefulWidget {
 
 class _BrowsePageState extends State<BrowsePage> {
   String searchQuery = '';
+  String dropdownValue = 'keep same';
   @override
   void initState() {
     super.initState();
@@ -82,13 +84,94 @@ class _BrowsePageState extends State<BrowsePage> {
                     var filteredDeck = filteredData[index][1];
                     var filteredAnswer = filteredData[index][2];
                     widgets.add(
-                      Column(
-                        children: <Widget>[
-                          Text('Question: $filteredQuestion'),
-                          Text('Answer: $filteredAnswer'),
-                          Text('Deck: $filteredDeck'),
-                          const Divider(color: Colors.black),
-                        ],
+                      GestureDetector(
+                        onTap: () {
+                          TextEditingController controller1 =
+                              TextEditingController(text: filteredQuestion);
+                          TextEditingController controller2 =
+                              TextEditingController(text: filteredAnswer);
+                          TextEditingController controller3 =
+                              TextEditingController(text: filteredDeck);
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Container(
+                                color: kbutton,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: <Widget>[
+                                      DropdownButton<String>(
+                                        value: dropdownValue,
+                                        onChanged: (String? newValue) {
+                                          setState(() {
+                                            dropdownValue = newValue!;
+                                          });
+                                        },
+                                        items: <String>[
+                                          'keep same',
+                                          'Computing',
+                                          'English',
+                                          'Geography',
+                                          'History',
+                                          'Maths',
+                                          'Science'
+                                        ].map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: SizedBox(
+                                              width: 200,
+                                              child: Text(value),
+                                            ),
+                                          );
+                                        }).toList(),
+                                      ),
+                                      TextField(
+                                        controller: controller1,
+                                        decoration: const InputDecoration(
+                                          labelText:
+                                              'Enter new value for question or leave blank to keep the same',
+                                        ),
+                                      ),
+                                      TextField(
+                                        controller: controller2,
+                                        decoration: const InputDecoration(
+                                          labelText:
+                                              'Enter new value for answer or leave blank to keep the same',
+                                        ),
+                                      ),
+                                      ElevatedButton(
+                                        child: const Text('Apply'),
+                                        onPressed: () {
+                                          // Handle the apply button press
+                                          if (controller1.text.isNotEmpty) {
+                                            filteredQuestion = controller1.text;
+                                          }
+                                          if (controller2.text.isNotEmpty) {
+                                            filteredAnswer = controller2.text;
+                                          }
+                                          if (dropdownValue != 'keep same') {
+                                            filteredDeck = dropdownValue;
+                                          }
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        child: Column(
+                          children: <Widget>[
+                            Text('Question: $filteredQuestion'),
+                            Text('Answer: $filteredAnswer'),
+                            Text('Deck: $filteredDeck'),
+                            const Divider(color: Colors.black),
+                          ],
+                        ),
                       ),
                     );
                   }
