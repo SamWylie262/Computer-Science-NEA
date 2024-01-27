@@ -18,7 +18,7 @@ class _BrowsePageState extends State<BrowsePage> {
   @override
   void initState() {
     super.initState();
-    getBroseCards();
+    getBrowseCards();
   }
 
   @override
@@ -60,7 +60,7 @@ class _BrowsePageState extends State<BrowsePage> {
           ),
           Expanded(
             child: FutureBuilder(
-              future: getBroseCards(),
+              future: getBrowseCards(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const CircularProgressIndicator();
@@ -101,31 +101,34 @@ class _BrowsePageState extends State<BrowsePage> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Column(
                                     children: <Widget>[
-                                      DropdownButton<String>(
-                                        value: dropdownValue,
-                                        onChanged: (String? newValue) {
-                                          setState(() {
-                                            dropdownValue = newValue!;
-                                          });
-                                        },
-                                        items: <String>[
-                                          'keep same',
-                                          'Computing',
-                                          'English',
-                                          'Geography',
-                                          'History',
-                                          'Maths',
-                                          'Science'
-                                        ].map<DropdownMenuItem<String>>(
-                                            (String value) {
-                                          return DropdownMenuItem<String>(
-                                            value: value,
-                                            child: SizedBox(
-                                              width: 200,
-                                              child: Text(value),
-                                            ),
-                                          );
-                                        }).toList(),
+                                      ButtonTheme(
+                                        alignedDropdown: true,
+                                        child: DropdownButton<String>(
+                                          value: dropdownValue,
+                                          onChanged: (String? newValue) {
+                                            setState(() {
+                                              dropdownValue = newValue!;
+                                            });
+                                          },
+                                          items: <String>[
+                                            'keep same',
+                                            'Computing',
+                                            'English',
+                                            'Geography',
+                                            'History',
+                                            'Maths',
+                                            'Science'
+                                          ].map<DropdownMenuItem<String>>(
+                                              (String value) {
+                                            return DropdownMenuItem<String>(
+                                              value: value,
+                                              child: SizedBox(
+                                                width: 200,
+                                                child: Text(value),
+                                              ),
+                                            );
+                                          }).toList(),
+                                        ),
                                       ),
                                       TextField(
                                         controller: controller1,
@@ -148,6 +151,7 @@ class _BrowsePageState extends State<BrowsePage> {
                                               filteredQuestion;
                                           dynamic tempAnswer = filteredAnswer;
                                           dynamic tempDeck = filteredDeck;
+                                          filteredDeck = dropdownValue;
                                           if (tempDeck == 'Computing') {
                                             tempDeck = 1;
                                           }
@@ -205,18 +209,18 @@ class _BrowsePageState extends State<BrowsePage> {
                                           } else {
                                             filteredDeck = tempDeck;
                                           }
-                                          print(filteredAnswer);
-                                          print(filteredQuestion);
-                                          print(filteredDeck);
-                                          print(tempQuestion);
-                                          print(tempAnswer);
-                                          print(tempDeck);
                                           neonClient.query(
                                               query:
                                                   "UPDATE cards SET question = '$filteredQuestion', answer = '$filteredAnswer', deck_id = $filteredDeck WHERE question = '$tempQuestion' AND answer = '$tempAnswer' AND deck_id = $tempDeck");
                                           controller1.clear();
                                           controller2.clear();
-                                          Navigator.pop(context);
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    BrowsePage(
+                                                        key: UniqueKey())),
+                                          );
                                         },
                                       ),
                                     ],
@@ -248,7 +252,7 @@ class _BrowsePageState extends State<BrowsePage> {
   }
 }
 
-Future<List<List<String>>> getBroseCards() async {
+Future<List<List<String>>> getBrowseCards() async {
   final results = await neonClient
       .select(table: "cards", columns: ["question", "deck_id", "answer"]);
   List<String> questions = results.map((row) => row[0].toString()).toList();
