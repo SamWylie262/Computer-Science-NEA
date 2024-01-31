@@ -163,86 +163,106 @@ class _BrowsePageState extends State<BrowsePage> {
                                           ElevatedButton(
                                             child: const Text('Apply'),
                                             onPressed: () {
-                                              dynamic tempQuestion =
-                                                  filteredQuestion;
-                                              dynamic tempAnswer =
-                                                  filteredAnswer;
-                                              dynamic tempDeck = filteredDeck;
-                                              filteredDeck = dropdownValue;
-                                              if (tempDeck == 'Computing') {
-                                                tempDeck = 1;
-                                              }
-
-                                              if (tempDeck == 'English') {
-                                                tempDeck = 2;
-                                              }
-
-                                              if (tempDeck == 'Geography') {
-                                                tempDeck = 3;
-                                              }
-
-                                              if (tempDeck == 'History') {
-                                                tempDeck = 4;
-                                              }
-
-                                              if (tempDeck == 'Maths') {
-                                                tempDeck = 5;
-                                              }
-
-                                              if (tempDeck == 'Science') {
-                                                tempDeck = 6;
-                                              }
-                                              // Handle the apply button press
-                                              if (controller1.text.isNotEmpty) {
-                                                filteredQuestion =
-                                                    controller1.text;
-                                              }
-                                              if (controller2.text.isNotEmpty) {
-                                                filteredAnswer =
-                                                    controller2.text;
-                                              }
-                                              if (dropdownValue !=
-                                                  'keep same') {
-                                                if (filteredDeck ==
-                                                    'Computing') {
-                                                  filteredDeck = 1;
-                                                }
-
-                                                if (filteredDeck == 'English') {
-                                                  filteredDeck = 2;
-                                                }
-
-                                                if (filteredDeck ==
-                                                    'Geography') {
-                                                  filteredDeck = 3;
-                                                }
-
-                                                if (filteredDeck == 'History') {
-                                                  filteredDeck = 4;
-                                                }
-
-                                                if (filteredDeck == 'Maths') {
-                                                  filteredDeck = 5;
-                                                }
-
-                                                if (filteredDeck == 'Science') {
-                                                  filteredDeck = 6;
-                                                }
+                                              final questionText =
+                                                  controller1.text;
+                                              final answerText =
+                                                  controller2.text;
+                                              if (questionText.isEmpty ||
+                                                  answerText.isEmpty) {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  const SnackBar(
+                                                      content: Text(
+                                                          'Please enter both question and answer')),
+                                                );
                                               } else {
-                                                filteredDeck = tempDeck;
+                                                dynamic tempQuestion =
+                                                    filteredQuestion;
+                                                dynamic tempAnswer =
+                                                    filteredAnswer;
+                                                dynamic tempDeck = filteredDeck;
+                                                filteredDeck = dropdownValue;
+                                                if (tempDeck == 'Computing') {
+                                                  tempDeck = 1;
+                                                }
+
+                                                if (tempDeck == 'English') {
+                                                  tempDeck = 2;
+                                                }
+
+                                                if (tempDeck == 'Geography') {
+                                                  tempDeck = 3;
+                                                }
+
+                                                if (tempDeck == 'History') {
+                                                  tempDeck = 4;
+                                                }
+
+                                                if (tempDeck == 'Maths') {
+                                                  tempDeck = 5;
+                                                }
+
+                                                if (tempDeck == 'Science') {
+                                                  tempDeck = 6;
+                                                }
+                                                // Handle the apply button press
+                                                if (controller1
+                                                    .text.isNotEmpty) {
+                                                  filteredQuestion =
+                                                      controller1.text;
+                                                }
+                                                if (controller2
+                                                    .text.isNotEmpty) {
+                                                  filteredAnswer =
+                                                      controller2.text;
+                                                }
+                                                if (dropdownValue !=
+                                                    'keep same') {
+                                                  if (filteredDeck ==
+                                                      'Computing') {
+                                                    filteredDeck = 1;
+                                                  }
+
+                                                  if (filteredDeck ==
+                                                      'English') {
+                                                    filteredDeck = 2;
+                                                  }
+
+                                                  if (filteredDeck ==
+                                                      'Geography') {
+                                                    filteredDeck = 3;
+                                                  }
+
+                                                  if (filteredDeck ==
+                                                      'History') {
+                                                    filteredDeck = 4;
+                                                  }
+
+                                                  if (filteredDeck == 'Maths') {
+                                                    filteredDeck = 5;
+                                                  }
+
+                                                  if (filteredDeck ==
+                                                      'Science') {
+                                                    filteredDeck = 6;
+                                                  }
+                                                } else {
+                                                  filteredDeck = tempDeck;
+                                                }
+                                                neonClient.query(
+                                                    query:
+                                                        "UPDATE cards SET question = '$filteredQuestion', answer = '$filteredAnswer', deck_id = $filteredDeck WHERE question = '$tempQuestion' AND answer = '$tempAnswer' AND deck_id = $tempDeck");
+                                                controller1.clear();
+                                                controller2.clear();
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          BrowsePage(
+                                                              key:
+                                                                  UniqueKey())),
+                                                );
                                               }
-                                              neonClient.query(
-                                                  query:
-                                                      "UPDATE cards SET question = '$filteredQuestion', answer = '$filteredAnswer', deck_id = $filteredDeck WHERE question = '$tempQuestion' AND answer = '$tempAnswer' AND deck_id = $tempDeck");
-                                              controller1.clear();
-                                              controller2.clear();
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        BrowsePage(
-                                                            key: UniqueKey())),
-                                              );
                                             },
                                           ),
                                         ],
