@@ -22,7 +22,9 @@ class _LoginPageState extends State<LoginPage> {
     final String password = _passwordController.text;
     List results = await neonClient.query(
         query: "SELECT password_hash FROM users WHERE username = '$username'");
-    if (results.contains(password)) {
+    String properResult =
+        results.toString().substring(2, results.toString().length - 2);
+    if (properResult == password) {
       isValidUser = true;
     }
     if (isValidUser) {
@@ -38,6 +40,47 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  Future<void> _signup() async {
+    isValidUser = true;
+    final String username = _usernameController.text;
+    final String password = _passwordController.text;
+    dynamic results =
+        await neonClient.query(query: "SELECT username FROM users");
+    String properResult =
+        results.toString().substring(2, results.toString().length - 2);
+    print(properResult);
+    if (results.contains(username)) {
+      isValidUser = false;
+    }
+    for (var sublist in results) {
+      print(sublist);
+      for (var element in sublist) {
+        print(element);
+        if (element == username) {
+          isValidUser = false;
+          break;
+        }
+      }
+    }
+    if (isValidUser) {
+      await neonClient.query(
+        query:
+            "INSERT INTO users (username, password_hash) VALUES ('$username', '$password')",
+      );
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage(key: UniqueKey())),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Welcome to the app!')),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Username already exists')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,15 +91,17 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: _usernameController,
+              decoration: const InputDecoration(
                 labelText: 'Username',
               ),
             ),
             const SizedBox(height: 16),
-            const TextField(
+            TextField(
+              controller: _passwordController,
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Password',
               ),
             ),
@@ -67,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 10),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: _signup,
               child: const Text('Sign Up'),
             ),
           ],
