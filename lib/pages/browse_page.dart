@@ -252,7 +252,7 @@ class _BrowsePageState extends State<BrowsePage> {
                                                 }
                                                 neonClient.query(
                                                     query:
-                                                        "UPDATE cards SET question = '$filteredQuestion', answer = '$filteredAnswer', deck_id = $filteredDeck WHERE question = '$tempQuestion' AND answer = '$tempAnswer' AND deck_id = $tempDeck");
+                                                        "UPDATE cards SET question = '$filteredQuestion', answer = '$filteredAnswer', deck_id = $filteredDeck WHERE question = '$tempQuestion' AND answer = '$tempAnswer' AND deck_id = $tempDeck AND user_id = $finaluserid");
                                                 controller1.clear();
                                                 controller2.clear();
                                                 Navigator.push(
@@ -298,11 +298,15 @@ class _BrowsePageState extends State<BrowsePage> {
 }
 
 Future<List<List<String>>> getBrowseCards() async {
-  final results = await neonClient
-      .select(table: "cards", columns: ["question", "deck_id", "answer"]);
+  final results = await neonClient.query(
+      query:
+          "SELECT question, deck_id, answer FROM cards WHERE user_id = $finaluserid");
   List<String> questions = results.map((row) => row[0].toString()).toList();
   List<String> decks = results.map((row) => row[1].toString()).toList();
   List<String> answers = results.map((row) => row[2].toString()).toList();
+  print(questions);
+  print(decks);
+  print(answers);
   for (var i = 0; i < questions.length; i++) {
     if (decks[i] == '1') {
       decks[i] = 'Computing';

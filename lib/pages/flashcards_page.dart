@@ -17,7 +17,8 @@ class _FlashcardsPageState extends State<FlashcardsPage> {
   @override
   void initState() {
     super.initState();
-    neonClient.query(query: "DELETE FROM custom_study");
+    neonClient.query(
+        query: "DELETE FROM custom_study WHERE user_id = $finaluserid");
     getCards();
     getReviewCards();
   }
@@ -114,12 +115,12 @@ Future<void> getCards() async {
   }
   final dailyQuestionsResult = await neonClient.query(
       query:
-          "SELECT question FROM Cards WHERE due <= 0 AND deck_id = $tappedTopic");
+          "SELECT question FROM Cards WHERE due <= 0 AND deck_id = $tappedTopic AND user_id = $finaluserid");
   dailyQuestions =
       dailyQuestionsResult.map((result) => result.toString()).toList();
   final dailyAnswersResult = await neonClient.query(
       query:
-          "SELECT answer FROM Cards WHERE due <= 0 AND deck_id = $tappedTopic");
+          "SELECT answer FROM Cards WHERE due <= 0 AND deck_id = $tappedTopic AND user_id = $finaluserid");
   dailyAnswers = dailyAnswersResult.map((result) => result.toString()).toList();
 }
 
@@ -150,15 +151,15 @@ Future<void> getReviewCards() async {
 
   neonClient.query(
       query:
-          "INSERT INTO custom_study (card_id) SELECT (card_id) FROM cards WHERE deck_id = $tappedTopic");
+          "INSERT INTO custom_study (card_id) SELECT (card_id) FROM cards WHERE deck_id = $tappedTopic AND user_id = $finaluserid");
   final customQuestionsResult = await neonClient.query(
       query:
-          "SELECT question FROM cards WHERE card_id IN (SELECT card_id FROM custom_study)");
+          "SELECT question FROM cards WHERE card_id IN (SELECT card_id FROM custom_study WHERE user_id = $finaluserid)");
   customQuestions =
       customQuestionsResult.map((result) => result.toString()).toList();
   final customAnswersResult = await neonClient.query(
       query:
-          "SELECT answer FROM cards WHERE card_id IN (SELECT card_id FROM custom_study)");
+          "SELECT answer FROM cards WHERE card_id IN (SELECT card_id FROM custom_study WHERE user_id = $finaluserid)");
   customAnswers =
       customAnswersResult.map((result) => result.toString()).toList();
 }

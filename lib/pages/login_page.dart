@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
     if (isValidUser) {
       await neonClient.query(
         query:
-            "INSERT INTO users (username, password_hash) VALUES ('$username', '$password')",
+            "INSERT INTO users (username, password_hash, computing, english, geography, history, maths, science) VALUES ('$username', '$password', true, true, true, true, true, true)",
       );
       Navigator.push(
         context,

@@ -29,13 +29,14 @@ class _CustomReviewPageState extends State<CustomReviewPage> {
       customAnswers.removeAt(0);
       var cardIdOfDeleteResult = await neonClient.query(
           query:
-              "SELECT card_id FROM cards WHERE question = '$customQuestion'");
+              "SELECT card_id FROM cards WHERE question = '$customQuestion' AND user_id = $finaluserid");
       var cardIdOfDelete = cardIdOfDeleteResult[0]
           .toString()
           .replaceAll('[', '')
           .replaceAll(']', '');
       await neonClient.query(
-          query: "DELETE FROM custom_study WHERE card_id = $cardIdOfDelete");
+          query:
+              "DELETE FROM custom_study WHERE card_id = $cardIdOfDelete AND user_id = $finaluserid");
     } else {
       String question = customQuestions.removeAt(0);
       customQuestions.add(question);
