@@ -95,6 +95,18 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
             ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: ElevatedButton(
+                child: const Text('Logout'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
