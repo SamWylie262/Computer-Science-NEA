@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:secondly/pages/home_page.dart';
 import 'package:secondly/models/connection.dart';
 import 'package:secondly/configs/constants.dart';
+import 'package:secondly/pages/login_page.dart';
 
 class BrowsePage extends StatefulWidget {
   const BrowsePage({required Key key}) : super(key: key);

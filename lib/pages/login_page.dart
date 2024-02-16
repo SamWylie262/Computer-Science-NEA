@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:secondly/pages/home_page.dart';
 import 'package:secondly/models/connection.dart';
 
+int finaluserid = 0;
 bool isValidUser = false;
 
 class LoginPage extends StatefulWidget {
@@ -26,6 +27,9 @@ class _LoginPageState extends State<LoginPage> {
         results.toString().substring(2, results.toString().length - 2);
     if (properResult == password) {
       isValidUser = true;
+      List results = await neonClient.query(
+          query: "SELECT user_id FROM users WHERE username = '$username'");
+      finaluserid = results[0][0];
     }
     if (isValidUser) {
       Navigator.push(
@@ -48,14 +52,11 @@ class _LoginPageState extends State<LoginPage> {
         await neonClient.query(query: "SELECT username FROM users");
     String properResult =
         results.toString().substring(2, results.toString().length - 2);
-    print(properResult);
     if (results.contains(username)) {
       isValidUser = false;
     }
     for (var sublist in results) {
-      print(sublist);
       for (var element in sublist) {
-        print(element);
         if (element == username) {
           isValidUser = false;
           break;
