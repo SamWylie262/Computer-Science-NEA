@@ -1,11 +1,13 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:secondly/pages/home_page.dart';
 import 'package:secondly/models/connection.dart';
+import '../data/words.dart';
 
 int finaluserid = 0;
 bool isValidUser = false;
+List<String> topics = [];
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -30,6 +32,8 @@ class _LoginPageState extends State<LoginPage> {
       List results = await neonClient.query(
           query: "SELECT user_id FROM users WHERE username = '$username'");
       finaluserid = results[0][0];
+      await getDeckInfo();
+      print(topics);
     }
     if (isValidUser) {
       Navigator.push(
@@ -66,6 +70,10 @@ class _LoginPageState extends State<LoginPage> {
         query:
             "INSERT INTO users (username, password_hash, computing, english, geography, history, maths, science) VALUES ('$username', '$password', true, true, true, true, true, true)",
       );
+      List results = await neonClient.query(
+          query: "SELECT user_id FROM users WHERE username = '$username'");
+      finaluserid = results[0][0];
+      await getDeckInfo();
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => HomePage(key: UniqueKey())),
@@ -119,4 +127,28 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+}
+
+getDeckInfo() async {
+  for (var t in words) {
+    if (!topics.contains(t.topic)) {
+      topics.add(t.topic);
+    }
+    topics.sort();
+  }
+  int shush = 0;
+  List results = await neonClient.query(
+      query:
+          "SELECT computing, english, geography, history, maths, science FROM users WHERE user_id = $finaluserid");
+  List<String> newList = [];
+  for (var list in results) {
+    for (var element in list) {
+      if (element == true) {
+        newList.add(topics[shush]);
+      }
+      shush = shush + 1;
+    }
+  }
+  topics = newList;
+  return topics;
 }

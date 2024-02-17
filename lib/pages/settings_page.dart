@@ -261,7 +261,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   width: 150, // Set the width of the button
                   height: 60, // Set the height of the button
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       bool booldropdownValue1;
                       bool booldropdownValue2;
                       bool booldropdownValue3;
@@ -305,6 +305,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           booldropdownValue4,
                           booldropdownValue5,
                           booldropdownValue6);
+                      await getDeckInfo();
                       // Add your action here
                     }, // Add your button text here
                     style: ElevatedButton.styleFrom(

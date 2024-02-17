@@ -4,11 +4,9 @@ import 'package:secondly/pages/add_page.dart';
 import 'package:secondly/pages/browse_page.dart';
 import 'package:secondly/pages/settings_page.dart';
 import '../components/home_page/topic_tile.dart';
-import '../data/words.dart';
 import 'package:secondly/pages/login_page.dart';
 import 'package:secondly/models/connection.dart';
 
-List<String> _topics = [];
 String dropdownValue1 = '';
 String dropdownValue2 = '';
 String dropdownValue3 = '';
@@ -28,7 +26,6 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     getDropDownValues();
-    getDeckInfo();
   }
 
   @override
@@ -117,8 +114,8 @@ class _HomePageState extends State<HomePage> {
             ),
             SliverGrid(
                 delegate: SliverChildBuilderDelegate(
-                  childCount: _topics.length,
-                  (context, index) => TopicTile(topic: _topics[index]),
+                  childCount: topics.length,
+                  (context, index) => TopicTile(topic: topics[index]),
                 ),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
@@ -142,28 +139,4 @@ Future<void> getDropDownValues() async {
   dropdownValue4 = results[0][3].toString();
   dropdownValue5 = results[0][4].toString();
   dropdownValue6 = results[0][5].toString();
-}
-
-Future<void> getDeckInfo() async {
-  for (var t in words) {
-    if (!_topics.contains(t.topic)) {
-      _topics.add(t.topic);
-    }
-    _topics.sort();
-  }
-  int shush = 0;
-  List results = await neonClient.query(
-      query:
-          "SELECT computing, english, geography, history, maths, science FROM users WHERE user_id = $finaluserid");
-  List<String> newList = [];
-  for (var list in results) {
-    for (var element in list) {
-      if (element == true) {
-        newList.add(_topics[shush]);
-      }
-      shush = shush + 1;
-    }
-  }
-
-  _topics = newList;
 }
