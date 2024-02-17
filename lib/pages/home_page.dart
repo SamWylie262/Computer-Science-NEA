@@ -8,6 +8,14 @@ import '../data/words.dart';
 import 'package:secondly/pages/login_page.dart';
 import 'package:secondly/models/connection.dart';
 
+List<String> _topics = [];
+String dropdownValue1 = '';
+String dropdownValue2 = '';
+String dropdownValue3 = '';
+String dropdownValue4 = '';
+String dropdownValue5 = '';
+String dropdownValue6 = '';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -16,36 +24,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<String> _topics = [];
-
-  getDeckInfo() async {
-    int shush = 0;
-    List results = await neonClient.query(
-        query:
-            "SELECT computing, english, geography, history, maths, science FROM users WHERE user_id = $finaluserid");
-    List<String> newList = [];
-    for (var list in results) {
-      for (var element in list) {
-        if (element == true) {
-          newList.add(_topics[shush]);
-        }
-        shush = shush + 1;
-      }
-    }
-    _topics = newList;
-  }
-
   @override
-  initState() {
-    for (var t in words) {
-      if (!_topics.contains(t.topic)) {
-        _topics.add(t.topic);
-      }
-      _topics.sort();
-    }
-    getDeckInfo();
-
+  void initState() {
     super.initState();
+    getDropDownValues();
+    getDeckInfo();
   }
 
   @override
@@ -147,4 +130,40 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+}
+
+Future<void> getDropDownValues() async {
+  List results = await neonClient.query(
+      query:
+          "SELECT computing, english, geography, history, maths, science FROM users WHERE user_id = $finaluserid");
+  dropdownValue1 = results[0][0].toString();
+  dropdownValue2 = results[0][1].toString();
+  dropdownValue3 = results[0][2].toString();
+  dropdownValue4 = results[0][3].toString();
+  dropdownValue5 = results[0][4].toString();
+  dropdownValue6 = results[0][5].toString();
+}
+
+Future<void> getDeckInfo() async {
+  for (var t in words) {
+    if (!_topics.contains(t.topic)) {
+      _topics.add(t.topic);
+    }
+    _topics.sort();
+  }
+  int shush = 0;
+  List results = await neonClient.query(
+      query:
+          "SELECT computing, english, geography, history, maths, science FROM users WHERE user_id = $finaluserid");
+  List<String> newList = [];
+  for (var list in results) {
+    for (var element in list) {
+      if (element == true) {
+        newList.add(_topics[shush]);
+      }
+      shush = shush + 1;
+    }
+  }
+
+  _topics = newList;
 }

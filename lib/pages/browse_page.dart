@@ -304,9 +304,6 @@ Future<List<List<String>>> getBrowseCards() async {
   List<String> questions = results.map((row) => row[0].toString()).toList();
   List<String> decks = results.map((row) => row[1].toString()).toList();
   List<String> answers = results.map((row) => row[2].toString()).toList();
-  print(questions);
-  print(decks);
-  print(answers);
   for (var i = 0; i < questions.length; i++) {
     if (decks[i] == '1') {
       decks[i] = 'Computing';
