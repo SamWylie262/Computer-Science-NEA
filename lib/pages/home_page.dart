@@ -6,6 +6,7 @@ import 'package:secondly/pages/settings_page.dart';
 import '../components/home_page/topic_tile.dart';
 import '../data/words.dart';
 import 'package:secondly/pages/login_page.dart';
+import 'package:secondly/models/connection.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,7 +16,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<String> _topics = [];
+  List<String> _topics = [];
+
+  getDeckInfo() async {
+    int shush = 0;
+    List results = await neonClient.query(
+        query:
+            "SELECT computing, english, geography, history, maths, science FROM users WHERE user_id = $finaluserid");
+    List<String> newList = [];
+    for (var list in results) {
+      for (var element in list) {
+        if (element == true) {
+          newList.add(_topics[shush]);
+        }
+        shush = shush + 1;
+      }
+    }
+    _topics = newList;
+  }
 
   @override
   initState() {
@@ -25,6 +43,8 @@ class _HomePageState extends State<HomePage> {
       }
       _topics.sort();
     }
+    getDeckInfo();
+
     super.initState();
   }
 
