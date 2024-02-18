@@ -94,7 +94,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         dropdownValue1 = newValue!;
                       });
                     },
-                    items: <String>['true', 'false']
+                    items: <String>['show', 'hide']
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -123,7 +123,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         dropdownValue2 = newValue!;
                       });
                     },
-                    items: <String>['true', 'false']
+                    items: <String>['show', 'hide']
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -152,7 +152,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         dropdownValue3 = newValue!;
                       });
                     },
-                    items: <String>['true', 'false']
+                    items: <String>['show', 'hide']
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -181,7 +181,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         dropdownValue4 = newValue!;
                       });
                     },
-                    items: <String>['true', 'false']
+                    items: <String>['show', 'hide']
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -210,7 +210,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         dropdownValue5 = newValue!;
                       });
                     },
-                    items: <String>['true', 'false']
+                    items: <String>['show', 'hide']
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -239,7 +239,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         dropdownValue6 = newValue!;
                       });
                     },
-                    items: <String>['true', 'false']
+                    items: <String>['show', 'hide']
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -268,32 +268,32 @@ class _SettingsPageState extends State<SettingsPage> {
                       bool booldropdownValue4;
                       bool booldropdownValue5;
                       bool booldropdownValue6;
-                      if (dropdownValue1 == 'true') {
+                      if (dropdownValue1 == 'show') {
                         booldropdownValue1 = true;
                       } else {
                         booldropdownValue1 = false;
                       }
-                      if (dropdownValue2 == 'true') {
+                      if (dropdownValue2 == 'show') {
                         booldropdownValue2 = true;
                       } else {
                         booldropdownValue2 = false;
                       }
-                      if (dropdownValue3 == 'true') {
+                      if (dropdownValue3 == 'show') {
                         booldropdownValue3 = true;
                       } else {
                         booldropdownValue3 = false;
                       }
-                      if (dropdownValue4 == 'true') {
+                      if (dropdownValue4 == 'show') {
                         booldropdownValue4 = true;
                       } else {
                         booldropdownValue4 = false;
                       }
-                      if (dropdownValue5 == 'true') {
+                      if (dropdownValue5 == 'show') {
                         booldropdownValue5 = true;
                       } else {
                         booldropdownValue5 = false;
                       }
-                      if (dropdownValue6 == 'true') {
+                      if (dropdownValue6 == 'show') {
                         booldropdownValue6 = true;
                       } else {
                         booldropdownValue6 = false;
