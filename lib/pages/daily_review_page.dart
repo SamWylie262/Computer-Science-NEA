@@ -14,6 +14,8 @@ class DailyReviewPage extends StatefulWidget {
 
 class _DailyReviewPageState extends State<DailyReviewPage> {
   bool showAnswerAndBottomBar = false;
+  int totalCards = dailyQuestions.length;
+  int currentCard = 1;
 
   @override
   void initState() {
@@ -59,9 +61,20 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
           ),
         ),
         body: Center(
+          // Add this at the top of your widget tree
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  if (dailyQuestions.isNotEmpty)
+                    Text(
+                      '$currentCard/$totalCards',
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                ],
+              ),
               if (dailyQuestions.isEmpty)
                 const Padding(
                   padding: EdgeInsets.all(20.0),
@@ -99,6 +112,9 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
                           height: 70.0,
                           child: ElevatedButton(
                             onPressed: () {
+                              if (currentCard <= totalCards) {
+                                currentCard = currentCard + 1;
+                              }
                               answeredCard(30);
                               setState(() {
                                 showAnswerAndBottomBar = false;
@@ -126,6 +142,9 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
                           height: 70.0,
                           child: ElevatedButton(
                             onPressed: () {
+                              if (currentCard <= totalCards) {
+                                currentCard = currentCard + 1;
+                              }
                               answeredCard(7);
                               setState(() {
                                 showAnswerAndBottomBar = false;
@@ -153,6 +172,9 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
                           height: 70.0,
                           child: ElevatedButton(
                             onPressed: () {
+                              if (currentCard <= totalCards) {
+                                currentCard = currentCard + 1;
+                              }
                               answeredCard(2);
                               setState(() {
                                 showAnswerAndBottomBar = false;
@@ -180,6 +202,9 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
                           height: 70.0,
                           child: ElevatedButton(
                             onPressed: () {
+                              if (currentCard <= totalCards) {
+                                currentCard = currentCard + 1;
+                              }
                               answeredCard(0);
                               setState(() {
                                 showAnswerAndBottomBar = false;

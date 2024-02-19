@@ -15,7 +15,8 @@ class CustomReviewPage extends StatefulWidget {
 
 class _CustomReviewPageState extends State<CustomReviewPage> {
   bool showAnswerAndBottomBar = false;
-
+  int totalCards = customQuestions.length;
+  int currentCard = 1;
   @override
   void initState() {
     super.initState();
@@ -34,6 +35,7 @@ class _CustomReviewPageState extends State<CustomReviewPage> {
           .toString()
           .replaceAll('[', '')
           .replaceAll(']', '');
+
       await neonClient.query(
           query:
               "DELETE FROM custom_study WHERE card_id = $cardIdOfDelete AND user_id = $finaluserid");
@@ -71,6 +73,16 @@ class _CustomReviewPageState extends State<CustomReviewPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  if (customQuestions.isNotEmpty)
+                    Text(
+                      '$currentCard/$totalCards',
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                ],
+              ),
               if (customQuestions.isEmpty)
                 const Padding(
                   padding: EdgeInsets.all(20.0),
@@ -110,6 +122,9 @@ class _CustomReviewPageState extends State<CustomReviewPage> {
                               height: 70.0,
                               child: ElevatedButton(
                                 onPressed: () {
+                                  if (currentCard <= totalCards) {
+                                    currentCard = currentCard + 1;
+                                  }
                                   answeredCard(1);
                                   setState(() {
                                     showAnswerAndBottomBar = false;
@@ -137,6 +152,9 @@ class _CustomReviewPageState extends State<CustomReviewPage> {
                               height: 70.0,
                               child: ElevatedButton(
                                 onPressed: () {
+                                  if (currentCard <= totalCards) {
+                                    currentCard = currentCard + 1;
+                                  }
                                   answeredCard(0);
                                   setState(() {
                                     showAnswerAndBottomBar = false;
