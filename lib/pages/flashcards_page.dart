@@ -17,8 +17,32 @@ class _FlashcardsPageState extends State<FlashcardsPage> {
   @override
   void initState() {
     super.initState();
+    if (tappedTopic == 'Computing') {
+      tappedTopic = '1';
+    }
+
+    if (tappedTopic == 'English') {
+      tappedTopic = '2';
+    }
+
+    if (tappedTopic == 'Geography') {
+      tappedTopic = '3';
+    }
+
+    if (tappedTopic == 'History') {
+      tappedTopic = '4';
+    }
+
+    if (tappedTopic == 'Maths') {
+      tappedTopic = '5';
+    }
+
+    if (tappedTopic == 'Science') {
+      tappedTopic = '6';
+    }
     neonClient.query(
-        query: "DELETE FROM custom_study WHERE user_id = $finaluserid");
+        query:
+            "DELETE FROM custom_study WHERE card_id IN (SELECT card_id FROM cards WHERE user_id = $finaluserid AND deck_id = $tappedTopic)");
     getCards();
     getReviewCards();
   }
@@ -90,29 +114,6 @@ List<String> dailyAnswers = [];
 List<String> customQuestions = [];
 List<String> customAnswers = [];
 Future<void> getCards() async {
-  if (tappedTopic == 'Computing') {
-    tappedTopic = '1';
-  }
-
-  if (tappedTopic == 'English') {
-    tappedTopic = '2';
-  }
-
-  if (tappedTopic == 'Geography') {
-    tappedTopic = '3';
-  }
-
-  if (tappedTopic == 'History') {
-    tappedTopic = '4';
-  }
-
-  if (tappedTopic == 'Maths') {
-    tappedTopic = '5';
-  }
-
-  if (tappedTopic == 'Science') {
-    tappedTopic = '6';
-  }
   final dailyQuestionsResult = await neonClient.query(
       query:
           "SELECT question FROM Cards WHERE due <= 0 AND deck_id = $tappedTopic AND user_id = $finaluserid");
@@ -125,41 +126,17 @@ Future<void> getCards() async {
 }
 
 Future<void> getReviewCards() async {
-  if (tappedTopic == 'Computing') {
-    tappedTopic = '1';
-  }
-
-  if (tappedTopic == 'English') {
-    tappedTopic = '2';
-  }
-
-  if (tappedTopic == 'Geography') {
-    tappedTopic = '3';
-  }
-
-  if (tappedTopic == 'History') {
-    tappedTopic = '4';
-  }
-
-  if (tappedTopic == 'Maths') {
-    tappedTopic = '5';
-  }
-
-  if (tappedTopic == 'Science') {
-    tappedTopic = '6';
-  }
-
   neonClient.query(
       query:
           "INSERT INTO custom_study (card_id) SELECT (card_id) FROM cards WHERE deck_id = $tappedTopic AND user_id = $finaluserid");
   final customQuestionsResult = await neonClient.query(
       query:
-          "SELECT question FROM cards WHERE card_id IN (SELECT card_id FROM custom_study WHERE user_id = $finaluserid)");
+          "SELECT question FROM cards WHERE card_id IN (SELECT card_id FROM custom_study) AND user_id = $finaluserid");
   customQuestions =
       customQuestionsResult.map((result) => result.toString()).toList();
   final customAnswersResult = await neonClient.query(
       query:
-          "SELECT answer FROM cards WHERE card_id IN (SELECT card_id FROM custom_study WHERE user_id = $finaluserid)");
+          "SELECT answer FROM cards WHERE card_id IN (SELECT card_id FROM custom_study) AND user_id = $finaluserid");
   customAnswers =
       customAnswersResult.map((result) => result.toString()).toList();
 }
