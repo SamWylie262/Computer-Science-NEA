@@ -98,12 +98,12 @@ class _BrowsePageState extends State<BrowsePage> {
                             context: context,
                             builder: (BuildContext context) {
                               return Container(
-                                color: kbutton,
+                                color: klogo,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: DefaultTextStyle(
                                     style: const TextStyle(
-                                      color: Colors.white,
+                                      color: Colors.black,
                                     ),
                                     child: SingleChildScrollView(
                                       padding: const EdgeInsets.all(8.0),
@@ -162,7 +162,10 @@ class _BrowsePageState extends State<BrowsePage> {
                                             ),
                                           ),
                                           ElevatedButton(
-                                            child: const Text('Apply'),
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor:
+                                                  kbutton, // replace with your color
+                                            ),
                                             onPressed: () {
                                               final questionText =
                                                   controller1.text;
@@ -265,6 +268,11 @@ class _BrowsePageState extends State<BrowsePage> {
                                                 );
                                               }
                                             },
+                                            child: const Text(
+                                              'Apply',
+                                              style: TextStyle(
+                                                  color: Colors.black),
+                                            ),
                                           ),
                                         ],
                                       ),
