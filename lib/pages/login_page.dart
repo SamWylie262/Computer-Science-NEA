@@ -21,12 +21,15 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   Future<void> _login() async {
+    String properResult = "jjosrengjnfdmvrteroiwjf,m";
     final String username = _usernameController.text;
     final String password = _passwordController.text;
     List results = await neonClient.query(
         query: "SELECT password_hash FROM users WHERE username = '$username'");
-    String properResult =
-        results.toString().substring(2, results.toString().length - 2);
+    if (results.isNotEmpty) {
+      properResult =
+          results.toString().substring(2, results.toString().length - 2);
+    }
     if (properResult == password) {
       isValidUser = true;
       List results = await neonClient.query(
