@@ -13,7 +13,9 @@ class BrowsePage extends StatefulWidget {
 
 class _BrowsePageState extends State<BrowsePage> {
   String searchQuery = '';
+  String deckQuery = '';
   String dropdownValue = 'Computing';
+  String dropdownValue2 = ''; // Added default value for dropdown
   final controller1 = TextEditingController();
   final controller2 = TextEditingController();
   @override
@@ -59,6 +61,44 @@ class _BrowsePageState extends State<BrowsePage> {
               ),
             ),
           ),
+          SizedBox(
+            height: 50,
+            child: Row(
+              children: <Widget>[
+                const Text('Filter by deck:'),
+                const Spacer(),
+                ButtonTheme(
+                  alignedDropdown: true,
+                  child: DropdownButton<String>(
+                    value: dropdownValue2,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        deckQuery = newValue!;
+                        dropdownValue2 = newValue;
+                      });
+                    },
+                    items: <String>[
+                      '',
+                      'Computing',
+                      'English',
+                      'Geography',
+                      'History',
+                      'Maths',
+                      'Science'
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: SizedBox(
+                          width: 200,
+                          child: Text(value),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ],
+            ),
+          ),
           Expanded(
             child: FutureBuilder(
               future: getBrowseCards(),
@@ -70,9 +110,12 @@ class _BrowsePageState extends State<BrowsePage> {
                 } else {
                   var filteredData = <List<String>>[];
                   for (var i = 0; i < snapshot.data![0].length; i++) {
-                    if (snapshot.data![0][i].contains(searchQuery) ||
-                        snapshot.data![1][i].contains(searchQuery) ||
-                        snapshot.data![2][i].contains(searchQuery)) {
+                    if (snapshot.data![0][i].contains(searchQuery) &&
+                            snapshot.data![1][i].contains(deckQuery) ||
+                        snapshot.data![1][i].contains(searchQuery) &&
+                            snapshot.data![1][i].contains(deckQuery) ||
+                        snapshot.data![2][i].contains(searchQuery) &&
+                            snapshot.data![1][i].contains(deckQuery)) {
                       filteredData.add([
                         snapshot.data![0][i],
                         snapshot.data![1][i],
