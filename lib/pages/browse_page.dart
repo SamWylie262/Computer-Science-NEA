@@ -14,7 +14,7 @@ class BrowsePage extends StatefulWidget {
 class _BrowsePageState extends State<BrowsePage> {
   String searchQuery = '';
   String deckQuery = '';
-  String dropdownValue = 'Computing';
+  String dropdownValue = '';
   String dropdownValue2 = ''; // Added default value for dropdown
   final controller1 = TextEditingController();
   final controller2 = TextEditingController();
@@ -99,6 +99,10 @@ class _BrowsePageState extends State<BrowsePage> {
               ],
             ),
           ),
+          const Divider(
+            color: Colors.black,
+            thickness: 1,
+          ),
           Expanded(
             child: FutureBuilder(
               future: getBrowseCards(),
@@ -160,11 +164,12 @@ class _BrowsePageState extends State<BrowsePage> {
                                                 alignedDropdown: true,
                                                 child: DropdownButton<String>(
                                                   value: dropdownValue,
-                                                  onChanged:
-                                                      (String? newValue) {
-                                                    setState(() {
-                                                      dropdownValue = newValue!;
-                                                    });
+                                                  onChanged: (newValue) {
+                                                    print(dropdownValue);
+                                                    print(newValue);
+                                                    dropdownValue = newValue!;
+                                                    print(dropdownValue);
+                                                    setState(() {});
                                                   },
                                                   items: <String>[
                                                     'Computing',

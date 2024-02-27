@@ -3,6 +3,8 @@ import 'package:secondly/models/connection.dart';
 import 'package:secondly/pages/home_page.dart';
 import 'package:secondly/pages/login_page.dart';
 
+bool duplicate = false;
+
 class AddPage extends StatefulWidget {
   const AddPage({super.key});
 
@@ -12,6 +14,7 @@ class AddPage extends StatefulWidget {
 
 class _AddPageState extends State<AddPage> {
   String dropdownValue = 'Computing';
+
   final textController1 = TextEditingController();
   final textController2 = TextEditingController();
   @override
@@ -108,7 +111,7 @@ class _AddPageState extends State<AddPage> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     var dropdown = dropdownValue;
                     final questionText = textController1.text;
                     final answerText = textController2.text;
@@ -119,9 +122,22 @@ class _AddPageState extends State<AddPage> {
                                 Text('Please enter both question and answer')),
                       );
                     } else {
-                      addCard(dropdown, questionText, answerText);
-                      textController1.clear();
-                      textController2.clear();
+                      await addCard(dropdown, questionText, answerText);
+                      if (duplicate == true) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text(
+                                  'This card already exists in this deck')),
+                        );
+                        duplicate = false;
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text('Card added successfully')),
+                        );
+                        textController1.clear();
+                        textController2.clear();
+                      }
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -140,7 +156,7 @@ class _AddPageState extends State<AddPage> {
   }
 }
 
-void addCard(dropdown, questionText, answerText) async {
+Future<void> addCard(dropdown, questionText, answerText) async {
   if (dropdown == 'Computing') {
     dropdown = 1;
   }
@@ -163,6 +179,14 @@ void addCard(dropdown, questionText, answerText) async {
 
   if (dropdown == 'Science') {
     dropdown = 6;
+  }
+  final results = await neonClient.query(
+    query:
+        "SELECT * FROM cards WHERE deck_id = $dropdown AND question = '$questionText' AND answer = '$answerText' AND user_id = $finaluserid",
+  );
+  if (results.isNotEmpty) {
+    duplicate = true;
+    return;
   }
   neonClient.query(
     query:
