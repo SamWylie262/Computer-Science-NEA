@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:secondly/configs/constants.dart';
 import 'package:secondly/pages/home_page.dart';
 import 'package:secondly/pages/login_page.dart';
 import 'package:secondly/models/connection.dart';
@@ -36,7 +37,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(15.0),
         child: Column(
           children: <Widget>[
             const SizedBox(height: 20),
@@ -83,7 +84,7 @@ class _SettingsPageState extends State<SettingsPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text('Computing:'),
+                const Text('Computing:', style: TextStyle(color: Colors.black)),
                 const Spacer(),
                 ButtonTheme(
                   alignedDropdown: true,
@@ -112,7 +113,7 @@ class _SettingsPageState extends State<SettingsPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text('English:'),
+                const Text('English:', style: TextStyle(color: Colors.black)),
                 const Spacer(),
                 ButtonTheme(
                   alignedDropdown: true,
@@ -141,7 +142,7 @@ class _SettingsPageState extends State<SettingsPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text('Geography:'),
+                const Text('Geography:', style: TextStyle(color: Colors.black)),
                 const Spacer(),
                 ButtonTheme(
                   alignedDropdown: true,
@@ -170,7 +171,7 @@ class _SettingsPageState extends State<SettingsPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text('History:'),
+                const Text('History:', style: TextStyle(color: Colors.black)),
                 const Spacer(),
                 ButtonTheme(
                   alignedDropdown: true,
@@ -199,7 +200,7 @@ class _SettingsPageState extends State<SettingsPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text('Maths:'),
+                const Text('Maths:', style: TextStyle(color: Colors.black)),
                 const Spacer(),
                 ButtonTheme(
                   alignedDropdown: true,
@@ -228,7 +229,7 @@ class _SettingsPageState extends State<SettingsPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text('Science:'),
+                const Text('Science:', style: TextStyle(color: Colors.black)),
                 const Spacer(),
                 ButtonTheme(
                   alignedDropdown: true,
@@ -309,11 +310,13 @@ class _SettingsPageState extends State<SettingsPage> {
                       // Add your action here
                     }, // Add your button text here
                     style: ElevatedButton.styleFrom(
+                      backgroundColor: kbutton,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                       ),
                     ),
-                    child: const Text('Apply'),
+                    child: const Text('Apply',
+                        style: TextStyle(color: Colors.black)),
                   ),
                 ),
               ),
@@ -321,7 +324,9 @@ class _SettingsPageState extends State<SettingsPage> {
             Align(
               alignment: Alignment.bottomLeft,
               child: ElevatedButton(
-                child: const Text('Logout'),
+                style: ElevatedButton.styleFrom(backgroundColor: kbutton),
+                child:
+                    const Text('Logout', style: TextStyle(color: Colors.black)),
                 onPressed: () {
                   Navigator.push(
                     context,

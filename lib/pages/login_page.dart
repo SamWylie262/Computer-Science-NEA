@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:secondly/configs/constants.dart';
 import 'package:secondly/pages/home_page.dart';
 import 'package:secondly/models/connection.dart';
 import '../data/words.dart';
@@ -98,34 +99,43 @@ class _LoginPageState extends State<LoginPage> {
         title: const Text('Login Page'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: _usernameController,
-              decoration: const InputDecoration(
-                labelText: 'Username',
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextField(
+                controller: _usernameController,
+                decoration: const InputDecoration(
+                  labelText: 'Username',
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: _passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                labelText: 'Password',
+              const SizedBox(height: 16),
+              TextField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: _login,
-              child: const Text('Login'),
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: _signup,
-              child: const Text('Sign Up'),
-            ),
-          ],
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: _login,
+                style: ElevatedButton.styleFrom(backgroundColor: kbutton),
+                child:
+                    const Text('Login', style: TextStyle(color: Colors.black)),
+              ),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: _signup,
+                style: ElevatedButton.styleFrom(backgroundColor: kbutton),
+                child: const Text('Sign Up',
+                    style: TextStyle(color: Colors.black)),
+              ),
+            ],
+          ),
         ),
       ),
     );

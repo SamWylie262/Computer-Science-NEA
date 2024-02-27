@@ -61,42 +61,45 @@ class _BrowsePageState extends State<BrowsePage> {
               ),
             ),
           ),
-          SizedBox(
-            height: 50,
-            child: Row(
-              children: <Widget>[
-                const Text('Filter by deck:'),
-                const Spacer(),
-                ButtonTheme(
-                  alignedDropdown: true,
-                  child: DropdownButton<String>(
-                    value: dropdownValue2,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        deckQuery = newValue!;
-                        dropdownValue2 = newValue;
-                      });
-                    },
-                    items: <String>[
-                      '',
-                      'Computing',
-                      'English',
-                      'Geography',
-                      'History',
-                      'Maths',
-                      'Science'
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: SizedBox(
-                          width: 200,
-                          child: Text(value),
-                        ),
-                      );
-                    }).toList(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              height: 50,
+              child: Row(
+                children: <Widget>[
+                  const Text('Filter by deck:'),
+                  const Spacer(),
+                  ButtonTheme(
+                    alignedDropdown: true,
+                    child: DropdownButton<String>(
+                      value: dropdownValue2,
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          deckQuery = newValue!;
+                          dropdownValue2 = newValue;
+                        });
+                      },
+                      items: <String>[
+                        '',
+                        'Computing',
+                        'English',
+                        'Geography',
+                        'History',
+                        'Maths',
+                        'Science'
+                      ].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: SizedBox(
+                            width: 200,
+                            child: Text(value),
+                          ),
+                        );
+                      }).toList(),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           const Divider(
@@ -165,10 +168,7 @@ class _BrowsePageState extends State<BrowsePage> {
                                                 child: DropdownButton<String>(
                                                   value: dropdownValue,
                                                   onChanged: (newValue) {
-                                                    print(dropdownValue);
-                                                    print(newValue);
                                                     dropdownValue = newValue!;
-                                                    print(dropdownValue);
                                                     setState(() {});
                                                   },
                                                   items: <String>[
