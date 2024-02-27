@@ -40,9 +40,7 @@ class _FlashcardsPageState extends State<FlashcardsPage> {
     if (tappedTopic == 'Science') {
       tappedTopic = '6';
     }
-    neonClient.query(
-        query:
-            "DELETE FROM custom_study WHERE card_id IN (SELECT card_id FROM cards WHERE user_id = $finaluserid AND deck_id = $tappedTopic)");
+    deleteCards();
     getCards();
     getReviewCards();
   }
@@ -128,7 +126,7 @@ Future<void> getCards() async {
 Future<void> getReviewCards() async {
   neonClient.query(
       query:
-          "INSERT INTO custom_study (card_id) SELECT (card_id) FROM cards WHERE deck_id = $tappedTopic AND user_id = $finaluserid");
+          "INSERT INTO custom_study (card_id, user_id) SELECT card_id, user_id FROM cards WHERE deck_id = $tappedTopic AND user_id = $finaluserid");
   final customQuestionsResult = await neonClient.query(
       query:
           "SELECT question FROM cards WHERE card_id IN (SELECT card_id FROM custom_study) AND user_id = $finaluserid");
@@ -139,4 +137,10 @@ Future<void> getReviewCards() async {
           "SELECT answer FROM cards WHERE card_id IN (SELECT card_id FROM custom_study) AND user_id = $finaluserid");
   customAnswers =
       customAnswersResult.map((result) => result.toString()).toList();
+}
+
+Future<void> deleteCards() async {
+  await neonClient.query(
+      query:
+          "DELETE FROM custom_study WHERE card_id IN (SELECT card_id FROM cards WHERE user_id = $finaluserid)");
 }
