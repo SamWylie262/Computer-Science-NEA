@@ -15,7 +15,7 @@ class CustomReviewPage extends StatefulWidget {
 
 class _CustomReviewPageState extends State<CustomReviewPage> {
   bool showAnswerAndBottomBar = false;
-  int totalCards = customQuestions.length - 1;
+  int totalCards = customQuestions.length;
   int currentCard = 1;
   @override
   void initState() {

@@ -84,7 +84,9 @@ class _FlashcardsPageState extends State<FlashcardsPage> {
             ),
             const SizedBox(height: 75), // add some space between the buttons
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
+                await Future.delayed(const Duration(seconds: 2));
+                // ignore: use_build_context_synchronously
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -124,7 +126,7 @@ Future<void> getCards() async {
 }
 
 Future<void> getReviewCards() async {
-  neonClient.query(
+  await neonClient.query(
       query:
           "INSERT INTO custom_study (card_id, user_id) SELECT card_id, user_id FROM cards WHERE deck_id = $tappedTopic AND user_id = $finaluserid");
   final customQuestionsResult = await neonClient.query(
@@ -139,7 +141,7 @@ Future<void> getReviewCards() async {
       customAnswersResult.map((result) => result.toString()).toList();
 }
 
-Future<void> deleteCards() async {
+deleteCards() async {
   await neonClient.query(
       query:
           "DELETE FROM custom_study WHERE card_id IN (SELECT card_id FROM cards WHERE user_id = $finaluserid)");

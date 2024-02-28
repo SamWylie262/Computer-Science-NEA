@@ -84,9 +84,9 @@ class _HomePageState extends State<HomePage> {
                 background: Stack(
                   children: [
                     Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(size.width * 0.10),
-                        child: FadeInAnimation(
+                      child: FadeInAnimation(
+                        child: FittedBox(
+                          fit: BoxFit.contain,
                           child: Image.asset('assets/images/logo.png'),
                         ),
                       ),

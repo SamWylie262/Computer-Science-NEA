@@ -14,7 +14,7 @@ class DailyReviewPage extends StatefulWidget {
 
 class _DailyReviewPageState extends State<DailyReviewPage> {
   bool showAnswerAndBottomBar = false;
-  int totalCards = dailyQuestions.length - 1;
+  int totalCards = dailyQuestions.length;
   int currentCard = 1;
 
   @override
