@@ -41,45 +41,6 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Column(
           children: <Widget>[
             const SizedBox(height: 20),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text('Maximum Interval:'),
-                SizedBox(
-                  width: 150,
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: TextField(),
-                  ),
-                ),
-              ],
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text('Daily Review Limit:'),
-                SizedBox(
-                  width: 150,
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: TextField(),
-                  ),
-                ),
-              ],
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text('Daily new card review limit:'),
-                SizedBox(
-                  width: 150,
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: TextField(),
-                  ),
-                ),
-              ],
-            ),
             const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
