@@ -14,7 +14,7 @@ class DailyReviewPage extends StatefulWidget {
 
 class _DailyReviewPageState extends State<DailyReviewPage> {
   bool showAnswerAndBottomBar = false;
-  int totalCards = dailyQuestions.length;
+  int totalCards = dailyQuestions.length - 1;
   int currentCard = 1;
 
   @override
@@ -85,13 +85,13 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
                 )
               else
                 Text(
-                  dailyQuestions[0],
+                  dailyQuestions[0].substring(1, dailyQuestions[0].length - 1),
                   style: const TextStyle(fontSize: 30),
                 ),
               const SizedBox(height: 20),
               if (showAnswerAndBottomBar && dailyQuestions.isNotEmpty)
                 Text(
-                  dailyAnswers[0],
+                  dailyAnswers[0].substring(1, dailyAnswers[0].length - 1),
                   style: const TextStyle(fontSize: 30),
                 ),
             ],

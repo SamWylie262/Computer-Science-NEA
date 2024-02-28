@@ -15,7 +15,7 @@ class CustomReviewPage extends StatefulWidget {
 
 class _CustomReviewPageState extends State<CustomReviewPage> {
   bool showAnswerAndBottomBar = false;
-  int totalCards = customQuestions.length;
+  int totalCards = customQuestions.length - 1;
   int currentCard = 1;
   @override
   void initState() {
@@ -92,15 +92,27 @@ class _CustomReviewPageState extends State<CustomReviewPage> {
                   ),
                 )
               else
-                Text(
-                  customQuestions[0],
-                  style: const TextStyle(fontSize: 30),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      customQuestions[0]
+                          .substring(1, customQuestions[0].length - 1),
+                      style: const TextStyle(fontSize: 30),
+                    ),
+                  ),
                 ),
               const SizedBox(height: 20),
               if (showAnswerAndBottomBar && customQuestions.isNotEmpty)
-                Text(
-                  customAnswers[0],
-                  style: const TextStyle(fontSize: 20),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      customAnswers[0]
+                          .substring(1, customAnswers[0].length - 1),
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                  ),
                 ),
             ],
           ),
