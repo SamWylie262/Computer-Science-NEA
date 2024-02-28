@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:secondly/animations/fade_in_animation.dart';
 import 'package:secondly/configs/constants.dart';
 import 'package:secondly/pages/home_page.dart';
 import 'package:secondly/models/connection.dart';
@@ -103,6 +104,15 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Center(
+                child: FadeInAnimation(
+                  child: FittedBox(
+                    fit: BoxFit.contain,
+                    child: Image.asset('assets/images/logo.png'),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
               TextField(
                 controller: _usernameController,
                 decoration: const InputDecoration(
@@ -148,7 +158,7 @@ getDeckInfo() async {
     }
     topics.sort();
   }
-  int shush = 0;
+  int topicIndex = 0;
   List results = await neonClient.query(
       query:
           "SELECT computing, english, geography, history, maths, science FROM users WHERE user_id = $finaluserid");
@@ -156,9 +166,9 @@ getDeckInfo() async {
   for (var list in results) {
     for (var element in list) {
       if (element == true) {
-        newList.add(topics[shush]);
+        newList.add(topics[topicIndex]);
       }
-      shush = shush + 1;
+      topicIndex = topicIndex + 1;
     }
   }
   topics = newList;
