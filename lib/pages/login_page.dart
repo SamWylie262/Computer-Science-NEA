@@ -59,8 +59,13 @@ class _LoginPageState extends State<LoginPage> {
     final String password = _passwordController.text;
     dynamic results =
         await neonClient.query(query: "SELECT username FROM users");
-    if (results.contains(username)) {
-      isValidUser = false;
+    for (var sublist in results) {
+      for (var element in sublist) {
+        if (element == username) {
+          isValidUser = false;
+          break;
+        }
+      }
     }
     if (isValidUser) {
       if (password.length < 7) {
