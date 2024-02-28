@@ -61,15 +61,14 @@ class _LoginPageState extends State<LoginPage> {
     if (results.contains(username)) {
       isValidUser = false;
     }
-    for (var sublist in results) {
-      for (var element in sublist) {
-        if (element == username) {
-          isValidUser = false;
-          break;
-        }
-      }
-    }
     if (isValidUser) {
+      if (password.length < 7) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text('Password must be at least 7 characters long')),
+        );
+        return;
+      }
       await neonClient.query(
         query:
             "INSERT INTO users (username, password_hash, computing, english, geography, history, maths, science) VALUES ('$username', '$password', true, true, true, true, true, true)",
