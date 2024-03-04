@@ -134,7 +134,7 @@ class _CustomReviewPageState extends State<CustomReviewPage> {
                               height: 70.0,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  if (currentCard <= totalCards) {
+                                  if (currentCard < totalCards) {
                                     currentCard = currentCard + 1;
                                   }
                                   answeredCard(1);
@@ -164,7 +164,7 @@ class _CustomReviewPageState extends State<CustomReviewPage> {
                               height: 70.0,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  if (currentCard <= totalCards) {
+                                  if (currentCard < totalCards) {
                                     currentCard = currentCard + 1;
                                   }
                                   answeredCard(0);

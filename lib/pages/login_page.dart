@@ -38,7 +38,6 @@ class _LoginPageState extends State<LoginPage> {
           query: "SELECT user_id FROM users WHERE username = '$username'");
       finaluserid = results[0][0];
       await getDeckInfo();
-      print(topics);
     }
     if (isValidUser) {
       Navigator.push(
