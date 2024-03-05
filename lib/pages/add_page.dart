@@ -26,6 +26,7 @@ class _AddPageState extends State<AddPage> {
         title: const Text('Add Cards'),
         centerTitle: true,
         leading: IconButton(
+          // This is the back button
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.push(
@@ -49,10 +50,12 @@ class _AddPageState extends State<AddPage> {
                     value: dropdownValue,
                     onChanged: (String? newValue) {
                       setState(() {
-                        dropdownValue = newValue!;
+                        dropdownValue =
+                            newValue!; // Set the dropdown value to the selected value
                       });
                     },
                     items: <String>[
+                      // These are the options in the dropdown
                       'Computing',
                       'English',
                       'Geography',
@@ -82,6 +85,7 @@ class _AddPageState extends State<AddPage> {
               children: <Widget>[
                 Expanded(
                   child: TextFormField(
+                    // This is the text field for the question
                     controller: textController1,
                     decoration: const InputDecoration(
                       labelText: 'Enter some text',
@@ -100,6 +104,7 @@ class _AddPageState extends State<AddPage> {
               children: <Widget>[
                 Expanded(
                   child: TextFormField(
+                    // This is the text field for the answer
                     controller: textController2,
                     decoration: const InputDecoration(
                       labelText: 'Enter some text',
@@ -113,13 +118,16 @@ class _AddPageState extends State<AddPage> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 ElevatedButton(
+                  // This is the submit button
                   onPressed: () async {
                     var dropdown = dropdownValue;
                     final questionText = textController1.text;
                     final answerText = textController2.text;
                     if (questionText.isEmpty || answerText.isEmpty) {
+                      // Check if the user has entered both question and answer
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
+                            // Show a snackbar if the user hasn't entered both question and answer
                             content:
                                 Text('Please enter both question and answer')),
                       );
@@ -127,6 +135,7 @@ class _AddPageState extends State<AddPage> {
                       await addCard(dropdown, questionText, answerText);
                       if (duplicate == true) {
                         ScaffoldMessenger.of(context).showSnackBar(
+                          // Show a snackbar if the card already exists
                           const SnackBar(
                               content: Text(
                                   'This card already exists in this deck')),
@@ -134,6 +143,7 @@ class _AddPageState extends State<AddPage> {
                         duplicate = false;
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
+                          // Show a snackbar if the card is added successfully
                           const SnackBar(
                               content: Text('Card added successfully')),
                         );
@@ -181,7 +191,7 @@ Future<void> addCard(dropdown, questionText, answerText) async {
 
   if (dropdown == 'Science') {
     dropdown = 6;
-  }
+  } // Convert the dropdown value to the corresponding deck_id
   final results = await neonClient.query(
     query:
         "SELECT * FROM cards WHERE deck_id = $dropdown AND question = '$questionText' AND answer = '$answerText' AND user_id = $finaluserid",
@@ -189,9 +199,9 @@ Future<void> addCard(dropdown, questionText, answerText) async {
   if (results.isNotEmpty) {
     duplicate = true;
     return;
-  }
+  } // Check if the card already exists
   neonClient.query(
     query:
         "INSERT INTO cards (deck_id, question, answer, due, tag_id, user_id) VALUES ($dropdown, '$questionText', '$answerText', 0, 1, $finaluserid)",
-  );
+  ); // Add the card to the database
 }

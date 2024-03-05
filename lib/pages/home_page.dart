@@ -24,6 +24,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
+    // This function is called when the page is loaded
     super.initState();
     getDropDownValues();
   }
@@ -38,12 +39,14 @@ class _HomePageState extends State<HomePage> {
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(30),
-                bottomRight: Radius.circular(30))),
+                bottomRight:
+                    Radius.circular(30))), // Set the shape of the app bar
         toolbarHeight: size.height * 0.15,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
+              // This is the search button
               icon: const Icon(Icons.search, color: Colors.white),
               onPressed: () {
                 Navigator.push(
@@ -55,11 +58,13 @@ class _HomePageState extends State<HomePage> {
             ),
             const FadeInAnimation(
               child: Text(
+                // This is the title of the app
                 'GCSEPotential Flashcards',
                 textAlign: TextAlign.center,
               ),
             ),
             IconButton(
+              // This is the settings button
               icon: const Icon(Icons.settings, color: Colors.white),
               onPressed: () {
                 Navigator.push(
@@ -86,14 +91,16 @@ class _HomePageState extends State<HomePage> {
                     Center(
                       child: FadeInAnimation(
                         child: FittedBox(
+                          // This is the logo
                           fit: BoxFit.contain,
                           child: Image.asset('assets/images/logo.png'),
                         ),
                       ),
                     ),
                     Positioned(
-                      bottom: 20, // adjust as needed
-                      right: 10, // adjust as needed
+                      // This is the add button
+                      bottom: 20,
+                      right: 10,
                       child: FloatingActionButton(
                         onPressed: () {
                           Navigator.push(
@@ -113,6 +120,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             SliverGrid(
+                // This is the grid of topics
                 delegate: SliverChildBuilderDelegate(
                   childCount: topics.length,
                   (context, index) => TopicTile(topic: topics[index]),
@@ -130,7 +138,9 @@ class _HomePageState extends State<HomePage> {
 }
 
 Future<void> getDropDownValues() async {
+  // This function gets the values of the dropdowns
   List results = await neonClient.query(
+      // Get the values from the database
       query:
           "SELECT computing, english, geography, history, maths, science FROM users WHERE user_id = $finaluserid");
   dropdownValue1 = results[0][0].toString();
