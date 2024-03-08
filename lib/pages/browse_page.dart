@@ -12,22 +12,23 @@ class BrowsePage extends StatefulWidget {
 }
 
 class _BrowsePageState extends State<BrowsePage> {
-  String searchQuery = '';
-  String deckQuery = '';
-  String dropdownValue = '';
+  String searchQuery = ''; // Added searchQuery
+  String deckQuery = ''; // Added deckQuery
+  String dropdownValue = ''; // Added default value for dropdown
   String dropdownValue2 = ''; // Added default value for dropdown
   final controller1 = TextEditingController();
   final controller2 = TextEditingController();
   @override
   void initState() {
     super.initState();
-    getBrowseCards();
+    getBrowseCards(); // Call the function to get the cards
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // This is the app bar
         title: const Text('Browse Cards'),
         centerTitle: true,
         leading: IconButton(
@@ -43,6 +44,7 @@ class _BrowsePageState extends State<BrowsePage> {
       body: Column(
         children: <Widget>[
           Padding(
+            // This is the search bar
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               onChanged: (value) {
@@ -62,6 +64,7 @@ class _BrowsePageState extends State<BrowsePage> {
             ),
           ),
           Padding(
+            // This is the filter by deck dropdown
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
               height: 50,
@@ -80,6 +83,7 @@ class _BrowsePageState extends State<BrowsePage> {
                         });
                       },
                       items: <String>[
+                        // These are the options in the dropdown
                         '',
                         'Computing',
                         'English',
@@ -103,10 +107,12 @@ class _BrowsePageState extends State<BrowsePage> {
             ),
           ),
           const Divider(
+            // This is the divider
             color: Colors.black,
             thickness: 1,
           ),
           Expanded(
+            // This is the list of cards
             child: FutureBuilder(
               future: getBrowseCards(),
               builder: (context, snapshot) {
@@ -127,11 +133,12 @@ class _BrowsePageState extends State<BrowsePage> {
                         snapshot.data![0][i],
                         snapshot.data![1][i],
                         snapshot.data![2][i]
-                      ]);
+                      ]); // This is the filtered data
                     }
                   }
                   var widgets = <Widget>[];
                   for (var index = 0; index < (filteredData.length); index++) {
+                    // This is the for loop to create the card list
                     dynamic filteredQuestion =
                         filteredData.isNotEmpty ? filteredData[index][0] : '';
                     dynamic filteredDeck = filteredData[index][1];
@@ -139,12 +146,14 @@ class _BrowsePageState extends State<BrowsePage> {
                     widgets.add(
                       GestureDetector(
                         onTap: () {
+                          // This is the onTap function
                           TextEditingController controller1 =
                               TextEditingController(text: filteredQuestion);
                           TextEditingController controller2 =
                               TextEditingController(text: filteredAnswer);
                           dropdownValue = filteredDeck;
                           refreshModalBottomSheet(
+                              // This is the modal bottom sheet
                               context,
                               dropdownValue,
                               controller1,
@@ -154,6 +163,7 @@ class _BrowsePageState extends State<BrowsePage> {
                               filteredDeck);
                         },
                         child: Column(
+                          // This is the card list
                           children: <Widget>[
                             Text('Question: $filteredQuestion'),
                             Text('Answer: $filteredAnswer'),
@@ -176,13 +186,22 @@ class _BrowsePageState extends State<BrowsePage> {
 }
 
 Future<List<List<String>>> getBrowseCards() async {
+  // This is the function to get the cards
   final results = await neonClient.query(
+      // This is the query to get the cards
       query:
           "SELECT question, deck_id, answer FROM cards WHERE user_id = $finaluserid");
-  List<String> questions = results.map((row) => row[0].toString()).toList();
-  List<String> decks = results.map((row) => row[1].toString()).toList();
-  List<String> answers = results.map((row) => row[2].toString()).toList();
+  List<String> questions = results
+      .map((row) => row[0].toString())
+      .toList(); // This is the list of questions
+  List<String> decks = results
+      .map((row) => row[1].toString())
+      .toList(); // This is the list of deck_ids
+  List<String> answers = results
+      .map((row) => row[2].toString())
+      .toList(); // This is the list of answers
   for (var i = 0; i < questions.length; i++) {
+    // This is the for loop to convert the deck_id to the deck name
     if (decks[i] == '1') {
       decks[i] = 'Computing';
     }
@@ -213,10 +232,12 @@ Future<List<List<String>>> getBrowseCards() async {
 void refreshModalBottomSheet(BuildContext context, dropdownValue, controller1,
     controller2, filteredQuestion, filteredAnswer, filteredDeck) {
   Navigator.push(
+    // This is the navigator to the browse page
     context,
     MaterialPageRoute(builder: (context) => BrowsePage(key: UniqueKey())),
   );
   showModalBottomSheet(
+      // This is the modal bottom sheet
       context: context,
       builder: (BuildContext context) {
         return Container(
@@ -251,6 +272,7 @@ void refreshModalBottomSheet(BuildContext context, dropdownValue, controller1,
                                   filteredDeck);
                             },
                             items: <String>[
+                              // These are the options in the dropdown
                               'Computing',
                               'English',
                               'Geography',
@@ -271,12 +293,14 @@ void refreshModalBottomSheet(BuildContext context, dropdownValue, controller1,
                       ],
                     ),
                     TextField(
+                      // This is the text field for the question
                       controller: controller1,
                       decoration: const InputDecoration(
                         labelText: 'Enter updated question field',
                       ),
                     ),
                     TextField(
+                      // This is the text field for the answer
                       controller: controller2,
                       decoration: const InputDecoration(
                         labelText: 'Enter updated answer field',
@@ -290,6 +314,7 @@ void refreshModalBottomSheet(BuildContext context, dropdownValue, controller1,
                         final questionText = controller1.text;
                         final answerText = controller2.text;
                         if (questionText.isEmpty || answerText.isEmpty) {
+                          // Show a snackbar if the fields are empty
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 content: Text(
@@ -358,6 +383,7 @@ void refreshModalBottomSheet(BuildContext context, dropdownValue, controller1,
                             filteredDeck = tempDeck;
                           }
                           neonClient.query(
+                              // Update the card
                               query:
                                   "UPDATE cards SET question = '$filteredQuestion', answer = '$filteredAnswer', deck_id = $filteredDeck WHERE question = '$tempQuestion' AND answer = '$tempAnswer' AND deck_id = $tempDeck AND user_id = $finaluserid");
                           controller1.clear();
