@@ -128,90 +128,90 @@ class _CustomReviewPageState extends State<CustomReviewPage> {
             ],
           ),
         ),
-        bottomNavigationBar: showAnswerAndBottomBar &&
-                customQuestions
-                    .isNotEmpty // if show answer and bottom bar is true, display the bottom bar
-            ? BottomAppBar(
-                color: Theme.of(context).primaryColor,
-                child: Padding(
-                  padding: const EdgeInsets.all(1.0),
-                  child: Row(
-                    // row to display the bottom bar
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      const SizedBox(width: 0),
-                      Padding(
-                        padding: const EdgeInsets.all(0),
-                        child: SizedBox(
-                          width: 90.0,
-                          height: 70.0,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              if (currentCard < totalCards) {
-                                // if current card is less than total cards, increment current card
-                                currentCard = currentCard + 1;
-                              }
-                              answeredCard(
-                                  1); // update the due date of the card
-                              setState(() {
-                                showAnswerAndBottomBar =
-                                    false; // hide answer and bottom bar
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: klogo,
-                            ),
-                            child: const Column(
-                              children: [
-                                // display the text of the button
-                                Text('Good',
-                                    style: TextStyle(color: Colors.black)),
-                                Text('Finish',
-                                    style: TextStyle(color: Colors.black)),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 0),
-                      Padding(
-                        padding: const EdgeInsets.all(0),
-                        child: SizedBox(
-                          width: 90.0,
-                          height: 70.0,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              if (currentCard < totalCards) {
-                                // if current card is less than total cards, increment current card
-                                currentCard = currentCard + 1;
-                              }
-                              answeredCard(
-                                  0); // update the due date of the card
-                              setState(() {
-                                showAnswerAndBottomBar =
-                                    false; // hide answer and bottom bar
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: klogo,
-                            ),
-                            child: const Column(
-                              children: [
-                                // display the text of the button
-                                Text('Tricky',
-                                    style: TextStyle(color: Colors.black)),
-                                Text('Again',
-                                    style: TextStyle(color: Colors.black)),
-                              ],
+        bottomNavigationBar:
+            showAnswerAndBottomBar && customQuestions.isNotEmpty
+                // if show answer and bottom bar is true, display the bottom bar
+                ? BottomAppBar(
+                    color: Theme.of(context).primaryColor,
+                    child: Padding(
+                      padding: const EdgeInsets.all(1.0),
+                      child: Row(
+                        // row to display the bottom bar
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          const SizedBox(width: 0),
+                          Padding(
+                            padding: const EdgeInsets.all(0),
+                            child: SizedBox(
+                              width: 90.0,
+                              height: 70.0,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  if (currentCard < totalCards) {
+                                    // if current card is less than total cards, increment current card
+                                    currentCard = currentCard + 1;
+                                  }
+                                  answeredCard(
+                                      1); // update the due date of the card
+                                  setState(() {
+                                    showAnswerAndBottomBar =
+                                        false; // hide answer and bottom bar
+                                  });
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: klogo,
+                                ),
+                                child: const Column(
+                                  children: [
+                                    // display the text of the button
+                                    Text('Good',
+                                        style: TextStyle(color: Colors.black)),
+                                    Text('Finish',
+                                        style: TextStyle(color: Colors.black)),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                          const SizedBox(width: 0),
+                          Padding(
+                            padding: const EdgeInsets.all(0),
+                            child: SizedBox(
+                              width: 90.0,
+                              height: 70.0,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  if (currentCard < totalCards) {
+                                    // if current card is less than total cards, increment current card
+                                    currentCard = currentCard + 1;
+                                  }
+                                  answeredCard(
+                                      0); // update the due date of the card
+                                  setState(() {
+                                    showAnswerAndBottomBar =
+                                        false; // hide answer and bottom bar
+                                  });
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: klogo,
+                                ),
+                                child: const Column(
+                                  children: [
+                                    // display the text of the button
+                                    Text('Tricky',
+                                        style: TextStyle(color: Colors.black)),
+                                    Text('Again',
+                                        style: TextStyle(color: Colors.black)),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-              )
-            : null,
+                    ),
+                  )
+                : null,
       ),
     );
   }

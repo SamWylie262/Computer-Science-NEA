@@ -29,6 +29,50 @@ class _HomePageState extends State<HomePage> {
     getDropDownValues();
   }
 
+  Future<void> getDropDownValues() async {
+    // This function gets the values of the dropdowns
+    List results = await neonClient.query(
+        // Get the values from the database
+        query:
+            "SELECT computing, english, geography, history, maths, science FROM users WHERE user_id = $finaluserid");
+    dropdownValue1 = results[0][0].toString();
+    if (dropdownValue1 == 'true') {
+      dropdownValue1 = 'show';
+    } else {
+      dropdownValue1 = 'hide';
+    }
+    dropdownValue2 = results[0][1].toString();
+    if (dropdownValue2 == 'true') {
+      dropdownValue2 = 'show';
+    } else {
+      dropdownValue2 = 'hide';
+    }
+    dropdownValue3 = results[0][2].toString();
+    if (dropdownValue3 == 'true') {
+      dropdownValue3 = 'show';
+    } else {
+      dropdownValue3 = 'hide';
+    }
+    dropdownValue4 = results[0][3].toString();
+    if (dropdownValue4 == 'true') {
+      dropdownValue4 = 'show';
+    } else {
+      dropdownValue4 = 'hide';
+    }
+    dropdownValue5 = results[0][4].toString();
+    if (dropdownValue5 == 'true') {
+      dropdownValue5 = 'show';
+    } else {
+      dropdownValue5 = 'hide';
+    }
+    dropdownValue6 = results[0][5].toString();
+    if (dropdownValue6 == 'true') {
+      dropdownValue6 = 'show';
+    } else {
+      dropdownValue6 = 'hide';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -134,49 +178,5 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
-  }
-}
-
-Future<void> getDropDownValues() async {
-  // This function gets the values of the dropdowns
-  List results = await neonClient.query(
-      // Get the values from the database
-      query:
-          "SELECT computing, english, geography, history, maths, science FROM users WHERE user_id = $finaluserid");
-  dropdownValue1 = results[0][0].toString();
-  if (dropdownValue1 == 'true') {
-    dropdownValue1 = 'show';
-  } else {
-    dropdownValue1 = 'hide';
-  }
-  dropdownValue2 = results[0][1].toString();
-  if (dropdownValue2 == 'true') {
-    dropdownValue2 = 'show';
-  } else {
-    dropdownValue2 = 'hide';
-  }
-  dropdownValue3 = results[0][2].toString();
-  if (dropdownValue3 == 'true') {
-    dropdownValue3 = 'show';
-  } else {
-    dropdownValue3 = 'hide';
-  }
-  dropdownValue4 = results[0][3].toString();
-  if (dropdownValue4 == 'true') {
-    dropdownValue4 = 'show';
-  } else {
-    dropdownValue4 = 'hide';
-  }
-  dropdownValue5 = results[0][4].toString();
-  if (dropdownValue5 == 'true') {
-    dropdownValue5 = 'show';
-  } else {
-    dropdownValue5 = 'hide';
-  }
-  dropdownValue6 = results[0][5].toString();
-  if (dropdownValue6 == 'true') {
-    dropdownValue6 = 'show';
-  } else {
-    dropdownValue6 = 'hide';
   }
 }

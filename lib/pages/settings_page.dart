@@ -289,6 +289,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 child:
                     const Text('Logout', style: TextStyle(color: Colors.black)),
                 onPressed: () {
+                  isValidUser = false;
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const LoginPage()),

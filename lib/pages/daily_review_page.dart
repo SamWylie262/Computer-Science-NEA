@@ -124,7 +124,7 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
                           height: 70.0,
                           child: ElevatedButton(
                             onPressed: () {
-                              if (currentCard <= totalCards) {
+                              if (currentCard < totalCards) {
                                 // checks to see if there are more cards
                                 currentCard = currentCard + 1;
                               }
@@ -158,7 +158,7 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
                           height: 70.0,
                           child: ElevatedButton(
                             onPressed: () {
-                              if (currentCard <= totalCards) {
+                              if (currentCard < totalCards) {
                                 // checks to see if there are more cards
                                 currentCard = currentCard + 1;
                               }
@@ -192,7 +192,7 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
                           height: 70.0,
                           child: ElevatedButton(
                             onPressed: () {
-                              if (currentCard <= totalCards) {
+                              if (currentCard < totalCards) {
                                 // checks to see if there are more cards
                                 currentCard = currentCard + 1;
                               }
@@ -226,7 +226,7 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
                           height: 70.0,
                           child: ElevatedButton(
                             onPressed: () {
-                              if (currentCard <= totalCards) {
+                              if (currentCard < totalCards) {
                                 // checks to see if there are more cards
                                 currentCard = currentCard + 1;
                               }

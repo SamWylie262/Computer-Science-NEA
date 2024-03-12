@@ -5,8 +5,6 @@ import 'package:secondly/models/connection.dart';
 import 'package:secondly/pages/home_page.dart';
 import 'package:secondly/pages/login_page.dart';
 
-bool duplicate = false;
-
 class AddPage extends StatefulWidget {
   const AddPage({super.key});
 
@@ -15,10 +13,49 @@ class AddPage extends StatefulWidget {
 }
 
 class _AddPageState extends State<AddPage> {
-  String dropdownValue = 'Computing';
-
+  String addPageDropdownValue = 'Computing';
+  bool duplicate = false;
   final textController1 = TextEditingController();
   final textController2 = TextEditingController();
+
+  Future<void> addCard(dropdown, questionText, answerText) async {
+    if (dropdown == 'Computing') {
+      dropdown = 1;
+    }
+
+    if (dropdown == 'English') {
+      dropdown = 2;
+    }
+
+    if (dropdown == 'Geography') {
+      dropdown = 3;
+    }
+
+    if (dropdown == 'History') {
+      dropdown = 4;
+    }
+
+    if (dropdown == 'Maths') {
+      dropdown = 5;
+    }
+
+    if (dropdown == 'Science') {
+      dropdown = 6;
+    } // Convert the dropdown value to the corresponding deck_id
+    final results = await neonClient.query(
+      query:
+          "SELECT * FROM cards WHERE deck_id = $dropdown AND question = '$questionText' AND answer = '$answerText' AND user_id = $finaluserid",
+    );
+    if (results.isNotEmpty) {
+      duplicate = true;
+      return;
+    } // Check if the card already exists
+    neonClient.query(
+      query:
+          "INSERT INTO cards (deck_id, question, answer, due, tag_id, user_id) VALUES ($dropdown, '$questionText', '$answerText', 0, 1, $finaluserid)",
+    ); // Add the card to the database
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,10 +84,10 @@ class _AddPageState extends State<AddPage> {
                 ButtonTheme(
                   alignedDropdown: true,
                   child: DropdownButton<String>(
-                    value: dropdownValue,
+                    value: addPageDropdownValue,
                     onChanged: (String? newValue) {
                       setState(() {
-                        dropdownValue =
+                        addPageDropdownValue =
                             newValue!; // Set the dropdown value to the selected value
                       });
                     },
@@ -120,7 +157,7 @@ class _AddPageState extends State<AddPage> {
                 ElevatedButton(
                   // This is the submit button
                   onPressed: () async {
-                    var dropdown = dropdownValue;
+                    var dropdown = addPageDropdownValue;
                     final questionText = textController1.text;
                     final answerText = textController2.text;
                     if (questionText.isEmpty || answerText.isEmpty) {
@@ -166,42 +203,4 @@ class _AddPageState extends State<AddPage> {
       ),
     );
   }
-}
-
-Future<void> addCard(dropdown, questionText, answerText) async {
-  if (dropdown == 'Computing') {
-    dropdown = 1;
-  }
-
-  if (dropdown == 'English') {
-    dropdown = 2;
-  }
-
-  if (dropdown == 'Geography') {
-    dropdown = 3;
-  }
-
-  if (dropdown == 'History') {
-    dropdown = 4;
-  }
-
-  if (dropdown == 'Maths') {
-    dropdown = 5;
-  }
-
-  if (dropdown == 'Science') {
-    dropdown = 6;
-  } // Convert the dropdown value to the corresponding deck_id
-  final results = await neonClient.query(
-    query:
-        "SELECT * FROM cards WHERE deck_id = $dropdown AND question = '$questionText' AND answer = '$answerText' AND user_id = $finaluserid",
-  );
-  if (results.isNotEmpty) {
-    duplicate = true;
-    return;
-  } // Check if the card already exists
-  neonClient.query(
-    query:
-        "INSERT INTO cards (deck_id, question, answer, due, tag_id, user_id) VALUES ($dropdown, '$questionText', '$answerText', 0, 1, $finaluserid)",
-  ); // Add the card to the database
 }

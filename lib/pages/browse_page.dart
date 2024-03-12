@@ -229,6 +229,38 @@ Future<List<List<String>>> getBrowseCards() async {
   return [questions, decks, answers];
 }
 
+Future<void> deleteCardFromDatabase(
+    filteredQuestion, filteredAnswer, filteredDeck) async {
+  // This is the function to delete the card from the database
+  if (filteredDeck == 'Computing') {
+    filteredDeck = 1;
+  }
+  if (filteredDeck == 'English') {
+    filteredDeck = 2;
+  }
+  if (filteredDeck == 'Geography') {
+    filteredDeck = 3;
+  }
+  if (filteredDeck == 'History') {
+    filteredDeck = 4;
+  }
+  if (filteredDeck == 'Maths') {
+    filteredDeck = 5;
+  }
+  if (filteredDeck == 'Science') {
+    filteredDeck = 6;
+  }
+  Future.delayed(const Duration(seconds: 0), () {});
+  await neonClient.query(
+      // Delete the card from the custom study
+      query:
+          "DELETE FROM custom_study WHERE card_id in (SELECT card_id FROM cards WHERE question = '$filteredQuestion' AND answer = '$filteredAnswer' AND deck_id = $filteredDeck AND user_id = $finaluserid)");
+  await neonClient.query(
+      // Delete the card from the database for good
+      query:
+          "DELETE FROM cards WHERE question = '$filteredQuestion' AND answer = '$filteredAnswer' AND deck_id = $filteredDeck AND user_id = $finaluserid");
+}
+
 void refreshModalBottomSheet(BuildContext context, dropdownValue, controller1,
     controller2, filteredQuestion, filteredAnswer, filteredDeck) {
   Navigator.push(
@@ -304,6 +336,24 @@ void refreshModalBottomSheet(BuildContext context, dropdownValue, controller1,
                       controller: controller2,
                       decoration: const InputDecoration(
                         labelText: 'Enter updated answer field',
+                      ),
+                    ),
+                    Align(
+                      // This is the delete icon
+                      alignment: Alignment.bottomRight,
+                      child: IconButton(
+                        icon: const Icon(Icons.delete),
+                        onPressed: () async {
+                          await deleteCardFromDatabase(
+                              filteredQuestion, filteredAnswer, filteredDeck);
+                          // ignore: use_build_context_synchronously
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    BrowsePage(key: UniqueKey())),
+                          );
+                        },
                       ),
                     ),
                     ElevatedButton(
