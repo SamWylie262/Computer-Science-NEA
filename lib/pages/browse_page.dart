@@ -165,9 +165,16 @@ class _BrowsePageState extends State<BrowsePage> {
                         child: Column(
                           // This is the card list
                           children: <Widget>[
-                            Text('Question: $filteredQuestion'),
-                            Text('Answer: $filteredAnswer'),
-                            Text('Deck: $filteredDeck'),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  Text('Question: $filteredQuestion'),
+                                  Text('Answer: $filteredAnswer'),
+                                  Text('Deck: $filteredDeck'),
+                                ],
+                              ),
+                            ),
                             const Divider(color: Colors.black),
                           ],
                         ),

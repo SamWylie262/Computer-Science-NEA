@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> _login() async {
     String properResult =
-        "jjosrengjnfdmvrteroiwjf,m"; // Random string that acts kind of like a password
+        "jnsfjfngjsdjlcvndgjlsbndfjdcnbjtgrnd"; // Random string that acts kind of like a password
     final String username = _usernameController.text;
     final String password = _passwordController.text;
     List results = await neonClient.query(
@@ -80,6 +80,14 @@ class _LoginPageState extends State<LoginPage> {
         );
         return;
       } // If the password is less than 7 characters, show a snackbar
+      else if (username.length > 30 || password.length > 254) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text(
+                  'Username must be max 30 characters, and password must be max 254 characters long')),
+        );
+        return;
+      } // If the username is greater than 30 characters, or password is greater than 254 characters show a snackbar
       await neonClient.query(
         query:
             "INSERT INTO users (username, password_hash, computing, english, geography, history, maths, science) VALUES ('$username', '$password', true, true, true, true, true, true)",

@@ -168,6 +168,16 @@ class _AddPageState extends State<AddPage> {
                             content:
                                 Text('Please enter both question and answer')),
                       );
+                    } else if (questionText.length > 255 ||
+                        answerText.length > 255) {
+                      // Check if the length of questionText or answerText is greater than 255
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          // Show a snackbar if the length of questionText or answerText is greater than 255
+                          content: Text(
+                              'Question or answer is too long. Please limit to 255 characters.'),
+                        ),
+                      );
                     } else {
                       await addCard(dropdown, questionText, answerText);
                       if (duplicate == true) {
