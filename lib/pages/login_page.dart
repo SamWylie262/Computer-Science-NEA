@@ -120,50 +120,53 @@ class _LoginPageState extends State<LoginPage> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                child: FadeInAnimation(
-                  child: FittedBox(
-                    fit: BoxFit.contain,
-                    child: Image.asset('assets/images/logo.png'), // Logo
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: FadeInAnimation(
+                    child: Column(
+                      children: [
+                        Image.asset('assets/images/logo.png'), // Logo
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: _usernameController,
-                decoration: const InputDecoration(
-                  labelText: 'Username',
-                  border: OutlineInputBorder(),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: _usernameController,
+                  decoration: const InputDecoration(
+                    labelText: 'Username',
+                    border: OutlineInputBorder(),
+                  ),
+                ), // Username text field
+                const SizedBox(height: 16),
+                TextField(
+                  controller: _passwordController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    labelText: 'Password',
+                    border: OutlineInputBorder(),
+                  ),
+                ), // Password text field
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: _login, // Login button
+                  style: ElevatedButton.styleFrom(backgroundColor: kbutton),
+                  child: const Text('Login',
+                      style: TextStyle(color: Colors.black)),
                 ),
-              ), // Username text field
-              const SizedBox(height: 16),
-              TextField(
-                controller: _passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder(),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  // Sign up button
+                  onPressed: _signup,
+                  style: ElevatedButton.styleFrom(backgroundColor: kbutton),
+                  child: const Text('Sign Up',
+                      style: TextStyle(color: Colors.black)),
                 ),
-              ), // Password text field
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: _login, // Login button
-                style: ElevatedButton.styleFrom(backgroundColor: kbutton),
-                child:
-                    const Text('Login', style: TextStyle(color: Colors.black)),
-              ),
-              const SizedBox(height: 10),
-              ElevatedButton(
-                // Sign up button
-                onPressed: _signup,
-                style: ElevatedButton.styleFrom(backgroundColor: kbutton),
-                child: const Text('Sign Up',
-                    style: TextStyle(color: Colors.black)),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
