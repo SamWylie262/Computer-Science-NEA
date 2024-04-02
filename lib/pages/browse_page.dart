@@ -5,7 +5,7 @@ import 'package:secondly/configs/constants.dart';
 import 'package:secondly/pages/login_page.dart';
 
 class BrowsePage extends StatefulWidget {
-  const BrowsePage({required Key key}) : super(key: key);
+  const BrowsePage({super.key});
 
   @override
   State<BrowsePage> createState() => _BrowsePageState();
@@ -45,6 +45,7 @@ class _BrowsePageState extends State<BrowsePage> {
         children: <Widget>[
           Padding(
             // This is the search bar
+            key: const Key('searchBar'),
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               onChanged: (value) {
@@ -73,6 +74,7 @@ class _BrowsePageState extends State<BrowsePage> {
                   const Text('Filter by deck:'),
                   const Spacer(),
                   ButtonTheme(
+                    key: const Key('filterByDeck'),
                     alignedDropdown: true,
                     child: DropdownButton<String>(
                       value: dropdownValue2,

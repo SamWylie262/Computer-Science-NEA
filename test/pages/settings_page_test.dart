@@ -25,25 +25,35 @@ void main() {
       expect(find.byType(SettingsPage), findsOneWidget);
     });
 
-    // testWidgets('Dropdown menu finder', (WidgetTester tester) async {
-    //   await tester.pumpWidget(MaterialApp(
-    //     home: const SettingsPage(),
-    //     navigatorObservers: [mockObserver],
-    //   ));
+    testWidgets('Dropdown menu finder', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(
+        home: const SettingsPage(),
+        navigatorObservers: [mockObserver],
+      ));
 
-    //   Find the dropdown menu
-    //   expect(find.byKey(const Key('settingsdropdownMenu')), findsOneWidget);
-    // });
+      // Find the dropdown menu
+      expect(find.byKey(const Key('settingsdropdownMenu')), findsOneWidget);
+    });
 
-    // testWidgets('Tap on Apply Button', (WidgetTester tester) async {
-    //   await tester.pumpWidget(MaterialApp(
-    //     home: const SettingsPage(),
-    //     navigatorObservers: [mockObserver],
-    //   ));
+    testWidgets('Tap on Apply Button', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(
+        home: const SettingsPage(),
+        navigatorObservers: [mockObserver],
+      ));
 
-    //   Find the search button
-    //   expect(find.byKey(const Key('applyButton')), findsOneWidget);
-    // });
+      // Find the search button
+      expect(find.byKey(const Key('applyButton')), findsOneWidget);
+    });
+
+    testWidgets('Tap on logout Button', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(
+        home: const SettingsPage(),
+        navigatorObservers: [mockObserver],
+      ));
+
+      // Find the search button
+      expect(find.byKey(const Key('logoutButton')), findsOneWidget);
+    });
   });
 
   tearDownAll(() async {

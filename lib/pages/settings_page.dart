@@ -287,6 +287,7 @@ class _SettingsPageState extends State<SettingsPage> {
             Align(
               alignment: Alignment.bottomLeft,
               child: ElevatedButton(
+                key: const Key('logoutButton'),
                 style: ElevatedButton.styleFrom(backgroundColor: kbutton),
                 child:
                     const Text('Logout', style: TextStyle(color: Colors.black)),
