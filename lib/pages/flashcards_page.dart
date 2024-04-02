@@ -68,6 +68,7 @@ class _FlashcardsPageState extends State<FlashcardsPage> {
           children: <Widget>[
             ElevatedButton(
               // create a button to navigate to the daily review page
+              key: const Key('dailyReviewButton'),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -87,6 +88,7 @@ class _FlashcardsPageState extends State<FlashcardsPage> {
             const SizedBox(height: 75), // add some space between the buttons
             ElevatedButton(
               // create a button to navigate to the custom review page
+              key: const Key('customReviewButton'),
               onPressed: () async {
                 await Future.delayed(const Duration(seconds: 2));
                 // ignore: use_build_context_synchronously
