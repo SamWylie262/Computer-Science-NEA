@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:secondly/models/connection.dart';
-import 'package:secondly/pages/home_page.dart';
+import 'package:secondly/pages/add_page.dart';
 
 // Mock NavigatorObserver
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
@@ -11,51 +11,58 @@ void main() {
   setUpAll(() async {
     await neonClient.open(); // Open the database
   });
-  group('HomePage Widget Tests', () {
+  group('AddPage Widget Tests', () {
     // Create a mock observer
     final mockObserver = MockNavigatorObserver();
 
-    testWidgets('HomePage Renders Correctly', (WidgetTester tester) async {
+    testWidgets('AddPage Renders Correctly', (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(
-        home: const HomePage(),
+        home: const AddPage(),
         navigatorObservers: [mockObserver],
       ));
 
       // Verify that the HomePage is rendered
-      expect(find.byType(HomePage), findsOneWidget);
+      expect(find.byType(AddPage), findsOneWidget);
     });
 
-    testWidgets('Tap on Search Button Navigates to BrowsePage',
-        (WidgetTester tester) async {
+    testWidgets('Dropdown menu finder', (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(
-        home: const HomePage(),
+        home: const AddPage(),
+        navigatorObservers: [mockObserver],
+      ));
+
+      // Find the dropdown menu
+      expect(find.byKey(const Key('dropdownMenu')), findsOneWidget);
+    });
+
+    testWidgets('Tap on Submit Button', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(
+        home: const AddPage(),
         navigatorObservers: [mockObserver],
       ));
 
       // Find the search button
-      expect(find.byKey(const Key('searchButton')), findsOneWidget);
+      expect(find.byKey(const Key('submitButton')), findsOneWidget);
     });
 
-    testWidgets('Tap on Settings Button Navigates to SettingsPage',
-        (WidgetTester tester) async {
+    testWidgets('Locate Question Field', (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(
-        home: const HomePage(),
+        home: const AddPage(),
         navigatorObservers: [mockObserver],
       ));
 
       // Find the settings button
-      expect(find.byKey(const Key('settingsPage')), findsOneWidget);
+      expect(find.byKey(const Key('questionField')), findsOneWidget);
     });
 
-    testWidgets('Tap on Add Button Navigates to AddPage',
-        (WidgetTester tester) async {
+    testWidgets('Locate Answer Field', (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(
-        home: const HomePage(),
+        home: const AddPage(),
         navigatorObservers: [mockObserver],
       ));
 
       // Find the add button
-      expect(find.byKey(const Key('addButton')), findsOneWidget);
+      expect(find.byKey(const Key('answerField')), findsOneWidget);
     });
   });
 

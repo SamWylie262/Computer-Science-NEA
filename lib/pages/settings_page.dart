@@ -48,6 +48,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 const Text('Computing:', style: TextStyle(color: Colors.black)),
                 const Spacer(),
                 ButtonTheme(
+                  key: const Key('settingsdropdownMenu'),
                   alignedDropdown: true,
                   child: DropdownButton<String>(
                     value: dropdownValue1,
@@ -223,6 +224,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   width: 150, // Set the width of the button
                   height: 60, // Set the height of the button
                   child: ElevatedButton(
+                    key: const Key('applyButton'),
                     onPressed: () async {
                       bool booldropdownValue1;
                       bool booldropdownValue2;

@@ -152,6 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                 ), // Password text field
                 const SizedBox(height: 16),
                 ElevatedButton(
+                  key: const Key('loginButton'),
                   onPressed: _login, // Login button
                   style: ElevatedButton.styleFrom(backgroundColor: kbutton),
                   child: const Text('Login',
@@ -160,6 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 10),
                 ElevatedButton(
                   // Sign up button
+                  key: const Key('signupButton'),
                   onPressed: _signup,
                   style: ElevatedButton.styleFrom(backgroundColor: kbutton),
                   child: const Text('Sign Up',

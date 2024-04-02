@@ -84,6 +84,7 @@ class _AddPageState extends State<AddPage> {
                 ButtonTheme(
                   alignedDropdown: true,
                   child: DropdownButton<String>(
+                    key: const Key('dropdownMenu'),
                     value: addPageDropdownValue,
                     onChanged: (String? newValue) {
                       setState(() {
@@ -123,6 +124,7 @@ class _AddPageState extends State<AddPage> {
                 Expanded(
                   child: TextFormField(
                     // This is the text field for the question
+                    key: const Key('questionField'),
                     controller: textController1,
                     decoration: const InputDecoration(
                       labelText: 'Enter some text',
@@ -142,6 +144,7 @@ class _AddPageState extends State<AddPage> {
                 Expanded(
                   child: TextFormField(
                     // This is the text field for the answer
+                    key: const Key('answerField'),
                     controller: textController2,
                     decoration: const InputDecoration(
                       labelText: 'Enter some text',
@@ -156,6 +159,7 @@ class _AddPageState extends State<AddPage> {
               children: <Widget>[
                 ElevatedButton(
                   // This is the submit button
+                  key: const Key('submitButton'),
                   onPressed: () async {
                     var dropdown = addPageDropdownValue;
                     final questionText = textController1.text;

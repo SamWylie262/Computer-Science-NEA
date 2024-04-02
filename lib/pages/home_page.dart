@@ -91,6 +91,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             IconButton(
               // This is the search button
+              key: const Key('searchButton'),
               icon: const Icon(Icons.search, color: Colors.white),
               onPressed: () {
                 Navigator.push(
@@ -109,6 +110,7 @@ class _HomePageState extends State<HomePage> {
             ),
             IconButton(
               // This is the settings button
+              key: const Key('settingsButton'),
               icon: const Icon(Icons.settings, color: Colors.white),
               onPressed: () {
                 Navigator.push(
@@ -150,6 +152,7 @@ class _HomePageState extends State<HomePage> {
                       bottom: 20,
                       right: 10,
                       child: FloatingActionButton(
+                        key: const Key('addButton'),
                         onPressed: () {
                           Navigator.push(
                             context,
