@@ -134,18 +134,20 @@ class _HomePageState extends State<HomePage> {
               flexibleSpace: FlexibleSpaceBar(
                 background: Stack(
                   children: [
-                    Column(
-                      children: [
-                        Center(
-                          child: FadeInAnimation(
-                            child: Column(
-                              children: [
-                                Image.asset('assets/images/logo.png'),
-                              ],
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Center(
+                            child: FadeInAnimation(
+                              child: Column(
+                                children: [
+                                  Image.asset('assets/images/logo.png'),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     Positioned(
                       // This is the add button
