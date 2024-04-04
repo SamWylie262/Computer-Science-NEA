@@ -25,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
       TextEditingController(); // Controller for the password
 
   Future<void> _login() async {
+    isValidUser = false;
     String properResult =
         "jnsfjfngjsdjlcvndgjlsbndfjdcnbjtgrnd"; // Random string that acts kind of like a password
     final String username = _usernameController.text;
@@ -80,6 +81,13 @@ class _LoginPageState extends State<LoginPage> {
         );
         return;
       } // If the password is less than 7 characters, show a snackbar
+      // ignore: prefer_is_empty
+      if (username.length < 1) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Please enter a username')),
+        );
+        return;
+      } // If the username is empty, show a snackbar
       else if (username.length > 30 || password.length > 254) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(

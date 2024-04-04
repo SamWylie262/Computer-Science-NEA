@@ -81,34 +81,35 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(30),
-            bottomRight: Radius.circular(30),
-          ),
-        ),
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(30),
+                bottomRight:
+                    Radius.circular(30))), // Set the shape of the app bar
         toolbarHeight: size.height * 0.15,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
+              // This is the search button
               key: const Key('searchButton'),
               icon: const Icon(Icons.search, color: Colors.white),
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => BrowsePage(key: UniqueKey()),
-                  ),
+                      builder: (context) => BrowsePage(key: UniqueKey())),
                 );
               },
             ),
             const FadeInAnimation(
               child: Text(
+                // This is the title of the app
                 'GCSEPotential Flashcards',
                 textAlign: TextAlign.center,
               ),
             ),
             IconButton(
+              // This is the settings button
               key: const Key('settingsButton'),
               icon: const Icon(Icons.settings, color: Colors.white),
               onPressed: () {
@@ -131,17 +132,40 @@ class _HomePageState extends State<HomePage> {
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               expandedHeight: size.height * 0.40,
               flexibleSpace: FlexibleSpaceBar(
-                background: Column(
+                background: Stack(
                   children: [
                     Expanded(
-                      child: Center(
-                        child: FadeInAnimation(
-                          child: Column(
-                            children: [
-                              Image.asset('assets/images/logo.png'),
-                            ],
+                      child: Column(
+                        children: [
+                          Center(
+                            child: FadeInAnimation(
+                              child: Column(
+                                children: [
+                                  Image.asset('assets/images/logo.png'),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      // This is the add button
+                      bottom: 20,
+                      right: 10,
+                      child: FloatingActionButton(
+                        key: const Key('addButton'),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AddPage()),
+                          );
+                        },
+                        backgroundColor: Theme.of(context)
+                            .primaryColor, // Set the background color to the primary color
+                        child: const Icon(Icons.add,
+                            color: Colors.white, size: 30),
                       ),
                     ),
                   ],
@@ -149,29 +173,18 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             SliverGrid(
-              delegate: SliverChildBuilderDelegate(
-                childCount: topics.length,
-                (context, index) => TopicTile(topic: topics[index]),
-              ),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 6,
-                mainAxisSpacing: 6,
-              ),
-            ),
+                // This is the grid of topics
+                delegate: SliverChildBuilderDelegate(
+                  childCount: topics.length,
+                  (context, index) => TopicTile(topic: topics[index]),
+                ),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 6,
+                  mainAxisSpacing: 6,
+                )),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        key: const Key('addButton'),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const AddPage()),
-          );
-        },
-        backgroundColor: Theme.of(context).primaryColor,
-        child: const Icon(Icons.add, color: Colors.white, size: 30),
       ),
     );
   }

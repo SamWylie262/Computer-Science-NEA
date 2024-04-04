@@ -369,7 +369,7 @@ void refreshModalBottomSheet(BuildContext context, dropdownValue, controller1,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: kbutton, // replace with your color
                       ),
-                      onPressed: () {
+                      onPressed: () async {
                         final questionText = controller1.text;
                         final answerText = controller2.text;
                         if (questionText.isEmpty || answerText.isEmpty) {
@@ -383,6 +383,7 @@ void refreshModalBottomSheet(BuildContext context, dropdownValue, controller1,
                           dynamic tempQuestion = filteredQuestion;
                           dynamic tempAnswer = filteredAnswer;
                           dynamic tempDeck = filteredDeck;
+
                           filteredDeck = dropdownValue;
                           if (tempDeck == 'Computing') {
                             tempDeck = 1;
@@ -407,6 +408,10 @@ void refreshModalBottomSheet(BuildContext context, dropdownValue, controller1,
                           if (tempDeck == 'Science') {
                             tempDeck = 6;
                           }
+                          final cardid = await neonClient.query(
+                            query:
+                                "SELECT card_id FROM cards WHERE question = '$tempQuestion' AND answer = '$tempAnswer' AND deck_id = $tempDeck AND user_id = $finaluserid",
+                          );
                           // Handle the apply button press
                           if (controller1.text.isNotEmpty) {
                             filteredQuestion = controller1.text;
@@ -441,12 +446,27 @@ void refreshModalBottomSheet(BuildContext context, dropdownValue, controller1,
                           } else {
                             filteredDeck = tempDeck;
                           }
+                          final results = await neonClient.query(
+                            query:
+                                "SELECT * FROM cards WHERE deck_id = $filteredDeck AND question = '$filteredQuestion' AND answer = '$filteredAnswer' AND user_id = $finaluserid AND card_id != ${cardid[0][0]}",
+                          );
+
+                          if (results.isNotEmpty) {
+                            // ignore: use_build_context_synchronously
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('This is a duplicate card'),
+                              ),
+                            );
+                            return;
+                          } // Check if the card already exists
                           neonClient.query(
                               // Update the card
                               query:
                                   "UPDATE cards SET question = '$filteredQuestion', answer = '$filteredAnswer', deck_id = $filteredDeck WHERE question = '$tempQuestion' AND answer = '$tempAnswer' AND deck_id = $tempDeck AND user_id = $finaluserid");
                           controller1.clear();
                           controller2.clear();
+                          // ignore: use_build_context_synchronously
                           Navigator.push(
                             context,
                             MaterialPageRoute(
