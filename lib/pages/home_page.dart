@@ -13,6 +13,7 @@ String dropdownValue3 = '';
 String dropdownValue4 = '';
 String dropdownValue5 = '';
 String dropdownValue6 = '';
+DateTime now = DateTime.now();
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

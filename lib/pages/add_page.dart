@@ -52,7 +52,7 @@ class _AddPageState extends State<AddPage> {
     } // Check if the card already exists
     neonClient.query(
       query:
-          "INSERT INTO cards (deck_id, question, answer, due, tag_id, user_id) VALUES ($dropdown, '$questionText', '$answerText', 0, 1, $finaluserid)",
+          "INSERT INTO cards (deck_id, question, answer, due, tag_id, user_id) VALUES ($dropdown, '$questionText', '$answerText', '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}', 1, $finaluserid)",
     ); // Add the card to the database
   }
 

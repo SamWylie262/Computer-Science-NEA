@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:secondly/configs/constants.dart';
 import 'package:secondly/pages/flashcards_page.dart';
 import 'package:secondly/models/connection.dart';
+import 'package:secondly/pages/home_page.dart';
 
 class DailyReviewPage extends StatefulWidget {
   const DailyReviewPage({super.key});
@@ -26,8 +27,9 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
     // update the due date of the card
     var question = dailyQuestions[0];
     question = question.substring(1, question.length - 1);
+    DateTime newDate = now.add(Duration(days: newDue));
     neonClient.query(
-        query: "UPDATE cards SET due = $newDue WHERE question = '$question'");
+        query: "UPDATE cards SET due = $newDate WHERE question = '$question'");
     if (newDue != 0) {
       // if the card is not being reviewed again, remove it from the list
       dailyQuestions.removeAt(0);
