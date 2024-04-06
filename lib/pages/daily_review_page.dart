@@ -28,8 +28,10 @@ class _DailyReviewPageState extends State<DailyReviewPage> {
     var question = dailyQuestions[0];
     question = question.substring(1, question.length - 1);
     DateTime newDate = now.add(Duration(days: newDue));
+    print(newDate);
     neonClient.query(
-        query: "UPDATE cards SET due = $newDate WHERE question = '$question'");
+        query:
+            "UPDATE cards SET due = '${newDate.year}-${newDate.month.toString().padLeft(2, '0')}-${newDate.day.toString().padLeft(2, '0')}' WHERE question = '$question'");
     if (newDue != 0) {
       // if the card is not being reviewed again, remove it from the list
       dailyQuestions.removeAt(0);
