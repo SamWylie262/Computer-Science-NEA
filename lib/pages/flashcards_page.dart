@@ -123,13 +123,13 @@ Future<void> getCards() async {
   final dailyQuestionsResult = await neonClient.query(
       // get all questions from the daily review table
       query:
-          "SELECT question FROM Cards WHERE due = '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}' AND deck_id = $tappedTopic AND user_id = $finaluserid");
+          "SELECT question FROM Cards WHERE due <= '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}' AND deck_id = $tappedTopic AND user_id = $finaluserid");
   dailyQuestions =
       dailyQuestionsResult.map((result) => result.toString()).toList();
   final dailyAnswersResult = await neonClient.query(
       // get all answers from the daily review table
       query:
-          "SELECT answer FROM Cards WHERE due = '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}' AND deck_id = $tappedTopic AND user_id = $finaluserid");
+          "SELECT answer FROM Cards WHERE due <= '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}' AND deck_id = $tappedTopic AND user_id = $finaluserid");
   dailyAnswers = dailyAnswersResult.map((result) => result.toString()).toList();
 }
 
