@@ -1,10 +1,10 @@
-# Computer-Science-NEA
+# GCSEPotential Flashcard Application
 
-GCSEPotential Flashcard Application
+
 
 ## Getting Started
 
-install flutter:  https://docs.flutter.dev/get-started/install
+install flutter:  https://docs.flutter.dev/get-started/install__
 Run Pub Get (flutter pub get) in terminal
 
 ## Run My code
