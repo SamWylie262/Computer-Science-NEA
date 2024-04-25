@@ -5,9 +5,9 @@
 ## Getting Started
 
 install flutter:  https://docs.flutter.dev/get-started/install  
-Run Pub Get (flutter pub get) in terminal
+Run Pub Get in terminal  pwsh flutter pub get
 
-## Run My code
+## Run my code
 
 go on the main.dart file  
 Press more actions (3 dots in top right) -> Run or Debug -> Run without debugging  
