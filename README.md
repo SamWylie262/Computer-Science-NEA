@@ -5,9 +5,10 @@
 ## Getting Started
 
 install flutter:  https://docs.flutter.dev/get-started/install  
-Run Pub Get in terminal  
-pwsh  
-flutter pub get
+Run Pub Get in terminal:  
+```pwsh  
+   flutter pub get
+```
 
 ## Run my code
 
